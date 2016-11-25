@@ -15,10 +15,12 @@ class Lab2_pomiarType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('p0')
-            ->add('s0')
-            ->add('l0')
-            ->add('zespol')
+            ->add('p01')
+            ->add('s01')
+            ->add('l01')
+            ->add('p02')
+            ->add('s02')
+            ->add('l02')
         ;
     }
     

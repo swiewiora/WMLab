@@ -48,21 +48,21 @@ class Lab2_pomiar
     /**
      * @var string
      *
-     * @ORM\Column(name="P02", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="P02", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $p02;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="S02", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="S02", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $s02;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="l02", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="l02", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $l02;
 
@@ -71,6 +71,16 @@ class Lab2_pomiar
      * @JoinColumn(name="id_zespol", referencedColumnName="id")
      */
     private $zespol;
+
+    public function getZespol()
+    {
+        return $this->zespol;
+    }
+
+    public function setZespol($zespol)
+    {
+        $this->zespol = $zespol;
+    }/** @noinspection PhpUnusedPrivateFieldInspection */
 
     /**
      * @OneToMany(targetEntity="Lab2_pomiar_tab", mappedBy="pomiar")

@@ -7,9 +7,12 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>P0</th>
-                <th>S0</th>
-                <th>L0</th>
+                <th>P01</th>
+                <th>S01</th>
+                <th>L01</th>
+                <th>P02</th>
+                <th>S02</th>
+                <th>L02</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,9 +20,12 @@
         {% for lab2_pomiar in lab2_pomiars %}
             <tr>
                 <td><a href="{{ path('lab2_pomiar_show', { 'id': lab2_pomiar.id }) }}">{{ lab2_pomiar.id }}</a></td>
-                <td>{{ lab2_pomiar.p0 }}</td>
-                <td>{{ lab2_pomiar.s0 }}</td>
-                <td>{{ lab2_pomiar.l0 }}</td>
+                <td>{{ lab2_pomiar.p01 }}</td>
+                <td>{{ lab2_pomiar.s01 }}</td>
+                <td>{{ lab2_pomiar.l01 }}</td>
+                <td>{{ lab2_pomiar.p02 }}</td>
+                <td>{{ lab2_pomiar.s02 }}</td>
+                <td>{{ lab2_pomiar.l02 }}</td>
                 <td>
                     <ul>
                         <li>

@@ -57,6 +57,16 @@ class Lab2_pomiar_tab
    */
     private $pomiar;
 
+    public function getPomiar()
+    {
+        return $this->pomiar;
+    }
+
+    public function setPomiar($pomiar)
+    {
+        $this->pomiar = $pomiar;
+    }
+
 
     /**
      * Get id
@@ -162,30 +172,6 @@ class Lab2_pomiar_tab
     public function getL3()
     {
         return $this->l3;
-    }
-
-    /**
-     * Set idPomiaru
-     *
-     * @param integer $idPomiar
-     *
-     * @return Lab2_pomiar_tab
-     */
-    public function setIdPomiar($idPomiar)
-    {
-        $this->idPomiar = $idPomiar;
-
-        return $this;
-    }
-
-    /**
-     * Get idPomiaru
-     *
-     * @return int
-     */
-    public function getIdPomiar()
-    {
-        return $this->idPomiar;
     }
 }
 

@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Lab2_pomiar</h1>
-
+    <h2>Próbka nr 1</h2>
     <table>
         <tbody>
             <tr>
@@ -11,16 +11,38 @@
             </tr>
             <tr>
                 <th>P0</th>
-                <td>{{ lab2_pomiar.p0 }}</td>
+                <td>{{ lab2_pomiar.p01 }}</td>
             </tr>
             <tr>
                 <th>S0</th>
-                <td>{{ lab2_pomiar.s0 }}</td>
+                <td>{{ lab2_pomiar.s01 }}</td>
             </tr>
             <tr>
                 <th>L0</th>
-                <td>{{ lab2_pomiar.l0 }}</td>
+                <td>{{ lab2_pomiar.l01 }}</td>
             </tr>
+        </tbody>
+    </table>
+
+    <h2>Próbka nr 2</h2>
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ lab2_pomiar.id }}</td>
+        </tr>
+        <tr>
+            <th>P0</th>
+            <td>{{ lab2_pomiar.p02 }}</td>
+        </tr>
+        <tr>
+            <th>S0</th>
+            <td>{{ lab2_pomiar.s02 }}</td>
+        </tr>
+        <tr>
+            <th>L0</th>
+            <td>{{ lab2_pomiar.l02 }}</td>
+        </tr>
         </tbody>
     </table>
 
@@ -37,4 +59,38 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>N</th>
+            <th>L1</th>
+            <th>L2</th>
+            <th>L3</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for lab2_pomiar_tab in lab2_pomiar_tabs %}
+            <tr>
+                <td><a href="{{ path('lab2_pomiar_tab_show', { 'id': lab2_pomiar_tab.id }) }}">{{ lab2_pomiar_tab.id }}</a></td>
+                <td>{{ lab2_pomiar_tab.n }}</td>
+                <td>{{ lab2_pomiar_tab.l1 }}</td>
+                <td>{{ lab2_pomiar_tab.l2 }}</td>
+                <td>{{ lab2_pomiar_tab.l3 }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('lab2_pomiar_tab_show', { 'id': lab2_pomiar_tab.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('lab2_pomiar_tab_edit', { 'id': lab2_pomiar_tab.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -63,11 +63,13 @@
         <td>{{ lab1_pomiar_tab.l2 }}</td>
         <td>
           <ul>
+            {# TODO Delete button
             <li>
               {{ form_start(delete_form_tab[lab1_pomiar_tab.id]) }}
                 <input type="submit" value="Usuń">
               {{ form_end(delete_form_tab[lab1_pomiar_tab.id]) }}
             </li>
+             #}
             <li>
               <a href="{{ path('lab1_pomiar_tab_edit', { 'id': lab1_pomiar_tab.id }) }}">Edytuj</a>
             </li>
@@ -77,7 +79,6 @@
     {% endfor %}
     </tbody>
   </table>
-
 
   <a href="{{ path('lab1_pomiar_new_step3', { 'id': lab1_pomiar.id }) }}">Przejdź dalej</a>
 {% endblock %}

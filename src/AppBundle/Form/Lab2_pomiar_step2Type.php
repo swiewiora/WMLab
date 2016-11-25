@@ -15,10 +15,9 @@ class Lab2_pomiar_step2Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('N')
-            ->add('l1')
-            ->add('l2')
-            ->add('l3')
+            ->add('l02')
+            ->add('s02')
+            ->add('zespol')
         ;
     }
     
@@ -28,7 +27,7 @@ class Lab2_pomiar_step2Type extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Lab1_pomiar_tab'
+            'data_class' => 'AppBundle\Entity\Lab2_pomiar'
         ));
     }
 }

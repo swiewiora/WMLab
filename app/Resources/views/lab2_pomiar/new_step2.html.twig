@@ -2,79 +2,16 @@
 
 {% block body %}
     <h1>Wprowadzenie wyników pomiarów - krok 2</h1>
+    <h2>Wprowadź wymiary drugiej próbki</h2>
 
-    <table>
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ lab2_pomiar.id }}</td>
-        </tr>
-        <tr>
-            <th>S0</th>
-            <td>{{ lab2_pomiar.s01 }}</td>
-        </tr>
-        <tr>
-            <th>L0</th>
-            <td>{{ lab2_pomiar.l01 }}</td>
-        </tr>
-        <tr>
-            <th>P0</th>
-            <td>{{ lab2_pomiar.p01 }}</td>
-        </tr>
-        </tbody>
-    </table>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Przejdź dalej" />
+    {{ form_end(form) }}
 
     <ul>
         <li>
-          <a href="{{ path('lab1_pomiar_new_step1') }}">Powrót</a>
-        </li>
-        <li>
-            <a href="{{ path('lab1_pomiar_index') }}">Przerwij</a>
-        </li>
-        <li>
-            <a href="{{ path('lab1_pomiar_edit', { 'id': lab1_pomiar.id }) }}">Edytuj</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Usuń">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('lab2_pomiar_index') }}">Powrót</a>
         </li>
     </ul>
-
-  <h2>Wprowadź wyniki odczytów tensometrów</h2>
-
-  {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" value="Create" />
-  {{ form_end(form) }}
-
-    <table>
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ lab2_pomiar_tab.id }}</td>
-        </tr>
-        <tr>
-            <th>N</th>
-            <td>{{ lab2_pomiar_tab.n }}</td>
-        </tr>
-        <tr>
-            <th>L1</th>
-            <td>{{ lab2_pomiar_tab.l1 }}</td>
-        </tr>
-        <tr>
-            <th>L2</th>
-            <td>{{ lab2_pomiar_tab.l2 }}</td>
-        </tr>
-        <tr>
-            <th>L3</th>
-            <td>{{ lab2_pomiar_tab.l3 }}</td>
-        </tr>
-        </tbody>
-    </table>
-
-  <h1>Lab1_pomiar_tab creation</h1>
-
-
-  <a href="{{ path('lab1_pomiar_new_step3', { 'id': lab1_pomiar_tab.id }) }}">Przejdź dalej</a>
 {% endblock %}

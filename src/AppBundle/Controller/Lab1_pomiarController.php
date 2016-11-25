@@ -34,6 +34,7 @@ class Lab1_pomiarController extends Controller
     }
 
     /**
+     * TODO Remove
      * Creates a new Lab1_pomiar entity.
      *
      * @Route("/new", name="lab1_pomiar_new")
@@ -50,7 +51,7 @@ class Lab1_pomiarController extends Controller
             $em->persist($lab1_pomiar);
             $em->flush();
 
-            return $this->redirectToRoute('lab1_pomiar_new_tab', array('id' => $lab1_pomiar->getId()));
+            return $this->redirectToRoute('lab1_pomiar_index', array('id' => $lab1_pomiar->getId()));
         }
 
         return $this->render('lab1_pomiar/new.html.twig', array(
@@ -142,20 +143,23 @@ class Lab1_pomiarController extends Controller
         ;
     }
 
-    /**
+    /** TODO Delete _tab rows in Lab1_pomiar create form
      * Creates a form to delete a Lab1_pomiar_tab records.
      *
-     * @param Lab1_pomiar_tab $lab1_pomiar_tab The Lab1_pomiar entity
+     * @param Lab1_pomiar_tab $lab1_pomiar_tab The Lab1_pomiar_tab entity
+     * @param Lab1_pomiar $lab1_pomiar The Lab1_pomiar entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteTabForm(Lab1_pomiar_tab $lab1_pomiar_tab)
+    private function createDeleteTabForm(Lab1_pomiar_tab $lab1_pomiar_tab, Lab1_pomiar $lab1_pomiar)
     {
-      return $this->createFormBuilder()
-        ->setAction($this->generateUrl('lab1_pomiar_tab_delete', array('id' => $lab1_pomiar_tab->getId())))
-        ->setMethod('DELETE')
-        ->getForm()
-        ;
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('lab1_pomiar_tab_delete', array(
+                'id_pomiar' => $lab1_pomiar->getId(),
+                'id_pomiar_tab' => $lab1_pomiar_tab->getId() )))
+            ->setMethod('DELETE')
+            ->getForm();
+      //return $this->redirectToRoute('lab1_pomiar_new_step2', array('id' => $lab1_pomiar->getId()));
     }
 
     /**
@@ -199,13 +203,15 @@ class Lab1_pomiarController extends Controller
 
         // To list Lab1_pomiar_tab entities
         $em = $this->getDoctrine()->getManager();
-        $lab1_pomiar_tabs = $em->getRepository('AppBundle:Lab1_pomiar_tab')->findBy(array('pomiar' => $lab1_pomiar->getId()));
+        $lab1_pomiar_tabs = $em->getRepository('AppBundle:Lab1_pomiar_tab')
+            ->findBy(array('pomiar' => $lab1_pomiar->getId()));
 
-        // Create Delete button for each lab1_pomiar_tab
-        $deleteForms = array();
+        // TODO Create Delete button for each lab1_pomiar_tab
+        /*$deleteForms = array();
         foreach ($lab1_pomiar_tabs as $lab1_pomiar_tab) {
-            $deleteForms[$lab1_pomiar_tab->getId()] = $this->createDeleteTabForm($lab1_pomiar_tab)->createView();
-        }
+            $deleteForms[$lab1_pomiar_tab->getId()] =
+                $this->createDeleteTabForm($lab1_pomiar_tab, $lab1_pomiar)->createView();
+        }*/
 
         // To create Lab1_pomiar_tab form
         $lab1_pomiar_tab = new Lab1_pomiar_tab();
@@ -225,7 +231,8 @@ class Lab1_pomiarController extends Controller
             'lab1_pomiar' => $lab1_pomiar,
             'delete_form' => $deleteForm->createView(),
             'lab1_pomiar_tabs' => $lab1_pomiar_tabs,
-            'delete_form_tab' => $deleteForms,
+            //TODO Create Delete button for each lab1_pomiar_tab
+            //'delete_form_tab' => $deleteForms,
             'form' => $form->createView(),
         ));
     }

@@ -2,12 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\Lab1_pomiar_tab;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use AppBundle\Entity\Lab1_pomiar_tab;
-use AppBundle\Form\Lab1_pomiar_tabType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Lab1_pomiar_tab controller.
@@ -102,13 +101,15 @@ class Lab1_pomiar_tabController extends Controller
         ));
     }
 
-    /**
-     * Deletes a Lab1_pomiar_tab entity.
+    /* TODO Deletes a Lab1_pomiar_tab entity.
      *
-     * @Route("/{id}", name="lab1_pomiar_tab_delete")
+     *
+     * @Route("/{id_pomiar_tab}/{id_pomiar}", name="lab1_pomiar_tab_delete")
+     * @ParamConverter("lab1_pomiar", options={"mapping": {"id_pomiar": "id"}})
+     * @ParamConverter("lab1_pomiar_tab", options={"mapping": {"id_pomiar_tab": "id"}})
      * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Lab1_pomiar_tab $lab1_pomiar_tab)
+     *
+    public function deleteAction(Request $request, Lab1_pomiar $lab1_pomiar, Lab1_pomiar_tab $lab1_pomiar_tab)
     {
         //$lab1_pomiar = $lab1_pomiar_tab->getPomiar(); - nie działa
         $form = $this->createDeleteForm($lab1_pomiar_tab);
@@ -120,7 +121,27 @@ class Lab1_pomiar_tabController extends Controller
             $em->flush();
         }
 
-        //return $this->redirectToRoute('lab1_pomiar_new_tab', array('id' => $lab1_pomiar)); - nie działa
+        //return $this->redirectToRoute('lab1_pomiar_new_step2', array('id' => $lab1_pomiar->getId())); //- nie działa
+        return $this->redirectToRoute('lab1_pomiar_tab_index');
+    }*/
+
+    /**
+     * Deletes a Lab1_pomiar_tab entity.
+     *
+     * @Route("/{id}", name="lab1_pomiar_tab_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Lab1_pomiar_tab $lab1_pomiar_tab)
+    {
+        $form = $this->createDeleteForm($lab1_pomiar_tab);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($lab1_pomiar_tab);
+            $em->flush();
+        }
+
         return $this->redirectToRoute('lab1_pomiar_tab_index');
     }
 

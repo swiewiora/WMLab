@@ -15,9 +15,9 @@ class Lab2_pomiar_step1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('L01')
-            ->add('S01')
-            ->add('P01')
+            ->add('l01')
+            ->add('s01')
+            ->add('p01')
             ->add('zespol')
         ;
     }
