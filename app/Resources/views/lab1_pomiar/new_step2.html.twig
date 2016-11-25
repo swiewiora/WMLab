@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Wprowadzenie wyników pomiarów - krok 2</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lab1_pomiar.id }}</td>
+            </tr>
+            <tr>
+                <th>L0</th>
+                <td>{{ lab1_pomiar.l0 }}</td>
+            </tr>
+            <tr>
+                <th>D0</th>
+                <td>{{ lab1_pomiar.d0 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+          <a href="{{ path('lab1_pomiar_new_step1') }}">Powrót</a>
+        </li>
+        <li>
+            <a href="{{ path('lab1_pomiar_index') }}">Przerwij</a>
+        </li>
+        <li>
+            <a href="{{ path('lab1_pomiar_edit', { 'id': lab1_pomiar.id }) }}">Edytuj</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Usuń">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+
+  <h2>Odczytaj wartość siły i wskazania tensometra</h2>
+
+  {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
+  {{ form_end(form) }}
+
+  <table>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>P</th>
+      <th>L1</th>
+      <th>L2</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for lab1_pomiar_tab in lab1_pomiar_tabs %}
+      <tr>
+        <td><a href="{{ path('lab1_pomiar_tab_show', { 'id': lab1_pomiar_tab.id }) }}">{{ lab1_pomiar_tab.id }}</a></td>
+        <td>{{ lab1_pomiar_tab.p }}</td>
+        <td>{{ lab1_pomiar_tab.l1 }}</td>
+        <td>{{ lab1_pomiar_tab.l2 }}</td>
+        <td>
+          <ul>
+            <li>
+              {{ form_start(delete_form_tab[lab1_pomiar_tab.id]) }}
+                <input type="submit" value="Usuń">
+              {{ form_end(delete_form_tab[lab1_pomiar_tab.id]) }}
+            </li>
+            <li>
+              <a href="{{ path('lab1_pomiar_tab_edit', { 'id': lab1_pomiar_tab.id }) }}">Edytuj</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+
+  <a href="{{ path('lab1_pomiar_new_step3', { 'id': lab1_pomiar.id }) }}">Przejdź dalej</a>
+{% endblock %}

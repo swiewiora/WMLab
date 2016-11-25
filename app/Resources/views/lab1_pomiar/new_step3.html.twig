@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Wprowadzenie wyników pomiarów - krok 3</h1>
+    <h2>Wprowadź wymiary próbki po zerwaniu i maksymalną wartość siły</h2>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Podsumowanie" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('lab1_pomiar_new_step2', { 'id': lab1_pomiar.id }) }}">Powrót</a>
+        </li>
+        <li>
+            <a href="{{ path('lab1_pomiar_index') }}">Przerwij</a>
+        </li>
+    </ul>
+{% endblock %}

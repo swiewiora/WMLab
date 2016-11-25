@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lab1_wynik</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lab1_wynik.id }}</td>
+            </tr>
+            <tr>
+                <th>Idzespol</th>
+                <td>{{ lab1_wynik.idZespol }}</td>
+            </tr>
+            <tr>
+                <th>S0</th>
+                <td>{{ lab1_wynik.s0 }}</td>
+            </tr>
+            <tr>
+                <th>Su</th>
+                <td>{{ lab1_wynik.su }}</td>
+            </tr>
+            <tr>
+                <th>A10</th>
+                <td>{{ lab1_wynik.a10 }}</td>
+            </tr>
+            <tr>
+                <th>Z</th>
+                <td>{{ lab1_wynik.z }}</td>
+            </tr>
+            <tr>
+                <th>Rh</th>
+                <td>{{ lab1_wynik.rH }}</td>
+            </tr>
+            <tr>
+                <th>Rel</th>
+                <td>{{ lab1_wynik.reL }}</td>
+            </tr>
+            <tr>
+                <th>Reh</th>
+                <td>{{ lab1_wynik.reH }}</td>
+            </tr>
+            <tr>
+                <th>Rm</th>
+                <td>{{ lab1_wynik.rm }}</td>
+            </tr>
+            <tr>
+                <th>Ru</th>
+                <td>{{ lab1_wynik.ru }}</td>
+            </tr>
+            <tr>
+                <th>E</th>
+                <td>{{ lab1_wynik.e }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('lab1_wynik_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

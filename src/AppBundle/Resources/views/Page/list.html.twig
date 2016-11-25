@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('lab1') }}">Cwiczenie 1</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Wyniki</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for lab1 in wyniki %}
+            <tr>
+                <td>d0 = {{ lab1.d0 }} mm</td>
+                <td>l0 = {{ lab1.l0 }} mm</td>
+                <td>du = {{ lab1.du }} mm</td>
+                <td>lu = {{ lab1.lu }} mm</td>
+                <td>Pm = {{ lab1.pm }} kN</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

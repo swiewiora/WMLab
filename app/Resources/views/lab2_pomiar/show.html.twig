@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lab2_pomiar</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lab2_pomiar.id }}</td>
+            </tr>
+            <tr>
+                <th>P0</th>
+                <td>{{ lab2_pomiar.p0 }}</td>
+            </tr>
+            <tr>
+                <th>S0</th>
+                <td>{{ lab2_pomiar.s0 }}</td>
+            </tr>
+            <tr>
+                <th>L0</th>
+                <td>{{ lab2_pomiar.l0 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('lab2_pomiar_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('lab2_pomiar_edit', { 'id': lab2_pomiar.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

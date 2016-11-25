@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Wprowadzenie wyników pomiarów - krok 3</h1>
+    <h2>Wprowadź wymiary próbki po zerwaniu i maksymalną wartość siły</h2>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Podsumowanie" />
+    {{ form_end(form) }}
+
+{% endblock %}

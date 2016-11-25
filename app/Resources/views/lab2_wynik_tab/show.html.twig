@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lab2_wynik_tab</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lab2_wynik_tab.id }}</td>
+            </tr>
+            <tr>
+                <th>Dl1</th>
+                <td>{{ lab2_wynik_tab.dl1 }}</td>
+            </tr>
+            <tr>
+                <th>Dl2</th>
+                <td>{{ lab2_wynik_tab.dl2 }}</td>
+            </tr>
+            <tr>
+                <th>Sdl1</th>
+                <td>{{ lab2_wynik_tab.sdl1 }}</td>
+            </tr>
+            <tr>
+                <th>Sdl2</th>
+                <td>{{ lab2_wynik_tab.sdl2 }}</td>
+            </tr>
+            <tr>
+                <th>Dl3</th>
+                <td>{{ lab2_wynik_tab.dl3 }}</td>
+            </tr>
+            <tr>
+                <th>Sdl3</th>
+                <td>{{ lab2_wynik_tab.sdl3 }}</td>
+            </tr>
+            <tr>
+                <th>Sdlsr</th>
+                <td>{{ lab2_wynik_tab.sdlSr }}</td>
+            </tr>
+            <tr>
+                <th>E</th>
+                <td>{{ lab2_wynik_tab.e }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('lab2_wynik_tab_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

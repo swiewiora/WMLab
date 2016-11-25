@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lab1_wynik list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Idzespol</th>
+                <th>S0</th>
+                <th>Su</th>
+                <th>A10</th>
+                <th>Z</th>
+                <th>Rh</th>
+                <th>Rel</th>
+                <th>Reh</th>
+                <th>Rm</th>
+                <th>Ru</th>
+                <th>E</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lab1_wynik in lab1_wyniks %}
+            <tr>
+                <td><a href="{{ path('lab1_wynik_show', { 'id': lab1_wynik.id }) }}">{{ lab1_wynik.id }}</a></td>
+                <td>{{ lab1_wynik.idZespol }}</td>
+                <td>{{ lab1_wynik.s0 }}</td>
+                <td>{{ lab1_wynik.su }}</td>
+                <td>{{ lab1_wynik.a10 }}</td>
+                <td>{{ lab1_wynik.z }}</td>
+                <td>{{ lab1_wynik.rH }}</td>
+                <td>{{ lab1_wynik.reL }}</td>
+                <td>{{ lab1_wynik.reH }}</td>
+                <td>{{ lab1_wynik.rm }}</td>
+                <td>{{ lab1_wynik.ru }}</td>
+                <td>{{ lab1_wynik.e }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('lab1_wynik_show', { 'id': lab1_wynik.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

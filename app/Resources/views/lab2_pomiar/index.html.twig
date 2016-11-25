@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lab2_pomiar list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>P0</th>
+                <th>S0</th>
+                <th>L0</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lab2_pomiar in lab2_pomiars %}
+            <tr>
+                <td><a href="{{ path('lab2_pomiar_show', { 'id': lab2_pomiar.id }) }}">{{ lab2_pomiar.id }}</a></td>
+                <td>{{ lab2_pomiar.p0 }}</td>
+                <td>{{ lab2_pomiar.s0 }}</td>
+                <td>{{ lab2_pomiar.l0 }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('lab2_pomiar_show', { 'id': lab2_pomiar.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('lab2_pomiar_edit', { 'id': lab2_pomiar.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('lab2_pomiar_new_step1') }}">Nowy pomiar</a>
+        </li>
+    </ul>
+{% endblock %}
