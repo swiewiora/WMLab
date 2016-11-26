@@ -74,7 +74,8 @@
         <tbody>
         {% for lab2_pomiar_tab in lab2_pomiar_tabs %}
             <tr>
-                <td><a href="{{ path('lab2_pomiar_tab_show', { 'id': lab2_pomiar_tab.id }) }}">{{ lab2_pomiar_tab.id }}</a></td>
+                <td><a href="{{ path('lab2_pomiar_tab_show', { 'id': lab2_pomiar_tab.id }) }}">
+                        {{ lab2_pomiar_tab.id }}</a></td>
                 <td>{{ lab2_pomiar_tab.n }}</td>
                 <td>{{ lab2_pomiar_tab.l1 }}</td>
                 <td>{{ lab2_pomiar_tab.l2 }}</td>
