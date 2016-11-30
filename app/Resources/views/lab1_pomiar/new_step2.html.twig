@@ -1,32 +1,28 @@
 {% extends 'base.html.twig' %}
+{% set counter = 0 %}
 
 {% block body %}
     <h1>Wprowadzenie wyników pomiarów - krok 2</h1>
 
     <table>
+
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ lab1_pomiar.id }}</td>
-            </tr>
-            <tr>
-                <th>L0</th>
+                <th>Długość początkowa </th>
+                <th>L<sub>0</sub></th>
                 <td>{{ lab1_pomiar.l0 }}</td>
+                <td>mm</td>
             </tr>
             <tr>
-                <th>D0</th>
+                <th>Średnica początkowa </th>
+                <th>D<sub>0</sub></th>
                 <td>{{ lab1_pomiar.d0 }}</td>
+                <td>mm</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
-        <li>
-          <a href="{{ path('lab1_pomiar_new_step1') }}">Powrót</a>
-        </li>
-        <li>
-            <a href="{{ path('lab1_pomiar_index') }}">Przerwij</a>
-        </li>
         <li>
             <a href="{{ path('lab1_pomiar_edit', { 'id': lab1_pomiar.id }) }}">Edytuj</a>
         </li>
@@ -40,24 +36,37 @@
   <h2>Odczytaj wartość siły i wskazania tensometra</h2>
 
   {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" value="Create" />
+    Siła:<br />
+    P = {{ form_widget(form.p) }} N<br />
+    Wskazania czujników:<br />
+    L<sub>1</sub> = {{ form_widget(form.l1) }} 10<sup>-2</sup> mm<br />
+    L<sub>2</sub> = {{ form_widget(form.l2) }} 10<sup>-2</sup> mm<br />
+    <input type="submit" value="Dodaj" />
   {{ form_end(form) }}
 
   <table>
     <thead>
     <tr>
-      <th>Id</th>
+      <th>l.p.</th>
       <th>P</th>
-      <th>L1</th>
-      <th>L2</th>
-      <th>Actions</th>
+      <th>L<sub>1</sub></th>
+      <th>L<sub>2</sub></th>
+      <th></th>
+    </tr>
+    <tr>
+        <th></th>
+        <th>[N]</th>
+        <th>10<sup>-2</sup> mm</th>
+        <th>10<sup>-2</sup> mm</th>
+        <th></th>
     </tr>
     </thead>
+
     <tbody>
     {% for lab1_pomiar_tab in lab1_pomiar_tabs %}
+        {% set counter = counter + 1 %}
       <tr>
-        <td><a href="{{ path('lab1_pomiar_tab_show', { 'id': lab1_pomiar_tab.id }) }}">{{ lab1_pomiar_tab.id }}</a></td>
+        <td>{{ counter }}</td>
         <td>{{ lab1_pomiar_tab.p }}</td>
         <td>{{ lab1_pomiar_tab.l1 }}</td>
         <td>{{ lab1_pomiar_tab.l2 }}</td>
@@ -80,5 +89,7 @@
     </tbody>
   </table>
 
-  <a href="{{ path('lab1_pomiar_new_step3', { 'id': lab1_pomiar.id }) }}">Przejdź dalej</a>
+  <a href="{{ path('lab1_pomiar_new_step1') }}">Wstecz</a><br />
+  <a href="{{ path('lab1_pomiar_new_step3', { 'id': lab1_pomiar.id }) }}">Dalej</a><br />
+    <a href="{{ path('lab1_pomiar_index') }}">Przerwij</a>
 {% endblock %}

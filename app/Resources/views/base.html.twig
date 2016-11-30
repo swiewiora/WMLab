@@ -13,17 +13,17 @@
     <body>
 
 
-        {% for type, messages in app.session.flashBag.all %}
+        {#% for type, messages in app.session.flashBag.all %}
             {% for message in messages %}
                 <div class="{{ type }}">
                     {{ message|trans({}, 'FOSUserBundle') }}
                 </div>
             {% endfor %}
         {% endfor %}
-        {% block fos_user_content %}{% endblock %}
+        {% block fos_user_content %}{% endblock %#}
         {% block body %}{% endblock %}
-        <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script-->
 
 
         {% block javascripts %}{% endblock %}

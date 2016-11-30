@@ -2,12 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Lab1_pomiar;
 use AppBundle\Entity\Lab1_pomiar_tab;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use AppBundle\Entity\Lab1_pomiar;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Lab1_pomiar controller.
@@ -30,33 +30,6 @@ class Lab1_pomiarController extends Controller
 
         return $this->render('lab1_pomiar/index.html.twig', array(
             'lab1_pomiars' => $lab1_pomiars,
-        ));
-    }
-
-    /**
-     * TODO Remove
-     * Creates a new Lab1_pomiar entity.
-     *
-     * @Route("/new", name="lab1_pomiar_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $lab1_pomiar = new Lab1_pomiar();
-        $form = $this->createForm('AppBundle\Form\Lab1_pomiarType', $lab1_pomiar);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($lab1_pomiar);
-            $em->flush();
-
-            return $this->redirectToRoute('lab1_pomiar_index', array('id' => $lab1_pomiar->getId()));
-        }
-
-        return $this->render('lab1_pomiar/new.html.twig', array(
-            'lab1_pomiar' => $lab1_pomiar,
-            'form' => $form->createView(),
         ));
     }
 
@@ -143,7 +116,7 @@ class Lab1_pomiarController extends Controller
         ;
     }
 
-    /** TODO Delete _tab rows in Lab1_pomiar create form
+    /** TODO Delete Lab1_pomiar_tab rows in Lab1_pomiar create form
      * Creates a form to delete a Lab1_pomiar_tab records.
      *
      * @param Lab1_pomiar_tab $lab1_pomiar_tab The Lab1_pomiar_tab entity
@@ -261,4 +234,6 @@ class Lab1_pomiarController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+
 }

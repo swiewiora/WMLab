@@ -5,7 +5,10 @@
     <h2>Wprowadź wymiary próbki</h2>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        Długość poczatkowa<br />
+        L<sub>0</sub> = {{ form_widget(form.l0) }} mm<br />
+        Średnica początkowa<br />
+        D<sub>0</sub> = {{ form_widget(form.d0) }} mm<br />
         <input type="submit" value="Przejdź dalej" />
     {{ form_end(form) }}
 

@@ -5,13 +5,28 @@
     <h2>Wprowadź wymiary próbki po zerwaniu i maksymalną wartość siły</h2>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        Długość po zerwaniu<br />
+        L<sub>u</sub> = {{ form_widget(form.lu) }} mm<br />
+        Średnica po zerwaniu<br />
+        D<sub>u</sub> = {{ form_widget(form.du) }} mm<br />
+        Maksymalna siła<br />
+        P<sub>m</sub> = {{ form_widget(form.pm) }} N<br />
+
+    <h2>Wprowadź dane odczytane z wykresu:</h2>
+
+        Dolna granica plastyczności:<br />
+        P<sub>m</sub> = {{ form_widget(form.pel) }} N<br />
+        Górna granica plastyczności:<br />
+        P<sub>m</sub> = {{ form_widget(form.peh) }} N<br />
+        Siła przy zerwaniu:<br />
+        P<sub>u</sub> = {{ form_widget(form.pu) }} N<br />
+
         <input type="submit" value="Podsumowanie" />
     {{ form_end(form) }}
 
     <ul>
         <li>
-            <a href="{{ path('lab1_pomiar_new_step2', { 'id': lab1_pomiar.id }) }}">Powrót</a>
+            <a href="{{ path('lab1_pomiar_new_step2', { 'id': lab1_pomiar.id }) }}">Wstecz</a>
         </li>
         <li>
             <a href="{{ path('lab1_pomiar_index') }}">Przerwij</a>

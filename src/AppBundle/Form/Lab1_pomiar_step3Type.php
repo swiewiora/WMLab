@@ -17,7 +17,10 @@ class Lab1_pomiar_step3Type extends AbstractType
         $builder
             ->add('lu')
             ->add('du')
-            ->add('Pm')
+            ->add('pm')
+            ->add('pel')
+            ->add('peh')
+            ->add('pu')
         ;
     }
     

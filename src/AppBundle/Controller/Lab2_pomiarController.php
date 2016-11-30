@@ -2,12 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Lab2_pomiar;
 use AppBundle\Entity\Lab2_pomiar_tab;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Lab2_pomiar controller.
@@ -30,32 +30,6 @@ class Lab2_pomiarController extends Controller
 
         return $this->render('lab2_pomiar/index.html.twig', array(
             'lab2_pomiars' => $lab2_pomiars,
-        ));
-    }
-
-    /**
-     * Creates a new Lab2_pomiar entity.
-     *
-     * @Route("/new", name="lab2_pomiar_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $lab2_pomiar = new Lab2_pomiar();
-        $form = $this->createForm('AppBundle\Form\Lab2_pomiarType', $lab2_pomiar);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($lab2_pomiar);
-            $em->flush();
-
-            return $this->redirectToRoute('lab2_pomiar_show', array('id' => $lab2_pomiar->getId()));
-        }
-
-        return $this->render('lab2_pomiar/new.html.twig', array(
-            'lab2_pomiar' => $lab2_pomiar,
-            'form' => $form->createView(),
         ));
     }
 

@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% set counter = 0 %}
 
 {% block body %}
     <h1>Lab 1 - lista pomiarów</h1>
@@ -6,19 +7,29 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
+                <th>l.p.</th>
                 <th>L0</th>
                 <th>D0</th>
                 <th>Du</th>
                 <th>Lu</th>
                 <th>Pm</th>
-                <th>Actions</th>
+                <th></th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>[mm]</th>
+                <th>[mm]</th>
+                <th>[mm]</th>
+                <th>[mm]</th>
+                <th>[N]</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for lab1_pomiar in lab1_pomiars %}
+            {% set counter = counter + 1 %}
             <tr>
-                <td><a href="{{ path('lab1_pomiar_show', { 'id': lab1_pomiar.id }) }}">{{ lab1_pomiar.id }}</a></td>
+                <td>{{ counter }}</td>
                 <td>{{ lab1_pomiar.l0 }}</td>
                 <td>{{ lab1_pomiar.d0 }}</td>
                 <td>{{ lab1_pomiar.du }}</td>

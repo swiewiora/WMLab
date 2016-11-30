@@ -60,6 +60,34 @@ class Lab1_pomiar
     private $pm;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="PeL", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $pel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PeH", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $peh;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Pu", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $pu;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Date", type="datetime")
+     */
+    private $date;
+
+    /**
      * @OneToOne(targetEntity="Zespol", inversedBy="lab1Pomiar")
      * @JoinColumn(name="id_zespol", referencedColumnName="id")
      */
@@ -221,28 +249,41 @@ class Lab1_pomiar
         return $this->pm;
     }
 
-    /**
-     * Set data
-     *
-     * @param \DateTime $data
-     *
-     * @return Lab1_pomiar
-     */
-    public function setData($data)
+    public function getPel()
     {
-        $this->data = $data;
-
-        return $this;
+        return $this->pel;
     }
 
-    /**
-     * Get data
-     *
-     * @return \DateTime
-     */
-    public function getData()
+    public function setPel($pel)
     {
-        return $this->data;
+        $this->pel = $pel;
+    }
+
+    public function getPeh()
+    {
+        return $this->peh;
+    }
+
+    public function setPeh($peh)
+    {
+        $this->peh = $peh;
+    }
+
+    public function getPu()
+    {
+        return $this->pu;
+    }
+
+    public function setPu($pu)
+    {
+        $this->pu = $pu;
+    }
+
+    public function getDate()
+    {
+        //$newDate = DateTime::createFromFormat("l dS F Y", $this->date);
+        $newDate = $this->date->format('d.m.Y H:i');
+        return $newDate;
     }
 
   public function __toString() {

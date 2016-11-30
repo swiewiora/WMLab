@@ -1,78 +1,93 @@
 {% extends 'base.html.twig' %}
+{% set counter = 0 %}
 
 {% block body %}
-    <h1>Lab1_pomiar</h1>
+    <h1>Wyniki pomiarów</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ lab1_pomiar.id }}</td>
-            </tr>
-            <tr>
-                <th>L0</th>
+                <th>Długość początkowa </th>
+                <th>L<sub>0</sub></th>
                 <td>{{ lab1_pomiar.l0 }}</td>
+                <td>mm</td>
             </tr>
             <tr>
-                <th>D0</th>
+                <th>Średnica początkowa </th>
+                <th>D<sub>0</sub></th>
                 <td>{{ lab1_pomiar.d0 }}</td>
+                <td>mm</td>
             </tr>
             <tr>
-                <th>Du</th>
+                <th>Średnica po zerwaniu </th>
+                <th>D<sub>u</sub></th>
                 <td>{{ lab1_pomiar.du }}</td>
+                <td>mm</td>
             </tr>
             <tr>
-                <th>Lu</th>
+                <th>Długość po zerwaniu </th>
+                <th>L<sub>u</sub></th>
                 <td>{{ lab1_pomiar.lu }}</td>
+                <td>mm</td>
             </tr>
             <tr>
-                <th>Pm</th>
+                <th>Maksymalna siła </th>
+                <th>P<sub>m</sub></th>
                 <td>{{ lab1_pomiar.pm }}</td>
+                <td>N</td>
+            </tr>
+            <tr>
+                <th>Dolna granica plastyczności </th>
+                <th>P<sub>eL</sub></th>
+                <td>{{ lab1_pomiar.pel }}</td>
+                <td>N</td>
+            </tr>
+            <tr>
+                <th>Górna granica plastycznościa </th>
+                <th>P<sub>eH</sub></th>
+                <td>{{ lab1_pomiar.peh }}</td>
+                <td>N</td>
+            </tr>
+            <tr>
+                <th>Siła przy zerwaniu </th>
+                <th>P<sub>u</sub></th>
+                <td>{{ lab1_pomiar.pu }}</td>
+                <td>N</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('lab1_pomiar_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('lab1_pomiar_edit', { 'id': lab1_pomiar.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 
-
-  <h1>Lab1_pomiar_tab list</h1>
 
   <table>
     <thead>
     <tr>
-      <th>Id</th>
+      <th>l.p.</th>
       <th>P</th>
-      <th>L1</th>
-      <th>L2</th>
-      <th>Actions</th>
+      <th>L<sub>1</sub></th>
+      <th>L<sub>2</sub></th>
+      <th></th>
+    </tr>
+    <tr>
+        <th></th>
+        <th>[N]</th>
+        <th>[10<sup>-2</sup> mm]</th>
+        <th>[10<sup>-2</sup> mm]</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     {% for lab1_pomiar_tab in lab1_pomiar_tabs %}
+        {% set counter = counter + 1 %}
       <tr>
-        <td><a href="{{ path('lab1_pomiar_tab_show', { 'id': lab1_pomiar_tab.id }) }}">{{ lab1_pomiar_tab.id }}</a></td>
+        <td>{{ counter }}</td>
         <td>{{ lab1_pomiar_tab.p }}</td>
         <td>{{ lab1_pomiar_tab.l1 }}</td>
         <td>{{ lab1_pomiar_tab.l2 }}</td>
         <td>
           <ul>
             <li>
-              <a href="{{ path('lab1_pomiar_tab_show', { 'id': lab1_pomiar_tab.id }) }}">show</a>
-            </li>
-            <li>
-              <a href="{{ path('lab1_pomiar_tab_edit', { 'id': lab1_pomiar_tab.id }) }}">edit</a>
+              <a href="{{ path('lab1_pomiar_tab_edit', { 'id': lab1_pomiar_tab.id }) }}">Edytuj</a>
             </li>
           </ul>
         </td>
@@ -81,10 +96,20 @@
     </tbody>
   </table>
 
-  <ul>
-    <li>
-      <a href="{{ path('lab1_pomiar_tab_new') }}">Create a new entry</a>
-    </li>
-  </ul>
+    Data modyfikacji: {{ lab1_pomiar.date }} <br />
+
+    <ul>
+        <li>
+            <a href="{{ path('lab1_pomiar_index') }}">Powrót do listy</a>
+        </li>
+        <li>
+            <a href="{{ path('lab1_pomiar_edit', { 'id': lab1_pomiar.id }) }}">Edytuj</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Usuń Pomiar">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
 
 {% endblock %}
