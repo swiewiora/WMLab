@@ -110,6 +110,9 @@
             <input type="submit" value="Usuń Pomiar">
             {{ form_end(delete_form) }}
         </li>
+        <li>
+            <a href="{{ path('lab1_calc', { 'id': lab1_pomiar.id }) }}">Generuj wynik</a>
+        </li>
     </ul>
 
 {% endblock %}

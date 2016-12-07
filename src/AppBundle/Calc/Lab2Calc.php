@@ -11,7 +11,7 @@ namespace AppBundle\Calc;
 use AppBundle\Entity\Lab1_pomiar;
 use AppBundle\Entity\Lab1_wynik;
 
-class Lab1Calc
+class Lab2Calc
 {
     private $s0;
     private $su;

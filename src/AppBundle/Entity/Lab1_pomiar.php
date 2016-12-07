@@ -83,7 +83,7 @@ class Lab1_pomiar
     /**
      * @var string
      *
-     * @ORM\Column(name="Date", type="datetime")
+     * @ORM\Column(name="Date", type="datetime", nullable=true)
      */
     private $date;
 
@@ -94,7 +94,7 @@ class Lab1_pomiar
     private $zespol;
 
     /**
-     * @OneToMany(targetEntity="Lab1_pomiar_tab", mappedBy="pomiar")
+     * @OneToMany(targetEntity="Lab1_pomiar_tab", mappedBy="pomiar", cascade={"remove"})
      */
     private $tab;
 
@@ -287,6 +287,19 @@ class Lab1_pomiar
     }
 
   public function __toString() {
-    return (string) $this->zespol;
+    return (string) $this->id;
   }
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->date = new \DateTime();
+    }
 }

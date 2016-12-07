@@ -25,13 +25,6 @@ class Lab1_wynik
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_zespol", type="integer")
-     */
-    private $idZespol;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="S0", type="decimal", precision=10, scale=2)
@@ -62,7 +55,7 @@ class Lab1_wynik
     /**
      * @var string
      *
-     * @ORM\Column(name="RH", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="RH", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $rH;
 
@@ -97,7 +90,7 @@ class Lab1_wynik
     /**
      * @var string
      *
-     * @ORM\Column(name="E", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="E", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $e;
 
@@ -121,30 +114,6 @@ class Lab1_wynik
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idZespol
-     *
-     * @param integer $idZespol
-     *
-     * @return Lab1_wynik
-     */
-    public function setIdZespol($idZespol)
-    {
-        $this->idZespol = $idZespol;
-
-        return $this;
-    }
-
-    /**
-     * Get idZespol
-     *
-     * @return int
-     */
-    public function getIdZespol()
-    {
-        return $this->idZespol;
     }
 
     /**
@@ -387,8 +356,18 @@ class Lab1_wynik
         return $this->e;
     }
 
+    public function getZespol()
+    {
+        return $this->zespol;
+    }
+
+    public function setZespol($zespol)
+    {
+        $this->zespol = $zespol;
+    }
+
   public function __toString() {
-    return (string) $this->zespol;
+    return (string) $this->id;
   }
 }
 
