@@ -4,8 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Lab2_pomiar;
 use AppBundle\Entity\Lab2_pomiar_tab;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Lab2_pomiar controller.
  *
  * @Route("/lab2_pomiar")
+ * @Security("has_role('ROLE_USER')")
  */
 class Lab2_pomiarController extends Controller
 {

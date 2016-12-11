@@ -31,7 +31,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "alcaeus/mongo-php-adapter": "^1.0",
         "doctrine/mongodb-odm": "^1.1",
-        "doctrine/mongodb-odm-bundle": "^3.2"
+        "doctrine/mongodb-odm-bundle": "^3.2",
+        "knplabs/knp-menu-bundle": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

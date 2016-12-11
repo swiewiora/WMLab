@@ -6,7 +6,8 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN:       ROLE_ADMIN
+        ROLE_SUPER_ADMIN: ROLE_SUPER_ADMIN
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
@@ -14,7 +15,6 @@ security:
                 id: fos_user.user_provider.username
         in_memory:
             memory: ~
-
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -34,7 +34,6 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-
             logout:     true
             anonymous:  true
 
@@ -43,3 +42,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/lab1_pomiar/, role: ROLE_USER }
+        - { path: ^/lab1_wynik/, role: ROLE_USER }
+        - { path: ^/lab2_pomiar/, role: ROLE_USER }
+        - { path: ^/lab2_wynik/, role: ROLE_USER }

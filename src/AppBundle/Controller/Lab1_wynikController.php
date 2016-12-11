@@ -6,8 +6,6 @@ namespace AppBundle\Controller;
 use AppBundle\Calc\Lab2Calc;
 use AppBundle\Entity\Lab1_pomiar;
 use AppBundle\Entity\Lab1_wynik;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -64,8 +62,5 @@ class Lab1_wynikController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('lab1_wynik_show', array('id' => $lab1_wynik->getId()));
-        /*return $this->render('lab1_wynik/show.html.twig', array(
-            'lab1_wynik' => $lab1_wynik,
-        ));*/
     }
 }

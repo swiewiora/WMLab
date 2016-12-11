@@ -17,7 +17,6 @@ class Lab2_pomiar_step2Type extends AbstractType
         $builder
             ->add('l02')
             ->add('s02')
-            ->add('zespol')
         ;
     }
     

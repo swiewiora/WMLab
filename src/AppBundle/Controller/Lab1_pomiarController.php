@@ -4,8 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Lab1_pomiar;
 use AppBundle\Entity\Lab1_pomiar_tab;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Lab1_pomiar controller.
  *
  * @Route("/lab1_pomiar")
+ * @Security("has_role('ROLE_USER')")
  */
 class Lab1_pomiarController extends Controller
 {
@@ -26,7 +25,7 @@ class Lab1_pomiarController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $lab1_pomiars = $em->getRepository('AppBundle:Lab1_pomiar')->findAll();
+        $lab1_pomiars = $em->getRepository('AppBundle:Lab1_pomiar')->findBy(array('zespol' => $this->getUser()->getZespol()));
 
         return $this->render('lab1_pomiar/index.html.twig', array(
             'lab1_pomiars' => $lab1_pomiars,
@@ -164,6 +163,7 @@ class Lab1_pomiarController extends Controller
     public function newAction_step1(Request $request)
     {
         $lab1_pomiar = new Lab1_pomiar();
+        $lab1_pomiar->setZespol($this->getUser()->getZespol());
         $form = $this->createForm('AppBundle\Form\Lab1_pomiar_step1Type', $lab1_pomiar);
         $form->handleRequest($request);
 

@@ -2,17 +2,15 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Zespol;
-use AppBundle\Form\ZespolType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Zespol controller.
  *
  * @Route("/zespol")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class ZespolController extends Controller
 {

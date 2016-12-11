@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToOne;
+use UserBundle\Entity\User;
 
 /**
  * Zespol
@@ -48,6 +48,12 @@ class Zespol
      * @OneToOne(targetEntity="Lab2_wynik", mappedBy="zespol")
      */
     private $lab2Wynik;
+
+    /**
+     * @var User
+     * @OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="zespol")
+     */
+    private $user;
 
     /**
      * Get id

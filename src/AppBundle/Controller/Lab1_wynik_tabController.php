@@ -3,15 +3,14 @@
 namespace AppBundle\Controller;
 
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Lab1_wynik_tab;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Lab1_wynik_tab controller.
  *
  * @Route("/lab1_wynik_tab")
+ * @Security("has_role('ROLE_USER')")
  */
 class Lab1_wynik_tabController extends Controller
 {
