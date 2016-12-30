@@ -2,6 +2,8 @@
 namespace UserBundle\Entity;
 use AppBundle\Entity\Zespol;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**

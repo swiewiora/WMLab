@@ -6,6 +6,8 @@ namespace AppBundle\Controller;
 use AppBundle\Calc\Lab2Calc;
 use AppBundle\Entity\Lab1_pomiar;
 use AppBundle\Entity\Lab1_wynik;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**

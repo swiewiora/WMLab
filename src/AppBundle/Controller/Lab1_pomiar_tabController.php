@@ -3,6 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Lab1_pomiar_tab;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -60,26 +63,6 @@ class Lab1_pomiar_tabController extends Controller
 
         return $this->redirectToRoute('lab1_pomiar_new_step2', array('id' => $lab1_pomiar->getId()));
     }
-
-    /*
-     * Deletes a Lab1_pomiar_tab entity.
-     *
-     * @Route("/{id}", name="lab1_pomiar_tab_delete")
-     * @Method("DELETE")
-     */
-   /* public function deleteAction(Request $request, Lab1_pomiar_tab $lab1_pomiar_tab)
-    {
-        $form = $this->createDeleteForm($lab1_pomiar_tab);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($lab1_pomiar_tab);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('lab1_pomiar_tab_index');
-    }*/
 
     /**
      * Creates a form to delete a Lab1_pomiar_tab entity.
