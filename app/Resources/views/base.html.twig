@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
+    {% block head %}
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <!-- link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-                  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-                  crossorigin="anonymous" / -->
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{% block title %}WMLab{% endblock %}</title>
+
+            <!-- Bootstrap Core CSS -->
+            <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+            <!-- MetisMenu CSS -->
+            <link href="{{ asset('metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+            <!-- Custom CSS -->
+            <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
+            <!-- Custom Fonts -->
+            <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        {% block stylesheets %}{% endblock %}
+
+        {#< link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
     </head>
+    {% endblock %}
+
     <body>
-
-        {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
-
         {% for type, messages in app.session.flashBag.all %}
             {% for message in messages %}
                 <div class="{{ type }}">
@@ -21,125 +29,85 @@
                 </div>
             {% endfor %}
         {% endfor %}
-        {% block fos_user_content %}{{ include('@User/layout.html.twig') }}{% endblock %}
-        {% block body %}{% endblock %}
-        <!--script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script-->
+        {#{% block fos_user_content %}{{ include('@User/layout.html.twig') }}{% endblock %}#}
 
-
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
-
-<html lang="{{ app.request.locale }}">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>{% block title %}Symfony Demo application{% endblock %}</title>
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap-flatly-3.3.7.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/font-awesome-4.6.3.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/font-lato.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/highlight-solarized-light.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    {% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
-
-<body id="{% block body_id %}{% endblock %}">
-
-{% block header %}
-    <header>
-        <div class="navbar navbar-default navbar-static-top" role="navigation">
-            <div class="container">
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ path('index') }}">
-                        Strona główna
-                    </a>
-
-                    <button type="button" class="navbar-toggle"
-                            data-toggle="collapse"
-                            data-target=".navbar-collapse">
-                        <span class="sr-only">{{ 'menu.toggle_nav'|trans }}</span>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <a class="navbar-brand" href="index.html">WM Lab</a>
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
+                <!-- /.navbar-header -->
 
-                        {% block header_navigation_links %}
-                            {% block fos_user_content %}{{ include('@User/layout.html.twig') }}{% endblock %}
-                        {% endblock %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header>
-{% endblock %}
+                <ul class="nav navbar-top-links navbar-right">
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
 
-<div class="container body-container">
-    {% block body %}
-        <div class="row">
-            <div id="main" class="col-sm-9">
-                {{ include('default/_flash_messages.html.twig') }}
-
-                {% block main %}{% endblock %}
-            </div>
-
-            <div id="sidebar" class="col-sm-3">
-                {% block sidebar %}
-                    {{ render_esi(controller('FrameworkBundle:Template:template', {
-                        'template': 'blog/about.html.twig',
-                        'sharedAge': 600,
-                        '_locale': app.request.locale
-                    })) }}
-                {% endblock %}
-            </div>
-        </div>
-    {% endblock %}
-</div>
-
-{% block footer %}
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div id="footer-copyright" class="col-md-6">
-                    <p>&copy; {{ 'now'|date('Y') }} - The Symfony Project</p>
-                    <p>{{ 'mit_license'|trans }}</p>
-                </div>
-                <div id="footer-resources" class="col-md-6">
-                    <p>
-                        <a href="https://twitter.com/symfony" title="Symfony Twitter">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} {{ app.user.username }} {% endif %}
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
-                        <a href="https://www.facebook.com/SensioLabs" title="SensioLabs Facebook">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://symfony.com/blog/" title="Symfony Blog">
-                            <i class="fa fa-rss" aria-hidden="true"></i>
-                        </a>
-                    </p>
+                        <ul class="dropdown-menu dropdown-user">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i> Profil użytkownika</a></li>
+                                <li class="divider"></li>
+                                <a href="{{ path('fos_user_security_logout') }}">
+                                    <i class="fa fa-sign-out fa-fw"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            {% else %}
+                                <a href="{{ path('fos_user_security_login') }}">
+                                    {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            {% endif %}
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
+                    </div>
+                    <!-- /.sidebar-collapse -->
                 </div>
-            </div>
+                <!-- /.navbar-static-side -->
+            </nav>
         </div>
-    </footer>
-{% endblock %}
+        <!-- /#wrapper -->
 
-{% block javascripts %}
-    <script src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
-    <script src="{{ asset('js/moment.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-3.3.7.min.js') }}"></script>
-    <script src="{{ asset('js/highlight.pack.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-{% endblock %}
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% block body %}{% endblock %}
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
 
-{# it's not mandatory to set the timezone in localizeddate(). This is done to
-   avoid errors when the 'intl' PHP extension is not available and the application
-   is forced to use the limited "intl polyfill", which only supports UTC and GMT #}
-<!-- Page rendered on {{ 'now'|localizeddate('long', 'long', null, 'UTC') }} -->
-</body>
+        {% block basejavascripts %}
+        {#<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>#}
+        {#<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+        <!-- jQuery -->
+        <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="{{ asset('metisMenu/metisMenu.min.js') }}"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="{{ asset('js/sb-admin-2.js') }}"></script>
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
 </html>
