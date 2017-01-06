@@ -2,20 +2,41 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block body %}
-    <h1>Wprowadzenie wyników pomiarów - krok 1</h1>
-    <h2>Wprowadź wymiary próbki</h2>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Próba statyczna rozciągania</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
 
-    {{ form_start(form) }}
-        Długość poczatkowa<br />
-        L<sub>0</sub> = {{ form_widget(form.l0) }} mm<br />
-        Średnica początkowa<br />
-        D<sub>0</sub> = {{ form_widget(form.d0) }} mm<br />
-        <input type="submit" value="Przejdź dalej" />
-    {{ form_end(form) }}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Krok 1 - Wprowadź wymiary próbki
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">L<sub>0</sub></span>
+                            {{ form_widget(form.l0, {'attr': {'placeholder': 'Długość poczatkowa'} }) }}
+                            <span class="input-group-addon">mm</span>
+                            {{ form_errors(form.l0) }}
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">D<sub>0</sub></span>
+                            {{ form_widget(form.d0, {'attr': {'placeholder': 'Średnica początkowa'} }) }}
+                            <span class="input-group-addon">mm</span>
+                            {{ form_errors(form.d0) }}
+                        </div>
+                    {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('lab1_pomiar_index') }}">Przerwij</a>
-        </li>
-    </ul>
+                        <p><input type="submit" class="btn btn-outline btn-primary" value="Przejdź dalej" /> </p>
+                <p><a class="btn btn-outline btn-danger" href="{{ path('lab1_pomiar_index') }}">Przerwij</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

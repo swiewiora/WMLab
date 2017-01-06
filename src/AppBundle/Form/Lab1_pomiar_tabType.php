@@ -3,11 +3,10 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class Lab1_pomiar_step1Type extends AbstractType
+class Lab1_pomiar_tabType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,18 +15,20 @@ class Lab1_pomiar_step1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('l0', NumberType::class)
-            ->add('d0', NumberType::class)
+            ->add('p')
+            ->add('l1')
+            ->add('l2')
+            ->add('pomiar')
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Lab1_pomiar'
+            'data_class' => 'AppBundle\Entity\Lab1_pomiar_tab'
         ));
     }
 }

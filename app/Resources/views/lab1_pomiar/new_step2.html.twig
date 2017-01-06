@@ -2,92 +2,100 @@
 {% set counter = 0 %}
 
 {% block body %}
-    <h1>Wprowadzenie wyników pomiarów - krok 2</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Próba statyczna rozciągania</h1>
+    </div>
+</div>
 
-    <table>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="list-unstyled">
+                    <li><strong>Długość początkowa:</strong> L<sub>0</sub> = {{ lab1_pomiar.l0 }} mm</li>
+                    <li><strong>Średnica początkowa:</strong> D<sub>0</sub> = {{ lab1_pomiar.d0 }} mm</li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Krok 2 - Wprowadź wartości sił i wskazania tensometra
+            </div>
+            <div class="panel-body">
+                {{ form_start(form) }}
+                <div class="form-group input-group">
+                    <span class="input-group-addon">P</span>
+                    {{ form_widget(form.p, {'attr': {'placeholder': 'Siła'} }) }}
+                    <span class="input-group-addon">N</span>
+                    {{ form_errors(form.p) }}
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">L<sub>1</sub></span>
+                    {{ form_widget(form.l1, {'attr': {'placeholder': 'Wskazanie pierwszego czujnika'} }) }}
+                    <span class="input-group-addon">10<sup>-2</sup> mm</span>
+                    {{ form_errors(form.l1) }}
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">L<sub>2</sub></span>
+                    {{ form_widget(form.l2, {'attr': {'placeholder': 'Wskazanie drugiego czujnika'} }) }}
+                    <span class="input-group-addon">10<sup>-2</sup> mm</span>
+                    {{ form_errors(form.l2) }}
+                </div>
+                <input type="submit" class="btn btn-primary" value="Dodaj" />
+                {{ form_end(form) }}
+            </div>
+        </div>
 
-        <tbody>
-            <tr>
-                <th>Długość początkowa </th>
-                <th>L<sub>0</sub></th>
-                <td>{{ lab1_pomiar.l0 }}</td>
-                <td>mm</td>
-            </tr>
-            <tr>
-                <th>Średnica początkowa </th>
-                <th>D<sub>0</sub></th>
-                <td>{{ lab1_pomiar.d0 }}</td>
-                <td>mm</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>l.p.</th>
+                      <th>P</th>
+                      <th>L<sub>1</sub></th>
+                      <th>L<sub>2</sub></th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>[N]</th>
+                        <th>[10<sup>-2</sup> mm]</th>
+                        <th>[10<sup>-2</sup> mm]</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for lab1_pomiar_tab in lab1_pomiar_tabs %}
+                        {% set counter = counter + 1 %}
+                      <tr>
+                        <td>{{ counter }}</td>
+                        <td>{{ lab1_pomiar_tab.p }}</td>
+                        <td>{{ lab1_pomiar_tab.l1 }}</td>
+                        <td>{{ lab1_pomiar_tab.l2 }}</td>
+                        <td>
+                            {{ form_start(delete_form_tab[lab1_pomiar_tab.id]) }}
+                            <a class="btn btn-outline btn-warning btn-xs"
+                               href="{{ path('lab1_pomiar_tab_edit', { 'id': lab1_pomiar_tab.id }) }}">
+                                Edytuj
+                            </a>
+                                <input class="btn btn-outline btn-danger btn-xs" type="submit" value="Usuń">
+                            {{ form_end(delete_form_tab[lab1_pomiar_tab.id]) }}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <p><a class="btn btn-outline btn-default" href="{{ path('lab1_pomiar_new_step1') }}">Wstecz</a>
+                 <a class="btn btn-outline btn-primary"
+                      href="{{ path('lab1_pomiar_new_step3', { 'id': lab1_pomiar.id }) }}">Dalej</a></p>
+                <p><a class="btn btn-outline btn-danger" href="{{ path('lab1_pomiar_index') }}">Przerwij</a></p>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <ul>
-        <li>
-            <a href="{{ path('lab1_pomiar_edit', { 'id': lab1_pomiar.id }) }}">Edytuj</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Usuń">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-
-  <h2>Odczytaj wartość siły i wskazania tensometra</h2>
-
-  {{ form_start(form) }}
-    Siła:<br />
-    P = {{ form_widget(form.p) }} N<br />
-    Wskazania czujników:<br />
-    L<sub>1</sub> = {{ form_widget(form.l1) }} 10<sup>-2</sup> mm<br />
-    L<sub>2</sub> = {{ form_widget(form.l2) }} 10<sup>-2</sup> mm<br />
-    <input type="submit" value="Dodaj" />
-  {{ form_end(form) }}
-
-  <table>
-    <thead>
-    <tr>
-      <th>l.p.</th>
-      <th>P</th>
-      <th>L<sub>1</sub></th>
-      <th>L<sub>2</sub></th>
-      <th></th>
-    </tr>
-    <tr>
-        <th></th>
-        <th>[N]</th>
-        <th>10<sup>-2</sup> mm</th>
-        <th>10<sup>-2</sup> mm</th>
-        <th></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    {% for lab1_pomiar_tab in lab1_pomiar_tabs %}
-        {% set counter = counter + 1 %}
-      <tr>
-        <td>{{ counter }}</td>
-        <td>{{ lab1_pomiar_tab.p }}</td>
-        <td>{{ lab1_pomiar_tab.l1 }}</td>
-        <td>{{ lab1_pomiar_tab.l2 }}</td>
-        <td>
-          <ul>
-            <li>
-              {{ form_start(delete_form_tab[lab1_pomiar_tab.id]) }}
-                <input type="submit" value="Usuń">
-              {{ form_end(delete_form_tab[lab1_pomiar_tab.id]) }}
-            </li>
-            <li>
-              <a href="{{ path('lab1_pomiar_tab_edit', { 'id': lab1_pomiar_tab.id }) }}">Edytuj</a>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-
-  <a href="{{ path('lab1_pomiar_new_step1') }}">Wstecz</a><br />
-  <a href="{{ path('lab1_pomiar_new_step3', { 'id': lab1_pomiar.id }) }}">Dalej</a><br />
-    <a href="{{ path('lab1_pomiar_index') }}">Przerwij</a>
 {% endblock %}
