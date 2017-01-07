@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Lab1_pomiar;
 use AppBundle\Entity\Lab1_pomiar_tab;
+use AppBundle\Entity\Lab1_wynik;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -27,8 +28,13 @@ class Lab1_pomiarController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $auth_checker = $this->get('security.authorization_checker');
 
-        $lab1_pomiars = $em->getRepository('AppBundle:Lab1_pomiar')->findBy(array('zespol' => $this->getUser()->getZespol()));
+        if($auth_checker->isGranted('ROLE_ADMIN'))
+            $lab1_pomiars = $em->getRepository('AppBundle:Lab1_pomiar')->findAll();
+        else
+        $lab1_pomiars = $em->getRepository('AppBundle:Lab1_pomiar')
+            ->findBy(array('zespol' => $this->getUser()->getZespol()));
 
         return $this->render('lab1_pomiar/index.html.twig', array(
             'lab1_pomiars' => $lab1_pomiars,
@@ -100,6 +106,17 @@ class Lab1_pomiarController extends Controller
             $em->flush();
         }
 
+        $em = $this->getDoctrine()->getManager();
+        $lab1_wynik = $em->getRepository('AppBundle:Lab1_wynik')
+            ->findOneBy(array('zespol' => $lab1_pomiar->getZespol()));
+
+        $form = $this->createDeleteWynikForm($lab1_wynik);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($lab1_wynik);
+            $em->flush();
+        }
         return $this->redirectToRoute('lab1_pomiar_index');
     }
 
@@ -107,7 +124,6 @@ class Lab1_pomiarController extends Controller
      * Creates a form to delete a Lab1_pomiar entity.
      *
      * @param Lab1_pomiar $lab1_pomiar The Lab1_pomiar entity
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Lab1_pomiar $lab1_pomiar)
@@ -117,6 +133,21 @@ class Lab1_pomiarController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Creates a form to delete a Lab1_pomiar entity.
+     *
+     * @param Lab1_wynik $lab1_wynik The Lab1_wynik entity
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteWynikForm(Lab1_wynik $lab1_wynik)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('lab1_wynik_delete', array('id' => $lab1_wynik->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 
     /**

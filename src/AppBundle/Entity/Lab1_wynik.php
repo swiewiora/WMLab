@@ -101,10 +101,9 @@ class Lab1_wynik
     private $zespol;
 
     /**
-     * @OneToMany(targetEntity="Lab1_wynik_tab", mappedBy="wynik")
+     * @OneToMany(targetEntity="Lab1_wynik_tab", mappedBy="wynik", cascade={"remove"})
      */
     private $tab;
-
 
     /**
      * Get id
@@ -369,5 +368,10 @@ class Lab1_wynik
   public function __toString() {
     return (string) $this->id;
   }
+
+    public function getTab()
+    {
+        return $this->tab;
+    }
 }
 

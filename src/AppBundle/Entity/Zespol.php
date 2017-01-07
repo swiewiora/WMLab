@@ -25,11 +25,11 @@ class Zespol
     private $id;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id_prowadzacego", type="integer")
+     * @ORM\Column(name="nazwa", type="string", nullable=true)
      */
-    private $idProwadzacego;
+    private $nazwa;
 
     /**
      * @OneToOne(targetEntity="Lab1_pomiar", mappedBy="zespol")
@@ -93,6 +93,9 @@ class Zespol
     }
 
     public function __toString() {
-      return (string) $this->id;
+        if($this->nazwa)
+            return $this->nazwa;
+        else
+            return (string) $this->id;
     }
 }

@@ -45,11 +45,44 @@ class Lab1_wynik_tab
     private $dlSr;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="s_dl", type="decimal", precision=10, scale=3)
+     */
+    private $sdl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="p", type="decimal", precision=10, scale=2)
+     */
+    private $p;
+
+    /**
      * @ManyToOne(targetEntity="Lab1_wynik", inversedBy="tab")
      * @JoinColumn(name="id_wynik", referencedColumnName="id")
      */
     private $wynik;
 
+    public function getP()
+    {
+        return $this->p;
+    }
+
+    public function setP($p)
+    {
+        $this->p = $p;
+    }
+
+    public function getWynik()
+    {
+        return $this->wynik;
+    }
+
+    public function setWynik($wynik)
+    {
+        $this->wynik = $wynik;
+    }
 
     /**
      * Get id
@@ -133,28 +166,15 @@ class Lab1_wynik_tab
         return $this->dlSr;
     }
 
-    /**
-     * Set idWynik
-     *
-     * @param integer $idWynik
-     *
-     * @return Lab1_wynik_tab
-     */
-    public function setIdWynik($idWynik)
-    {
-        $this->idWynik = $idWynik;
 
-        return $this;
+    public function getSdl()
+    {
+        return $this->sdl;
     }
 
-    /**
-     * Get idWynik
-     *
-     * @return int
-     */
-    public function getIdWynik()
+    public function setSdl($sdl)
     {
-        return $this->idWynik;
+        $this->sdl = $sdl;
     }
 }
 

@@ -3,6 +3,7 @@
 namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
@@ -59,8 +60,8 @@ class Builder implements ContainerAwareInterface
             'extras' => array('safe_label' => true),
         ));
 
-        /*$securityContext = $this->get('security.authorization_checker');
-        if($securityContext->isGranted('ROLE_ADMIN'))*/
+//        $securityContext = $this->get('security.authorization_checker');
+//        if($securityContext->isGranted('ROLE_ADMIN')) {
 
             $menu->addChild(
                 'Dashboard',
@@ -78,7 +79,7 @@ class Builder implements ContainerAwareInterface
                     'extras' => array('safe_label' => true),
                 )
             );
-
+//        }
         return $menu;
     }
 }
