@@ -48,6 +48,7 @@ class Lab1Calc
 
     private function calculate(Lab1_pomiar $lab1_pomiar)
     {
+
         $d0 = $lab1_pomiar->getD0();
         $this->s0 = pi() * pow((double) $d0, 2) / 4;
 
@@ -67,7 +68,7 @@ class Lab1Calc
         $this->reh = $peh / $this->s0;
 
         $pm = $lab1_pomiar->getPm();
-        $this->rm = $pm / $this->s0;
+        $this->rm = $pm * 10 / $this->s0;
 
         $pu = $lab1_pomiar->getPu();
         $this->ru = $pu / $this->su;
@@ -88,8 +89,6 @@ class Lab1Calc
 
             if($i != 0)
                 $this->sdl[$i] += $this->sdl[$i-1];
-
-
         }
     }
 

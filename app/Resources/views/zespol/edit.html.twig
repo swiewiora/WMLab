@@ -1,21 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Zespol edit</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Edycja zespołu</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+            {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('zespol_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <div class="well">
+                <h4>Operacje</h4>
+                <p><input class="btn btn-outline btn-lg btn-success btn-block"
+                       type="submit" value="Zapisz zmiany" /></p>
+            {{ form_end(edit_form) }}
+
+                <p><a class="btn btn-outline btn-lg btn-default btn-block"
+                      href="{{ path('dashboard') }}">Odrzuć zmiany</a></p>
+                {{ form_start(delete_form) }}
+                <input class="btn btn-outline btn-lg btn-danger btn-block"
+                       type="submit" value="Usuń">
+                {{ form_end(delete_form) }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

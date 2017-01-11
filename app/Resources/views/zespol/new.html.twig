@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Zespol creation</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Tworzenie nowego zespołu</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <p><input class="btn btn-outline btn-primary" type="submit" value="Stwórz zespół" /></p>
+            {{ form_end(form) }}
+            <p><a class="btn btn-outline btn-default" href="{{ path('dashboard') }}">Powrót</a></p>
+        </div>
+    </div>
+</div>
 
-    <ul>
-        <li>
-            <a href="{{ path('zespol_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

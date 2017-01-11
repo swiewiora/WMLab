@@ -18,7 +18,6 @@ class Lab1_pomiar_tabType extends AbstractType
             ->add('p')
             ->add('l1')
             ->add('l2')
-            ->add('pomiar')
         ;
     }
 

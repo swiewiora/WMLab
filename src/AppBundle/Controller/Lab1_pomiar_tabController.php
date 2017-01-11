@@ -30,6 +30,8 @@ class Lab1_pomiar_tabController extends Controller
         $editForm = $this->createForm('AppBundle\Form\Lab1_pomiar_tabType', $lab1_pomiar_tab);
         $editForm->handleRequest($request);
 
+        $lab1_pomiar = $lab1_pomiar_tab->getPomiar();
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($lab1_pomiar_tab);
@@ -40,8 +42,9 @@ class Lab1_pomiar_tabController extends Controller
 
         return $this->render('lab1_pomiar_tab/edit.html.twig', array(
             'lab1_pomiar_tab' => $lab1_pomiar_tab,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'lab1_pomiar' => $lab1_pomiar,
         ));
     }
 

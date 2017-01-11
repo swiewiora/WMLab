@@ -9,6 +9,7 @@
 namespace AppBundle\Admin;
 
 use AppBundle\Controller\ZespolController;
+use AppBundle\Entity\Zespol;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;

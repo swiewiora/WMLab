@@ -63,6 +63,7 @@
                                 <td>{{ counter }}</td>
                                 <td>{{ zespol }}</td>
                                 <td>
+                                    {{ form_start(delete_form) }}
                                     <a class="btn btn-outline btn-info btn-xs"
                                        href="{{ path('zespol_show', { 'id': zespol.id }) }}">
                                         Szczegóły
@@ -71,7 +72,6 @@
                                        href="{{ path('zespol_edit', { 'id': zespol.id }) }}">
                                         Edytuj
                                     </a>
-                                    {{ form_start(delete_form) }}
                                     <input class="btn btn-outline btn-danger btn-xs" type="submit" value="Usuń">
                                     {{ form_end(delete_form) }}
                                 </td>

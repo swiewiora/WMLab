@@ -26,11 +26,7 @@ class User extends BaseUser
      */
     protected $zespol;
 
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
+
 
     public function getZespol()
     {
@@ -40,4 +36,21 @@ class User extends BaseUser
     {
         $this->zespol = $zespol;
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+
+    public function __toString()
+    {
+        return $this->id;
+    }
+
 }

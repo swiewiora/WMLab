@@ -71,9 +71,13 @@ class ZespolController extends Controller
     {
         $deleteForm = $this->createDeleteForm($zespol);
 
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('UserBundle:User')->findBy(array('zespol' => $zespol->getId()));
+
         return $this->render('zespol/show.html.twig', array(
             'zespol' => $zespol,
             'delete_form' => $deleteForm->createView(),
+            'users' => $users,
         ));
     }
 
