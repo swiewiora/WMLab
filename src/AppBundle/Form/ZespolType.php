@@ -15,7 +15,7 @@ class ZespolType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idProwadzacego')
+            ->add('nazwa')
         ;
     }
     

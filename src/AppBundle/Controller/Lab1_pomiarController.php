@@ -110,12 +110,14 @@ class Lab1_pomiarController extends Controller
         $lab1_wynik = $em->getRepository('AppBundle:Lab1_wynik')
             ->findOneBy(array('zespol' => $lab1_pomiar->getZespol()));
 
-        $form = $this->createDeleteWynikForm($lab1_wynik);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($lab1_wynik);
-            $em->flush();
+        if ($lab1_wynik) {
+            $form = $this->createDeleteWynikForm($lab1_wynik);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($lab1_wynik);
+                $em->flush();
+            }
         }
         return $this->redirectToRoute('lab1_pomiar_index');
     }

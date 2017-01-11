@@ -26,20 +26,21 @@
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
+                        {% if lab1_pomiars %}
                         <thead>
                             <tr>
                                 <th>#</th>
                                 {% if is_granted("ROLE_ADMIN") %} <th>Zespół</th> {% endif %}
-                                <th>L0</th>
-                                <th>D0</th>
-                                <th>Du</th>
-                                <th>Lu</th>
-                                <th>Pm</th>
+                                <th>L<sub>0</sub></th>
+                                <th>D<sub>0</sub></th>
+                                <th>D<sub>u</sub></th>
+                                <th>L<sub>u</sub></th>
+                                <th>P<sub>m</sub></th>
                                 <th></th>
                             </tr>
                             <tr>
                                 <th></th>
-                                <th></th>
+                                {% if is_granted("ROLE_ADMIN") %}<th></th>{% endif %}
                                 <th>[mm]</th>
                                 <th>[mm]</th>
                                 <th>[mm]</th>
@@ -73,6 +74,11 @@
                         {% endfor %}
                         </tbody>
                     </table>
+                    {% else %}
+                    <div class="alert alert-info">
+                       Brak pomiarów
+                    </div>
+                    {% endif %}
                     <!-- /.table-responsive -->
                     <div class="well">
                         <h4>Operacje</h4>

@@ -6,6 +6,8 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class Builder implements ContainerAwareInterface
 {
@@ -13,13 +15,13 @@ class Builder implements ContainerAwareInterface
 
     public function mainMenu(FactoryInterface $factory, array $options)
     {
+
         $menu = $factory->createItem('root', array(
             'childrenAttributes'    => array(
                 'class'             => 'nav',
                 'id'                => 'side-menu',
             ),
         ));
-//        $menu->setChildrenAttribute('class',null);
 
         $menu->addChild('Labs', array(
             'uri' => '#',
@@ -41,7 +43,7 @@ class Builder implements ContainerAwareInterface
         $menu['Labs']['Lab1']->addChild('Wyniki', array(
             'route' => 'lab1_wynik_index',
             'label' => '<i class="fa fa-bar-chart-o fa-fw"></i> Wyniki',
-            'extras' => array('safe_label' => true),
+            'extras' => array('safe_label' => true)
         ));
         $menu['Labs']->addChild('Lab2', array(
             'uri' => '#',
@@ -52,7 +54,7 @@ class Builder implements ContainerAwareInterface
         $menu['Labs']['Lab2']->addChild('Pomiary', array(
             'route' => 'lab2_pomiar_index',
             'label' => '<i class="fa fa-edit fa-fw"></i> Pomiary',
-            'extras' => array('safe_label' => true),
+            'extras' => array('safe_label' => true)
         ));
         $menu['Labs']['Lab2']->addChild('Wyniki', array(
             'route' => 'lab2_wynik_index',
@@ -60,26 +62,27 @@ class Builder implements ContainerAwareInterface
             'extras' => array('safe_label' => true),
         ));
 
-//        $securityContext = $this->get('security.authorization_checker');
-//        if($securityContext->isGranted('ROLE_ADMIN')) {
+        $checker = $this->container->get('security.authorization_checker');
+        if ($checker->isGranted('ROLE_ADMIN')) {
 
             $menu->addChild(
                 'Dashboard',
                 array(
-                    'uri' => '#',
+                    'route' => 'dashboard',
                     'label' => '<i class="fa fa-dashboard fa-fw"></i> Kokpit',
                     'extras' => array('safe_label' => true),
                 )
             );
-            $menu->addChild(
+            /*$menu->addChild(
                 'Settings',
                 array(
                     'uri' => '#',
                     'label' => '<i class="fa fa-wrench fa-fw"></i> Ustawienia',
                     'extras' => array('safe_label' => true),
                 )
-            );
-//        }
+            );*/
+        }
+
         return $menu;
     }
 }

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\User;
 
 /**
  * Zespol controller.
@@ -120,7 +121,7 @@ class ZespolController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('zespol_index');
+        return $this->redirectToRoute('dashboard');
     }
 
     /**

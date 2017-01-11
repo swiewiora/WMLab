@@ -32,22 +32,22 @@ class Zespol
     private $nazwa;
 
     /**
-     * @OneToOne(targetEntity="Lab1_pomiar", mappedBy="zespol")
+     * @OneToOne(targetEntity="Lab1_pomiar", mappedBy="zespol", cascade={"remove"})
      */
     private $lab1Pomiar;
 
     /**
-     * @OneToOne(targetEntity="Lab1_wynik", mappedBy="zespol")
+     * @OneToOne(targetEntity="Lab1_wynik", mappedBy="zespol", cascade={"remove"})
      */
     private $lab1Wynik;
 
     /**
-     * @OneToOne(targetEntity="Lab2_pomiar", mappedBy="zespol")
+     * @OneToOne(targetEntity="Lab2_pomiar", mappedBy="zespol"), cascade={"remove"}
      */
     private $lab2Pomiar;
 
     /**
-     * @OneToOne(targetEntity="Lab2_wynik", mappedBy="zespol")
+     * @OneToOne(targetEntity="Lab2_wynik", mappedBy="zespol", cascade={"remove"})
      */
     private $lab2Wynik;
 
@@ -67,30 +67,42 @@ class Zespol
         return $this->id;
     }
 
-
-    /**
-     * Set idProwadzacego
-     *
-     * @param integer $idProwadzacego
-     *
-     * @return Zespol
-     */
-    public function setIdProwadzacego($idProwadzacego)
+    public function getNazwa()
     {
-        $this->idProwadzacego = $idProwadzacego;
-
-        return $this;
+        return $this->nazwa;
     }
 
-    /**
-     * Get idProwadzacego
-     *
-     * @return int
-     */
-    public function getIdProwadzacego()
+    public function setNazwa($nazwa)
     {
-        return $this->idProwadzacego;
+        $this->nazwa = $nazwa;
     }
+
+    public function getLab1Pomiar()
+    {
+        return $this->lab1Pomiar;
+    }
+
+    public function getLab1Wynik()
+    {
+        return $this->lab1Wynik;
+    }
+
+    public function getLab2Pomiar()
+    {
+        return $this->lab2Pomiar;
+    }
+
+    public function getLab2Wynik()
+    {
+        return $this->lab2Wynik;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+
 
     public function __toString() {
         if($this->nazwa)

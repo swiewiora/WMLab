@@ -2,5 +2,9 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
+admin:
+    resource: "@AppBundle/Admin/"
+    type:     annotation
+
 _user_bundle:
   resource: "@UserBundle/Resources/config/routing.yml"

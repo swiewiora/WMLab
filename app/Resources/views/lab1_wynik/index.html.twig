@@ -18,22 +18,23 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="table-responsive">
+                        {% if lab1_wyniks %}
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     {% if is_granted("ROLE_ADMIN") %} <th>Zespół</th> {% endif %}
-                                    <th>S0</th>
-                                    <th>Su</th>
-                                    <th>A10</th>
+                                    <th>S<sub>0</sub></th>
+                                    <th>S<sub>u</sub></th>
+                                    <th>A<sub>10</sub></th>
                                     <th>Z</th>
                                     {#<th>Rh</th>#}
-                                    <th>Rel</th>
-                                    <th>Reh</th>
-                                    <th>Rm</th>
-                                    <th>Ru</th>
+                                    <th>R<sub>eL</sub></th>
+                                    <th>R<sub>eH</sub></th>
+                                    <th>R<sub>m</sub></th>
+                                    <th>R<sub>u</sub></th>
                                     {#<th>E</th>#}
-                                    <th>Actions</th>
+                                    <th>Operacje</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,6 +69,11 @@
                             {% endfor %}
                             </tbody>
                         </table>
+                        {% else %}
+                            <div class="alert alert-info">
+                                Brak pomiarów lub niewygenerowany wynik
+                            </div>
+                        {% endif %}
                     </div>
                     <!-- /.panel-body -->
                 </div>

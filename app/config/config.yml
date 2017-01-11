@@ -77,6 +77,10 @@ fos_user:
     registration:
         form:
             type: UserBundle\Form\RegistrationType
+    profile:
+        form:
+            type: UserBundle\Form\ProfileFormType
+
 
 # KNP Menu
 knp_menu:

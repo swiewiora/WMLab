@@ -22,7 +22,9 @@
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Profil użytkownika</a></li>
+                        <li><a href="{{ path('fos_user_profile_show') }}">
+                                <i class="fa fa-user fa-fw"></i> Profil użytkownika</a>
+                        </li>
                         <li class="divider"></li>
                         <a href="{{ path('fos_user_security_logout') }}">
                             <i class="fa fa-sign-out fa-fw"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
