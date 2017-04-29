@@ -80,7 +80,9 @@ fos_user:
     profile:
         form:
             type: UserBundle\Form\ProfileFormType
-
+    from_email:
+        address: you@example.com
+        sender_name: You
 
 # KNP Menu
 knp_menu:
