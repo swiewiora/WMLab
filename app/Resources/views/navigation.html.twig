@@ -15,9 +15,10 @@
         <ul class="nav navbar-top-links navbar-right">
             <!-- /.dropdown -->
             <li class="dropdown">
-
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} {{ app.user.username }} {% endif %}
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {{ app.user.username }}
+                    {% endif %}
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
@@ -26,13 +27,15 @@
                                 <i class="fa fa-user fa-fw"></i> Profil użytkownika</a>
                         </li>
                         <li class="divider"></li>
-                        <a href="{{ path('fos_user_security_logout') }}">
-                            <i class="fa fa-sign-out fa-fw"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                        </a>
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                <i class="fa fa-sign-out fa-fw"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
                     {% else %}
-                        <a href="{{ path('fos_user_security_login') }}">
-                            {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
-                        </a>
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}">
+                                {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
                     {% endif %}
                 </ul>
                 <!-- /.dropdown-user -->

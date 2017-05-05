@@ -1,4 +1,3 @@
-/app/config/parameters.yml
 /build/
 /phpunit.xml
 /var/*
@@ -15,3 +14,9 @@
 /vendor/
 /web/bundles/
 .idea/
+.bowerrc
+src/AppBundle/Document/
+src/UserBundle/Document/
+/test1_2.php
+/test1.php
+/wm.sql
