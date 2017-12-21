@@ -12,7 +12,6 @@
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 /vendor/
-/web/bundles/
 .idea/
 .bowerrc
 src/AppBundle/Document/
