@@ -10,3 +10,4 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: e7fb2f009ba0e79816497545a60afd6bd8184f1a
+    jwt_key_pass_phrase: happyapi

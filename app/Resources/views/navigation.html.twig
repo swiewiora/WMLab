@@ -26,13 +26,13 @@
                                 <i class="fa fa-user fa-fw"></i> Profil użytkownika</a>
                         </li>
                         <li class="divider"></li>
-                        <a href="{{ path('fos_user_security_logout') }}">
+                        <li><a href="{{ path('fos_user_security_logout') }}">
                             <i class="fa fa-sign-out fa-fw"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                        </a>
+                        </a></li>
                     {% else %}
-                        <a href="{{ path('fos_user_security_login') }}">
+                        <li><a href="{{ path('fos_user_security_login') }}">
                             {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
-                        </a>
+                        </a></li>
                     {% endif %}
                 </ul>
                 <!-- /.dropdown-user -->
