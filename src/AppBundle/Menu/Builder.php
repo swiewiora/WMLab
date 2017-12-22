@@ -29,38 +29,38 @@ class Builder implements ContainerAwareInterface
             'extras' => array('safe_label' => true),
         ));
         $menu['Labs']->setChildrenAttribute('class', 'nav nav-second-level');
-        $menu['Labs']->addChild('Lab1', array(
-            'uri' => '#',
-            'label' => '1. Próba statyczna rozciągania<span class="fa arrow"></span>',
-            'extras' => array('safe_label' => true),
-        ));
-        $menu['Labs']['Lab1']->setChildrenAttribute('class', 'nav nav-third-level');
-        $menu['Labs']['Lab1']->addChild('Pomiary', array(
-            'route' => 'lab1_pomiar_index',
-            'label' => '<i class="fa fa-edit fa-fw"></i> Pomiary',
-            'extras' => array('safe_label' => true),
-        ));
-        $menu['Labs']['Lab1']->addChild('Wyniki', array(
-            'route' => 'lab1_wynik_index',
-            'label' => '<i class="fa fa-bar-chart-o fa-fw"></i> Wyniki',
-            'extras' => array('safe_label' => true)
-        ));
-        $menu['Labs']->addChild('Lab2', array(
-            'uri' => '#',
-            'label' => '2. Próba statyczna ściskania<span class="fa arrow"></span>',
-            'extras' => array('safe_label' => true),
-        ));
-        $menu['Labs']['Lab2']->setChildrenAttribute('class', 'nav nav-third-level');
-        $menu['Labs']['Lab2']->addChild('Pomiary', array(
-            'route' => 'lab2_pomiar_index',
-            'label' => '<i class="fa fa-edit fa-fw"></i> Pomiary',
-            'extras' => array('safe_label' => true)
-        ));
-        $menu['Labs']['Lab2']->addChild('Wyniki', array(
-            'route' => 'lab2_wynik_index',
-            'label' => '<i class="fa fa-bar-chart-o fa-fw"></i> Wyniki',
-            'extras' => array('safe_label' => true),
-        ));
+//        $menu['Labs']->addChild('Lab1', array(
+//            'uri' => '#',
+//            'label' => '1. Próba statyczna rozciągania<span class="fa arrow"></span>',
+//            'extras' => array('safe_label' => true),
+//        ));
+//        $menu['Labs']['Lab1']->setChildrenAttribute('class', 'nav nav-third-level');
+//        $menu['Labs']['Lab1']->addChild('Pomiary', array(
+//            'route' => 'lab1_pomiar_index',
+//            'label' => '<i class="fa fa-edit fa-fw"></i> Pomiary',
+//            'extras' => array('safe_label' => true),
+//        ));
+//        $menu['Labs']['Lab1']->addChild('Wyniki', array(
+//            'route' => 'lab1_wynik_index',
+//            'label' => '<i class="fa fa-bar-chart-o fa-fw"></i> Wyniki',
+//            'extras' => array('safe_label' => true)
+//        ));
+//        $menu['Labs']->addChild('Lab2', array(
+//            'uri' => '#',
+//            'label' => '2. Próba statyczna ściskania<span class="fa arrow"></span>',
+//            'extras' => array('safe_label' => true),
+//        ));
+//        $menu['Labs']['Lab2']->setChildrenAttribute('class', 'nav nav-third-level');
+//        $menu['Labs']['Lab2']->addChild('Pomiary', array(
+//            'route' => 'lab2_pomiar_index',
+//            'label' => '<i class="fa fa-edit fa-fw"></i> Pomiary',
+//            'extras' => array('safe_label' => true)
+//        ));
+//        $menu['Labs']['Lab2']->addChild('Wyniki', array(
+//            'route' => 'lab2_wynik_index',
+//            'label' => '<i class="fa fa-bar-chart-o fa-fw"></i> Wyniki',
+//            'extras' => array('safe_label' => true),
+//        ));
 
         $checker = $this->container->get('security.authorization_checker');
         if ($checker->isGranted('ROLE_ADMIN')) {

@@ -26,7 +26,11 @@ class User extends BaseUser
      */
     protected $zespol;
 
-
+    /**
+     * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="user")
+     * @JoinColumn(name="id_project", referencedColumnName="id")
+     */
+    protected $project;
 
     public function getZespol()
     {
