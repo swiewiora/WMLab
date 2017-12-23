@@ -62,12 +62,12 @@ doctrine:
         auto_mapping: true
 
 # Swiftmailer Configuration
-swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+#swiftmailer:
+#    transport: "%mailer_transport%"
+#    host:      "%mailer_host%"
+#    username:  "%mailer_user%"
+#    password:  "%mailer_password%"
+#    spool:     { type: memory }
 
 # FOSUserBundle
 fos_user:
@@ -77,12 +77,17 @@ fos_user:
     registration:
         form:
             type: UserBundle\Form\RegistrationType
+        confirmation:
+            enabled: false
+    service:
+        mailer: fos_user.mailer.noop
     profile:
         form:
             type: UserBundle\Form\ProfileFormType
     from_email:
         address: you@example.com
         sender_name: You
+
 
 # KNP Menu
 knp_menu:

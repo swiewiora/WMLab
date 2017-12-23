@@ -46,3 +46,4 @@ security:
         - { path: ^/lab1_wynik/, role: ROLE_USER }
         - { path: ^/lab2_pomiar/, role: ROLE_USER }
         - { path: ^/lab2_wynik/, role: ROLE_USER }
+#        - { path: "/{YOUR-PREFIX}/profile/confirm-email-update/{token}", roles: IS_AUTHENTICATED_REMEMBERED }
