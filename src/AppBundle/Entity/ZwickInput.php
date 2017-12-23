@@ -12,6 +12,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ZwickInputRepository")
@@ -26,17 +27,9 @@ class ZwickInput
      */
     private $id;
     /**
-     * @ORM\Column(type="float")
+     * @OneToMany(targetEntity="AppBundle\Entity\ZwickInputData", mappedBy="material")
      */
-    private $test_time;
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $distance_standard;
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $load_measurement;
+    private $data;
     /**
      * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="zwick_input")
      * @JoinColumn(name="id_project", referencedColumnName="id")
