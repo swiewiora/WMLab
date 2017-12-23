@@ -35,4 +35,11 @@ class ZwickInput
      * @JoinColumn(name="id_project", referencedColumnName="id")
      */
     private $project;
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the CSV data.")
+     * @Assert\File(mimeTypes={ "application/csv" })
+     */
+    private $file;
 }
