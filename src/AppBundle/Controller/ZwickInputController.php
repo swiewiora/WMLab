@@ -36,14 +36,14 @@ class ZwickInputController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $file stores the uploaded PDF file
+            // $file stores the uploaded CSV file
             /** @var File\UploadedFile $file */
             $file = $input->getFile();
 
             // Generate a unique name for the file before saving it
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-            // Move the file to the directory where brochures are stored
+            // Move the file to the directory
             $file->move(
                 $this->getParameter('csv_directory'),
                 $fileName
@@ -54,8 +54,18 @@ class ZwickInputController extends Controller
             $input->setFile($fileName);
 
             // ... persist the $product variable or any other work
+            $em = $this->getDoctrine()->getManager();
+            $connection = $em->getConnection();
+            $statement = $connection->prepare("LOAD DATA INFILE :filename into table zwick_input_data".
+                " fields terminated by ','".
+                " lines terminated by '\r\n'".
+                " ignore 1 lines".
+                " (test_time, distance_standard, load_measurement)");
+            $statement->bindValue('filename', $this->getParameter('csv_directory').'\\'.$fileName);
+            $statement->execute();
+            //$results = $statement->fetchAll();
 
-            return $this->redirect($this->generateUrl('zwick_input_list'));
+            return $this->redirect($this->generateUrl('index'));
         }
 
         return $this->render('zwick/upload.html.twig', array(
