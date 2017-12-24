@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\ZwickInput;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File as File;
@@ -40,30 +41,24 @@ class ZwickInputController extends Controller
             /** @var File\UploadedFile $file */
             $file = $input->getFile();
 
-            // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-
-            // Move the file to the directory
-            $file->move(
-                $this->getParameter('csv_directory'),
-                $fileName
-            );
-
-            // Update the 'file' property to store the CSV file name
-            // instead of its contents
-            $input->setFile($fileName);
-
-            // ... persist the $product variable or any other work
+            // persist the $input variable
             $em = $this->getDoctrine()->getManager();
+            $em->persist($input);
+            $em->flush();
+
             $connection = $em->getConnection();
             $statement = $connection->prepare("LOAD DATA INFILE :filename into table zwick_input_data".
                 " fields terminated by ','".
                 " lines terminated by '\r\n'".
                 " ignore 1 lines".
-                " (test_time, distance_standard, load_measurement)");
-            $statement->bindValue('filename', $this->getParameter('csv_directory').'\\'.$fileName);
+                " (test_time, distance_standard, load_measurement)".
+                " set id_input = :idinput");
+            $statement->bindValue('filename', $file->getRealPath());
+            $statement->bindValue('idinput', $input->getId());
             $statement->execute();
-            //$results = $statement->fetchAll();
+
+            $filesystem = new Filesystem();
+            $filesystem->remove($file->getRealPath());
 
             return $this->redirect($this->generateUrl('index'));
         }

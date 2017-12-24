@@ -118,7 +118,6 @@ class Lab1_pomiar
     $this->tab = $tab;
   }
 
-
     /**
      * Get id
      *
@@ -281,7 +280,6 @@ class Lab1_pomiar
 
     public function getDate()
     {
-        //$newDate = DateTime::createFromFormat("l dS F Y", $this->date);
         $newDate = $this->date->format('d.m.Y H:i');
         return $newDate;
     }

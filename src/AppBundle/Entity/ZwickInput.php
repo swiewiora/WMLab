@@ -28,7 +28,9 @@ class ZwickInput
      */
     private $id;
     /**
-     * @OneToMany(targetEntity="AppBundle\Entity\ZwickInputData", mappedBy="material")
+     * @OneToMany(targetEntity="AppBundle\Entity\ZwickInputData",
+     *     mappedBy="material",
+     *     cascade={"remove"})
      */
     private $data;
     /**
