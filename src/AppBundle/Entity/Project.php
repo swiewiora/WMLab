@@ -36,4 +36,34 @@ class Project
      * @OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="project")
      */
     private $user;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getZwickInput()
+    {
+        return $this->zwick_input;
+    }
+
+    public function setZwickInput($zwick_input)
+    {
+        $this->zwick_input = $zwick_input;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
 }

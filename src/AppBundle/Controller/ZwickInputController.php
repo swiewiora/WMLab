@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\ZwickInput;
-use AppBundle\Form\ZwickInputType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,8 +31,8 @@ class ZwickInputController extends Controller
      */
     public function newAction(Request $request) {
         $input = new ZwickInput();
-        $input->setUser($this->getUser());
-        $form = $this->createForm(ZwickInputType::class, $input);
+//        $input->setUser($this->getUser());
+        $form = $this->createForm('AppBundle\Form\ZwickInputType', $input);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -50,9 +49,9 @@ class ZwickInputController extends Controller
                 $fileName
             );
 
-            // Update the 'brochure' property to store the PDF file name
+            // Update the 'file' property to store the CSV file name
             // instead of its contents
-            $input->setBrochure($fileName);
+            $input->setFile($fileName);
 
             // ... persist the $product variable or any other work
 

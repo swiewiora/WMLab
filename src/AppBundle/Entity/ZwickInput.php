@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ZwickInputRepository")
@@ -39,7 +40,47 @@ class ZwickInput
      * @ORM\Column(type="string")
      *
      * @Assert\NotBlank(message="Please, upload the CSV data.")
-     * @Assert\File(mimeTypes={ "application/csv" })
+     * @Assert\File(mimeTypes={ "text/plain" })
      */
     private $file;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    public function setProject($project)
+    {
+        $this->project = $project;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
 }

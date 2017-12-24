@@ -41,4 +41,54 @@ class ZwickInputData
      * @JoinColumn(name="id_input", referencedColumnName="id")
      */
     private $material;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getTestTime()
+    {
+        return $this->test_time;
+    }
+
+    public function setTestTime($test_time)
+    {
+        $this->test_time = $test_time;
+    }
+
+    public function getDistanceStandard()
+    {
+        return $this->distance_standard;
+    }
+
+    public function setDistanceStandard($distance_standard)
+    {
+        $this->distance_standard = $distance_standard;
+    }
+
+    public function getLoadMeasurement()
+    {
+        return $this->load_measurement;
+    }
+
+    public function setLoadMeasurement($load_measurement)
+    {
+        $this->load_measurement = $load_measurement;
+    }
+
+    public function getMaterial()
+    {
+        return $this->material;
+    }
+
+    public function setMaterial($material)
+    {
+        $this->material = $material;
+    }
 }
