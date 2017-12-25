@@ -45,6 +45,26 @@ class ZwickInput
      * @Assert\File(mimeTypes={ "text/plain" })
      */
     private $file;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $d0;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $h0;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $t0;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $t1;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $korr;
 
     public function getId()
     {
@@ -84,5 +104,55 @@ class ZwickInput
     public function setFile($file)
     {
         $this->file = $file;
+    }
+
+    public function getD0()
+    {
+        return $this->d0;
+    }
+
+    public function setD0($d0)
+    {
+        $this->d0 = $d0;
+    }
+
+    public function getH0()
+    {
+        return $this->h0;
+    }
+
+    public function setH0($h0)
+    {
+        $this->h0 = $h0;
+    }
+
+    public function getT0()
+    {
+        return $this->t0;
+    }
+
+    public function setT0($t0)
+    {
+        $this->t0 = $t0;
+    }
+
+    public function getT1()
+    {
+        return $this->t1;
+    }
+
+    public function setT1($t1)
+    {
+        $this->t1 = $t1;
+    }
+
+    public function getKorr()
+    {
+        return $this->korr;
+    }
+
+    public function setKorr($korr)
+    {
+        $this->korr = $korr;
     }
 }
