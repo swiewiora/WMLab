@@ -1,0 +1,6 @@
+parameters:
+    database_host: mysql
+    database_name: wm
+    database_name_test: wm
+    database_user: root
+    database_password: secret
