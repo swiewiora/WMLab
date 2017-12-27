@@ -15,7 +15,7 @@ variables:
 # Before Script
 before_script:
   - bash .gitlab-ci.sh > /dev/null
-  - cd /builds/zeedenis/ZeeApi
+  - cd /builds/sebawiewior/php
   - php -v
   - ping -c 3 mysql
   - cp app/config/parameters.gitlab-ci.yml app/config/parameters.yml
