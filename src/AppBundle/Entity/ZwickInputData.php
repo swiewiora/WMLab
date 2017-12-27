@@ -40,7 +40,7 @@ class ZwickInputData
      * @ManyToOne(targetEntity="AppBundle\Entity\ZwickInput", inversedBy="data")
      * @JoinColumn(name="id_input", referencedColumnName="id")
      */
-    private $material;
+    private $input;
 
     public function getId()
     {
@@ -82,13 +82,13 @@ class ZwickInputData
         $this->load_measurement = $load_measurement;
     }
 
-    public function getMaterial()
+    public function getInput()
     {
-        return $this->material;
+        return $this->input;
     }
 
-    public function setMaterial($material)
+    public function setInput($input)
     {
-        $this->material = $material;
+        $this->input = $input;
     }
 }
