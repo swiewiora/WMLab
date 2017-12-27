@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Calc\ZwickCalculations;
 use AppBundle\Entity\ZwickInput;
+use AppBundle\Entity\ZwickOutput;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
@@ -15,7 +17,7 @@ use Symfony\Component\HttpFoundation\File as File;
  *
  * @Route("/zwick")
  */
-class ZwickInputController extends Controller
+class ZwickController extends Controller
 {
     /**
      * Lists all Lab1_pomiar entities.
@@ -32,7 +34,6 @@ class ZwickInputController extends Controller
      */
     public function newAction(Request $request) {
         $input = new ZwickInput();
-//        $input->setUser($this->getUser());
         $form = $this->createForm('AppBundle\Form\ZwickInputType', $input);
         $form->handleRequest($request);
 
@@ -66,5 +67,36 @@ class ZwickInputController extends Controller
         return $this->render('zwick/upload.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * Calculates and displays an entity.
+     *
+     * @Route("/generate/{id}", name="zwick_generate")
+     * @Method("GET")
+     */
+    public function reportAction(ZwickInput $input)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $existing_output = $em->getRepository('AppBundle:Project')
+            ->findOneBy(array('user' => $this->getUser()))->getZwickOutput();
+        if($existing_output) {
+            $em->remove($existing_output);
+            $em->flush();
+        }
+
+        $zwick_calculations = new ZwickCalculations($input);
+
+        $output = $zwick_calculations->getOutput();
+        $em->persist($output);
+        $em->flush();
+
+        $output_data = $zwick_calculations->getOutputData();
+        foreach($output_data as $item) {
+            $em->persist($item);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('zwick_report', array('id' => $project->getId()));
     }
 }

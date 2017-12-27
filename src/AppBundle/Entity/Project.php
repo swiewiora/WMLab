@@ -31,21 +31,11 @@ class Project
     /**
      * @OneToMany(targetEntity="AppBundle\Entity\ZwickOutput", mappedBy="project", cascade={"remove"})
      */
-//    private $zwick_output;
+    private $zwick_output;
     /**
      * @OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="project")
      */
     private $user;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     public function getZwickInput()
     {
@@ -55,6 +45,16 @@ class Project
     public function setZwickInput($zwick_input)
     {
         $this->zwick_input = $zwick_input;
+    }
+
+    public function getZwickOutput()
+    {
+        return $this->zwick_output;
+    }
+
+    public function setZwickOutput($zwick_output)
+    {
+        $this->zwick_output = $zwick_output;
     }
 
     public function getUser()

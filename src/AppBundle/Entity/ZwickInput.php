@@ -66,16 +66,6 @@ class ZwickInput
      */
     private $korr;
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getData()
     {
         return $this->data;

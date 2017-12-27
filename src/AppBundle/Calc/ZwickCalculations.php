@@ -10,19 +10,12 @@ namespace AppBundle\Calc;
 
 use AppBundle\Entity\ZwickInput;
 use AppBundle\Entity\ZwickInputData;
+use AppBundle\Entity\ZwickOutput;
+use AppBundle\Entity\ZwickOutputData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class Lab1Calc
+class ZwickCalculations
 {
-//    private $s0;
-//    private $su;
-//    private $a10;
-//    private $z;
-//    private $rel;
-//    private $reh;
-//    private $rm;
-//    private $ru;
-//    private $dl1, $dl2, $dl, $sdl, $p;
     private $input, $output;
     private $time, $distance_standard, $load_measurement, $S, $v, $t_avg, $Eps, $U, $Ns, $flow_stress, $Sexp, $Sapr,
         $load_prediction, $d, $p, $d2;
@@ -35,16 +28,6 @@ class Lab1Calc
     {
         $this->input = $zwick_input;
         $this->calculate();
-    }
-
-    public function getWynik()
-    {
-        return $this->toWynik($this->input);
-    }
-
-    public function getWynikTab()
-    {
-        return $this->toWynikTab($this->input);
     }
 
     private function calculate()
@@ -87,40 +70,40 @@ class Lab1Calc
         $Ktu = 1; //StrainRate_input ^ (m5 * t_input)
         return $Kstrain * $Ku * $Kt * $Ktu;
     }
-    private function toWynik(ZwickInput $lab1_pomiar)
-    {
-        //Create new Lab1_wynik entity and connect it with Team
-        $this->output = new Lab1_wynik();
-        if($zespol = $lab1_pomiar->getZespol())
-            $this->output->setZespol($zespol);
 
-        // Set results to Lab1_wynik entity
-        $this->output->setS0($this->s0);
-        $this->output->setSu($this->su);
-        $this->output->setA10($this->a10);
-        $this->output->setZ($this->z);
-        $this->output->setReL($this->rel);
-        $this->output->setReH($this->reh);
-        $this->output->setRm($this->rm);
-        $this->output->setRu($this->ru);
+    public function getOutput()
+    {
+        //Create new Entity and assign it to Project
+        $this->output = new ZwickOutput();
+        $this->output->setProject($this->input->getProject());
 
         return $this->output;
     }
 
-    private function toWynikTab(ZwickInput $lab1_pomiar)
+    public function getOutputData()
     {
-        for($i = 0; $i < sizeof($this->p); $i++)
-        {
-            $lab1_wynik_tab[$i] = new Lab1_wynik_tab();
-            $lab1_wynik_tab[$i]->setWynik($this->output);
+        $input_data = $this->input->getData();
+        $output_data_tab = [];
+        for ($i = 0; $i < sizeof($input_data); $i++) {
+            $output_data_tab[$i] = new ZwickOutputData();
+            $output_data_tab[$i]->setOutput($this->output);
 
-            $lab1_wynik_tab[$i]->setP($this->p[$i]);
-            $lab1_wynik_tab[$i]->setDl1($this->dl1[$i]);
-            $lab1_wynik_tab[$i]->setDl2($this->dl2[$i]);
-            $lab1_wynik_tab[$i]->setDlSr($this->dl[$i]);
-            $lab1_wynik_tab[$i]->setSdl($this->sdl[$i]);
+            $output_data_tab[$i]->setDistanceStandard($this->distance_standard);
+            $output_data_tab[$i]->setS($this->S);
+            $output_data_tab[$i]->setV($this->v);
+            $output_data_tab[$i]->setTAvg($this->t_avg);
+            $output_data_tab[$i]->setEps($this->Eps);
+            $output_data_tab[$i]->setU($this->U);
+            $output_data_tab[$i]->setD($this->d);
+            $output_data_tab[$i]->setNs($this->Ns);
+            $output_data_tab[$i]->setSexp($this->Sexp);
+            $output_data_tab[$i]->setFlowStress($this->flow_stress);
+            $output_data_tab[$i]->setSapr($this->Sapr);
+            $output_data_tab[$i]->setLoadPrediction($this->load_prediction);
+            $output_data_tab[$i]->setP($this->p);
+            $output_data_tab[$i]->setD2($this->d2);
         }
 
-        return $lab1_wynik_tab;
+        return $output_data_tab;
     }
 }

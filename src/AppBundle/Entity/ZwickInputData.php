@@ -42,16 +42,6 @@ class ZwickInputData
      */
     private $input;
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getTestTime()
     {
         return $this->test_time;
