@@ -1133,16 +1133,16 @@
         },
         {
             "name": "knplabs/knp-menu-bundle",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "80c765d729fcc7e3fcb096ea678f62684b53cbe6"
+                "reference": "6bea43eb84fc67c43ab2b43709194efffa8a8ac0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/80c765d729fcc7e3fcb096ea678f62684b53cbe6",
-                "reference": "80c765d729fcc7e3fcb096ea678f62684b53cbe6",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/6bea43eb84fc67c43ab2b43709194efffa8a8ac0",
+                "reference": "6bea43eb84fc67c43ab2b43709194efffa8a8ac0",
                 "shasum": ""
             },
             "require": {
@@ -1188,7 +1188,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2017-11-29T11:06:44+00:00"
+            "time": "2017-12-24T16:32:39+00:00"
         },
         {
             "name": "lexik/jwt-authentication-bundle",
