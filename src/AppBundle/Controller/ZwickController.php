@@ -43,11 +43,17 @@ class ZwickController extends Controller
             /** @var File\UploadedFile $file */
             $file = $input->getFile();
 
-            // persist the $input variable
             $em = $this->getDoctrine()->getManager();
+            // TODO remove all existing entities
+            $existing_output = $em->getRepository('AppBundle:Zwick')
+                ->findAll();
+            foreach($existing_output as $output) {
+                $em->remove($output);
+            }
+            // persist input to get ID
             $em->persist($input);
             $em->flush();
-
+            // quickly load data from file
             $connection = $em->getConnection();
             $statement = $connection->prepare("LOAD DATA INFILE :filename into table zwick_data".
                 " fields terminated by ','".
@@ -58,7 +64,7 @@ class ZwickController extends Controller
             $statement->bindValue('filename', $file->getRealPath());
             $statement->bindValue('idinput', $input->getId());
             $statement->execute();
-
+            //get zwick_data from database
             $data = $this->getDoctrine()
                 ->getRepository(ZwickData::class)
                 ->findBy(array('zwick' => $input->getId()));
@@ -68,7 +74,9 @@ class ZwickController extends Controller
             $filesystem->remove($file->getRealPath());
 
             $this->reportAction($input);
-            //return $this->redirect($this->generateUrl('index'));
+            return $this->redirect($this->generateUrl('index'));
+            //TODO report form
+//        return $this->redirectToRoute('zwick_report', array('id' => $project->getId()));
         }
 
         return $this->render('zwick/upload.html.twig', array(
@@ -85,7 +93,7 @@ class ZwickController extends Controller
     public function reportAction(Zwick $input)
     {
         $em = $this->getDoctrine()->getManager();
-        //TODO multi user
+        //TODO multi user, multi projects
 //        $existing_output = $em->getRepository('AppBundle:Project')
 //            ->findOneBy(array('user' => $this->getUser()))->getZwick();
 //        if($existing_output) {
@@ -96,17 +104,13 @@ class ZwickController extends Controller
         $zwick_calculations = new ZwickCalculations($input);
         $output_data = $zwick_calculations->calculateData();
 
+        //TODO persist Zwick entity after changes
 //        $output = $zwick_calculations->getZwick();
 //        $em->persist($output);
-//        $em->flush();
 
         foreach($output_data as $item) {
             $em->persist($item);
-            $em->flush();
         }
-
-        return $this->redirect($this->generateUrl('index'));
-        //TODO report form
-//        return $this->redirectToRoute('zwick_report', array('id' => $project->getId()));
+        $em->flush();
     }
 }

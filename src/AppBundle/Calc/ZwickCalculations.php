@@ -27,7 +27,6 @@ class ZwickCalculations
     public function __construct(Zwick $zwick)
     {
         $this->zwick = $zwick;
-//        $this->calculate();
     }
 
     public function calculateData()
@@ -102,7 +101,7 @@ class ZwickCalculations
     }
 
     private function sigmaMgCa08($Strain_input, $StrainRate_input, $t_input, $A, $m1, $m2, $m3, $m4, $m5) {
-        $Kstrain = $A * pow($Strain_input, $m2) * Exp(-$m4 * $Strain_input);
+        $Kstrain = $A * pow($Strain_input, $m2) * exp(-$m4 * $Strain_input);
         $Ku = pow($StrainRate_input, ($m3 * pow( ( ($t_input - 20) / 280), $m5) ) );
         $Kt = exp(-$m1 * $t_input);
         $Ktu = 1; //pow(StrainRate_input, (m5 * t_input) )
