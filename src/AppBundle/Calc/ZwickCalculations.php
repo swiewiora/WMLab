@@ -48,12 +48,16 @@ class ZwickCalculations
             $this->Eps[0] = log($h0 / ($h0 - $this->distance_standard[0]));
 
         for($i = 0; $i < sizeof($zwick_file_data); $i++) {
-            /** @var ZwickData $data_row */
+            /**
+             * @var ZwickData $data_row
+             * @var ZwickData $next_data_row
+             */
             $data_row = $zwick_file_data[$i];
             if ($i < (sizeof($zwick_file_data) - 1) ) {
-                $this->time[$i + 1] = $zwick_file_data[$i + 1]->getTestTime();
-                $this->distance_standard[$i + 1] = $zwick_file_data[$i + 1]->getDistanceStandard() + $korr;
-                $this->load_measurement[$i + 1] = $zwick_file_data[$i + 1]->getLoadMeasurement();
+                $next_data_row = $zwick_file_data[$i+1];
+                $this->time[$i + 1] = $next_data_row->getTestTime();
+                $this->distance_standard[$i + 1] = $next_data_row->getDistanceStandard() + $korr;
+                $this->load_measurement[$i + 1] = $next_data_row->getLoadMeasurement();
             }
             if ($i == (sizeof($zwick_file_data) - 1) ) {
                 $this->time[$i + 1] = 0;
@@ -61,7 +65,7 @@ class ZwickCalculations
                 $this->load_measurement[$i + 1] = 0;
             }
 
-            $this->S[$i] = pi() * $d0^2 * $h0 / (4 * ($h0 - $this->distance_standard[$i]));
+            $this->S[$i] = pi() * pow($d0,2) * $h0 / (4 * ($h0 - $this->distance_standard[$i]));
             $this->v[$i] = ($this->distance_standard[$i+1] - $this->distance_standard[$i])
                 / ($this->time[$i+1] - $this->time[$i]);
             $this->t_avg[$i] = $t0 + $t1 * $this->distance_standard[$i];
@@ -76,7 +80,7 @@ class ZwickCalculations
                 1158.87119892742, 0.005703923, 0.188112152, 0.144087312, 0.5, 0);
             $this->p[$i] = $this->Sapr[$i] * $this->Ns[$i];
             $this->load_prediction[$i] = $this->p[$i] * $this->S[$i];
-            $this->d2[$i] = ($this->load_measurement[$i] - $this->load_prediction[$i])^2;
+            $this->d2[$i] = pow( ($this->load_measurement[$i] - $this->load_prediction[$i]),2);
 
             $data_row->setDistanceStandardKorr($this->distance_standard[$i]);
             $data_row->setS($this->S[$i]);
@@ -98,10 +102,10 @@ class ZwickCalculations
     }
 
     private function sigmaMgCa08($Strain_input, $StrainRate_input, $t_input, $A, $m1, $m2, $m3, $m4, $m5) {
-        $Kstrain = $A * $Strain_input ^ $m2 * Exp(-$m4 * $Strain_input);
-        $Ku = $StrainRate_input ^ ($m3 * (($t_input - 20) / 280) ^ $m5);
+        $Kstrain = $A * pow($Strain_input, $m2) * Exp(-$m4 * $Strain_input);
+        $Ku = pow($StrainRate_input, ($m3 * pow( ( ($t_input - 20) / 280), $m5) ) );
         $Kt = exp(-$m1 * $t_input);
-        $Ktu = 1; //StrainRate_input ^ (m5 * t_input)
+        $Ktu = 1; //pow(StrainRate_input, (m5 * t_input) )
         return $Kstrain * $Ku * $Kt * $Ktu;
     }
 
