@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Calc\ZwickCalculations;
 use AppBundle\Entity\Zwick;
+use AppBundle\Entity\ZwickData;
 use AppBundle\Entity\ZwickOutput;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -58,6 +59,11 @@ class ZwickController extends Controller
             $statement->bindValue('idinput', $input->getId());
             $statement->execute();
 
+            $data = $this->getDoctrine()
+                ->getRepository(ZwickData::class)
+                ->findBy(array('zwick' => $input->getId()));
+            $input->setData($data);
+
             $filesystem = new Filesystem();
             $filesystem->remove($file->getRealPath());
 
@@ -79,6 +85,7 @@ class ZwickController extends Controller
     public function reportAction(Zwick $input)
     {
         $em = $this->getDoctrine()->getManager();
+        //TODO multi user
 //        $existing_output = $em->getRepository('AppBundle:Project')
 //            ->findOneBy(array('user' => $this->getUser()))->getZwick();
 //        if($existing_output) {
@@ -87,18 +94,19 @@ class ZwickController extends Controller
 //        }
 
         $zwick_calculations = new ZwickCalculations($input);
-
-        $output = $zwick_calculations->getZwick();
-        $em->persist($output);
-        $em->flush();
-
         $output_data = $zwick_calculations->calculateData();
+
+//        $output = $zwick_calculations->getZwick();
+//        $em->persist($output);
+//        $em->flush();
+
         foreach($output_data as $item) {
             $em->persist($item);
             $em->flush();
         }
 
         return $this->redirect($this->generateUrl('index'));
+        //TODO report form
 //        return $this->redirectToRoute('zwick_report', array('id' => $project->getId()));
     }
 }
