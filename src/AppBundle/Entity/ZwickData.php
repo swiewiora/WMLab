@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Seba
- * Date: 2017-12-27
- * Time: 18:02
+ * Date: 2017-12-23
+ * Time: 12:27
  */
 
 namespace AppBundle\Entity;
@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="zwick_output_data")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ZwickDataRepository")
+ * @ORM\Table(name="zwick_data")
  */
-class ZwickOutputData
+class ZwickData
 {
     /**
      * @ORM\Id
@@ -25,14 +25,26 @@ class ZwickOutputData
      */
     private $id;
     /**
-     * @ManyToOne(targetEntity="AppBundle\Entity\ZwickOutput", inversedBy="data")
-     * @JoinColumn(name="id_input", referencedColumnName="id")
+     * @ORM\Column(type="float")
      */
-    private $output;
+    private $test_time;
     /**
      * @ORM\Column(type="float")
      */
     private $distance_standard;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $load_measurement;
+    /**
+     * @ManyToOne(targetEntity="AppBundle\Entity\Zwick", inversedBy="data")
+     * @JoinColumn(name="id_input", referencedColumnName="id")
+     */
+    private $zwick;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $distance_standard_korr;
     /**
      * @ORM\Column(type="float")
      */
@@ -86,24 +98,14 @@ class ZwickOutputData
      */
     private $d2;
 
-    public function getOutput()
+    public function getDistanceStandardKorr()
     {
-        return $this->output;
+        return $this->distance_standard_korr;
     }
 
-    public function setOutput($output)
+    public function setDistanceStandardKorr($distance_standard_korr)
     {
-        $this->output = $output;
-    }
-
-    public function getDistanceStandard()
-    {
-        return $this->distance_standard;
-    }
-
-    public function setDistanceStandard($distance_standard)
-    {
-        $this->distance_standard = $distance_standard;
+        $this->distance_standard_korr = $distance_standard_korr;
     }
 
     public function getS()
@@ -234,5 +236,45 @@ class ZwickOutputData
     public function setD2($d2)
     {
         $this->d2 = $d2;
+    }
+
+    public function getTestTime()
+    {
+        return $this->test_time;
+    }
+
+    public function setTestTime($test_time)
+    {
+        $this->test_time = $test_time;
+    }
+
+    public function getDistanceStandard()
+    {
+        return $this->distance_standard;
+    }
+
+    public function setDistanceStandard($distance_standard)
+    {
+        $this->distance_standard = $distance_standard;
+    }
+
+    public function getLoadMeasurement()
+    {
+        return $this->load_measurement;
+    }
+
+    public function setLoadMeasurement($load_measurement)
+    {
+        $this->load_measurement = $load_measurement;
+    }
+
+    public function getZwick()
+    {
+        return $this->zwick;
+    }
+
+    public function setZwick($zwick)
+    {
+        $this->zwick = $zwick;
     }
 }

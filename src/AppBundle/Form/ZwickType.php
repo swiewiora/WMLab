@@ -2,14 +2,14 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\ZwickInput;
+use AppBundle\Entity\Zwick;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ZwickInputType extends AbstractType
+class ZwickType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,12 +26,12 @@ class ZwickInputType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => ZwickInput::class,
+            'data_class' => Zwick::class,
         ));
     }
 
     public function getBlockPrefix()
     {
-        return 'app_bundle_zwick_input';
+        return 'app_bundle_zwick';
     }
 }

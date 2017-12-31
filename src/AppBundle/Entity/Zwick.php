@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -16,10 +15,10 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ZwickInputRepository")
- * @ORM\Table(name="zwick_input")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ZwickRepository")
+ * @ORM\Table(name="zwick")
  */
-class ZwickInput
+class Zwick
 {
     /**
      * @ORM\Id
@@ -28,13 +27,13 @@ class ZwickInput
      */
     private $id;
     /**
-     * @OneToMany(targetEntity="AppBundle\Entity\ZwickInputData",
-     *     mappedBy="input",
+     * @OneToMany(targetEntity="AppBundle\Entity\ZwickData",
+     *     mappedBy="zwick",
      *     cascade={"remove"})
      */
     private $data;
     /**
-     * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="zwick_input")
+     * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="zwick")
      * @JoinColumn(name="id_project", referencedColumnName="id")
      */
     private $project;
@@ -48,6 +47,7 @@ class ZwickInput
     /**
      * @ORM\Column(type="float")
      */
+
     private $d0;
     /**
      * @ORM\Column(type="float")
@@ -65,6 +65,11 @@ class ZwickInput
      * @ORM\Column(type="float")
      */
     private $korr;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getData()
     {

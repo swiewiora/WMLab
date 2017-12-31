@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Calc\ZwickCalculations;
-use AppBundle\Entity\ZwickInput;
+use AppBundle\Entity\Zwick;
 use AppBundle\Entity\ZwickOutput;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -33,8 +33,8 @@ class ZwickController extends Controller
      * @Route("/new", name="zwick_new")
      */
     public function newAction(Request $request) {
-        $input = new ZwickInput();
-        $form = $this->createForm('AppBundle\Form\ZwickInputType', $input);
+        $input = new Zwick();
+        $form = $this->createForm('AppBundle\Form\ZwickType', $input);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -48,7 +48,7 @@ class ZwickController extends Controller
             $em->flush();
 
             $connection = $em->getConnection();
-            $statement = $connection->prepare("LOAD DATA INFILE :filename into table zwick_input_data".
+            $statement = $connection->prepare("LOAD DATA INFILE :filename into table zwick_data".
                 " fields terminated by ','".
                 " lines terminated by '\r\n'".
                 " ignore 1 lines".
@@ -61,7 +61,8 @@ class ZwickController extends Controller
             $filesystem = new Filesystem();
             $filesystem->remove($file->getRealPath());
 
-            return $this->redirect($this->generateUrl('index'));
+            $this->reportAction($input);
+            //return $this->redirect($this->generateUrl('index'));
         }
 
         return $this->render('zwick/upload.html.twig', array(
@@ -75,28 +76,29 @@ class ZwickController extends Controller
      * @Route("/generate/{id}", name="zwick_generate")
      * @Method("GET")
      */
-    public function reportAction(ZwickInput $input)
+    public function reportAction(Zwick $input)
     {
         $em = $this->getDoctrine()->getManager();
-        $existing_output = $em->getRepository('AppBundle:Project')
-            ->findOneBy(array('user' => $this->getUser()))->getZwickOutput();
-        if($existing_output) {
-            $em->remove($existing_output);
-            $em->flush();
-        }
+//        $existing_output = $em->getRepository('AppBundle:Project')
+//            ->findOneBy(array('user' => $this->getUser()))->getZwick();
+//        if($existing_output) {
+//            $em->remove($existing_output);
+//            $em->flush();
+//        }
 
         $zwick_calculations = new ZwickCalculations($input);
 
-        $output = $zwick_calculations->getOutput();
+        $output = $zwick_calculations->getZwick();
         $em->persist($output);
         $em->flush();
 
-        $output_data = $zwick_calculations->getOutputData();
+        $output_data = $zwick_calculations->calculateData();
         foreach($output_data as $item) {
             $em->persist($item);
             $em->flush();
         }
 
-        return $this->redirectToRoute('zwick_report', array('id' => $project->getId()));
+        return $this->redirect($this->generateUrl('index'));
+//        return $this->redirectToRoute('zwick_report', array('id' => $project->getId()));
     }
 }

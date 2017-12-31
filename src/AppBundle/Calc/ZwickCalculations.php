@@ -8,43 +8,45 @@
 
 namespace AppBundle\Calc;
 
-use AppBundle\Entity\ZwickInput;
-use AppBundle\Entity\ZwickInputData;
+use AppBundle\Entity\Zwick;
+use AppBundle\Entity\ZwickData;
 use AppBundle\Entity\ZwickOutput;
 use AppBundle\Entity\ZwickOutputData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ZwickCalculations
 {
-    private $input, $output;
+    private $zwick;
     private $time, $distance_standard, $load_measurement, $S, $v, $t_avg, $Eps, $U, $Ns, $flow_stress, $Sexp, $Sapr,
         $load_prediction, $d, $p, $d2;
 
     /**
      * Lab1Calc constructor.
-     * @param ZwickInput $zwick_input
+     * @param Zwick $zwick
      */
-    public function __construct(ZwickInput $zwick_input)
+    public function __construct(Zwick $zwick)
     {
-        $this->input = $zwick_input;
-        $this->calculate();
+        $this->zwick = $zwick;
+//        $this->calculate();
     }
 
-    private function calculate()
+    public function calculateData()
     {
-        $d0 = $this->input->getD0();
-        $h0 = $this->input->getH0();
-        $t0 = $this->input->getT0();
-        $t1 = $this->input->getT1();
+        $d0 = $this->zwick->getD0();
+        $h0 = $this->zwick->getH0();
+        $t0 = $this->zwick->getT0();
+        $t1 = $this->zwick->getT1();
 
-        $input_file_data = $this->input->getData();
-        for($i = 0; $i < sizeof($input_file_data); $i++) {
-            $this->time[$i] = $input_file_data[$i]->getTestTime();
-            $this->distance_standard[$i] = $input_file_data->getDistanceStandard() + $this->input->getKorr();
-            $this->load_measurement[$i] = $input_file_data->getLoadMeasurement();
+        $zwick_file_data = $this->zwick->getData();
+        for($i = 0; $i < sizeof($zwick_file_data); $i++) {
+            /** @var ZwickData $data_row */
+            $data_row = $zwick_file_data[$i];
+            $this->time[$i] = $data_row->getTestTime();
+            $this->distance_standard[$i] = $data_row->getDistanceStandard() + $this->zwick->getKorr();
+            $this->load_measurement[$i] = $data_row->getLoadMeasurement();
         }
 
-        for($i = 0; $i < sizeof($input_file_data); $i++) {
+        for($i = 0; $i < sizeof($zwick_file_data); $i++) {
             $this->S[$i] = pi() * $d0^2 * $h0 / (4 * ($h0 - $this->distance_standard[$i]));
             $this->v[$i] = ($this->distance_standard[$i+1] - $this->distance_standard[$i])
                     / ($this->time[$i+1] - $this->time[$i+1]);
@@ -60,7 +62,24 @@ class ZwickCalculations
             $this->load_prediction[$i] = $this->p[$i] * $this->S[$i];
             $this->p[$i] = $this->Sapr[$i] * $this->Ns[$i];
             $this->d2[$i] = ($this->load_measurement[$i] - $this->load_prediction[$i])^2;
+
+            $data_row->setDistanceStandardKorr($this->distance_standard[$i]);
+            $data_row->setS($this->S[$i]);
+            $data_row->setV($this->v[$i]);
+            $data_row->setTAvg($this->t_avg[$i]);
+            $data_row->setEps($this->Eps[$i]);
+            $data_row->setU($this->U[$i]);
+            $data_row->setD($this->d[$i]);
+            $data_row->setNs($this->Ns[$i]);
+            $data_row->setSexp($this->Sexp[$i]);
+            $data_row->setFlowStress($this->flow_stress[$i]);
+            $data_row->setSapr($this->Sapr[$i]);
+            $data_row->setLoadPrediction($this->load_prediction[$i]);
+            $data_row->setP($this->p[$i]);
+            $data_row->setD2($this->d2[$i]);
         }
+
+        return $zwick_file_data;
     }
 
     private function sigmaMgCa08($Strain_input, $StrainRate_input, $t_input, $A, $m1, $m2, $m3, $m4, $m5) {
@@ -71,24 +90,23 @@ class ZwickCalculations
         return $Kstrain * $Ku * $Kt * $Ktu;
     }
 
-    public function getOutput()
+    public function getZwick()
     {
         //Create new Entity and assign it to Project
-        $this->output = new ZwickOutput();
-        $this->output->setProject($this->input->getProject());
+        $this->zwick = new Zwick();
+        $this->zwick->setProject($this->zwick->getProject());
 
-        return $this->output;
+        return $this->zwick;
     }
 
     public function getOutputData()
     {
-        $input_data = $this->input->getData();
+        $input_data = $this->zwick->getData();
         $output_data_tab = [];
         for ($i = 0; $i < sizeof($input_data); $i++) {
-            $output_data_tab[$i] = new ZwickOutputData();
-            $output_data_tab[$i]->setOutput($this->output);
-
-            $output_data_tab[$i]->setDistanceStandard($this->distance_standard);
+            $output_data_tab[$i] = new ZwickData();
+//            $output_data_tab[$i]->setZwick($this->zwick);
+            $output_data_tab[$i]->setDistanceStandardKorr($this->distance_standard);
             $output_data_tab[$i]->setS($this->S);
             $output_data_tab[$i]->setV($this->v);
             $output_data_tab[$i]->setTAvg($this->t_avg);
