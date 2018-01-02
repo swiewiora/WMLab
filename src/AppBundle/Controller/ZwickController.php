@@ -41,7 +41,7 @@ class ZwickController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             // $file stores the uploaded CSV file
             /** @var File\UploadedFile $file */
-            $file = $input->getFile();
+            $file = $input->getFileTra();
 
             $em = $this->getDoctrine()->getManager();
             // TODO remove all existing entities

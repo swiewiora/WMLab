@@ -43,7 +43,14 @@ class Zwick
      * @Assert\NotBlank(message="Please, upload the CSV data.")
      * @Assert\File(mimeTypes={ "text/plain" })
      */
-    private $file;
+    private $fileTra;
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the PDF data.")
+     * @Assert\File(mimeTypes={ "application/pdf" })
+     */
+    private $filePdf;
     /**
      * @ORM\Column(type="float")
      */
@@ -59,11 +66,12 @@ class Zwick
     /**
      * @ORM\Column(type="float")
      */
-    private $t1;
+    private $v0;
     /**
      * @ORM\Column(type="float")
      */
-    private $v0;
+    private $t1;
+
     /**
      * @ORM\Column(type="float")
      */
@@ -72,6 +80,16 @@ class Zwick
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getFilePdf()
+    {
+        return $this->filePdf;
+    }
+
+    public function setFilePdf($filePdf)
+    {
+        $this->filePdf = $filePdf;
     }
 
     public function getV0()
@@ -104,14 +122,14 @@ class Zwick
         $this->project = $project;
     }
 
-    public function getFile()
+    public function getFileTra()
     {
-        return $this->file;
+        return $this->fileTra;
     }
 
-    public function setFile($file)
+    public function setFileTra($fileTra)
     {
-        $this->file = $file;
+        $this->fileTra = $fileTra;
     }
 
     public function getD0()
