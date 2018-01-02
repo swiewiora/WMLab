@@ -84,9 +84,11 @@ class ZwickController extends Controller
             $filesystem->remove($file->getRealPath());
 
             $this->reportAction($input);
-            return $this->redirect($this->generateUrl('index'));
-            //TODO report form
-//        return $this->redirectToRoute('zwick_report', array('id' => $project->getId()));
+//            return $this->redirect($this->generateUrl('index'));
+            return $this->render('zwick/report.html.twig', array(
+                'zwick' => $input,
+                'zwick_data' => $input->getData(),
+            ));
         }
 
         return $this->render('zwick/upload.html.twig', array(
@@ -122,5 +124,7 @@ class ZwickController extends Controller
             $em->persist($item);
         }
         $em->flush();
+
+
     }
 }
