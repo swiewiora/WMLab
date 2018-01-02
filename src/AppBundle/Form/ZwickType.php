@@ -17,8 +17,7 @@ class ZwickType extends AbstractType
             ->add('d0', NumberType::class)
             ->add('h0', NumberType::class)
             ->add('t0', NumberType::class)
-            ->add('t1', NumberType::class)
-            ->add('korr', NumberType::class)
+            ->add('v0', NumberType::class)
             ->add('file', FileType::class, array('label' => "Input Data (CSV file)"))
             ;
     }

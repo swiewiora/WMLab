@@ -47,7 +47,6 @@ class Zwick
     /**
      * @ORM\Column(type="float")
      */
-
     private $d0;
     /**
      * @ORM\Column(type="float")
@@ -64,11 +63,25 @@ class Zwick
     /**
      * @ORM\Column(type="float")
      */
+    private $v0;
+    /**
+     * @ORM\Column(type="float")
+     */
     private $korr;
 
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getV0()
+    {
+        return $this->v0;
+    }
+
+    public function setV0($v0)
+    {
+        $this->v0 = $v0;
     }
 
     public function getData()
