@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 
@@ -25,36 +24,22 @@ class Project
      */
     private $id;
     /**
-     * @OneToMany(targetEntity="AppBundle\Entity\ZwickInput", mappedBy="project", cascade={"remove"})
+     * @OneToMany(targetEntity="AppBundle\Entity\Zwick", mappedBy="project", cascade={"remove"})
      */
-    private $zwick_input;
-    /**
-     * @OneToMany(targetEntity="AppBundle\Entity\ZwickOutput", mappedBy="project", cascade={"remove"})
-     */
-//    private $zwick_output;
+    private $zwick;
     /**
      * @OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="project")
      */
     private $user;
 
-    public function getId()
+    public function getZwick()
     {
-        return $this->id;
+        return $this->zwick;
     }
 
-    public function setId($id)
+    public function setZwick($zwick)
     {
-        $this->id = $id;
-    }
-
-    public function getZwickInput()
-    {
-        return $this->zwick_input;
-    }
-
-    public function setZwickInput($zwick_input)
-    {
-        $this->zwick_input = $zwick_input;
+        $this->zwick = $zwick;
     }
 
     public function getUser()
