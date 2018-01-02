@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: pl
     csv_directory: '%kernel.project_dir%/web/uploads/csv'
+    pdf_directory: '%kernel.project_dir%/web/uploads/pdf'
 
 framework:
     #esi:             ~

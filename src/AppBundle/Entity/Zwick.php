@@ -68,10 +68,41 @@ class Zwick
      */
     private $v0;
     /**
+     * @ORM\Column(type="string")
+     */
+    private $ag;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $agt;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $at;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $e;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $r;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $fm;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $rm;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $rb;
+    /**
      * @ORM\Column(type="float")
      */
     private $t1;
-
     /**
      * @ORM\Column(type="float")
      */
@@ -80,6 +111,86 @@ class Zwick
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getAgt()
+    {
+        return $this->agt;
+    }
+
+    public function setAgt($agt)
+    {
+        $this->agt = $agt;
+    }
+
+    public function getAg()
+    {
+        return $this->ag;
+    }
+
+    public function setAg($ag)
+    {
+        $this->ag = $ag;
+    }
+
+    public function getAt()
+    {
+        return $this->at;
+    }
+
+    public function setAt($at)
+    {
+        $this->at = $at;
+    }
+
+    public function getE()
+    {
+        return $this->e;
+    }
+
+    public function setE($e)
+    {
+        $this->e = $e;
+    }
+
+    public function getR()
+    {
+        return $this->r;
+    }
+
+    public function setR($r)
+    {
+        $this->r = $r;
+    }
+
+    public function getFm()
+    {
+        return $this->fm;
+    }
+
+    public function setFm($fm)
+    {
+        $this->fm = $fm;
+    }
+
+    public function getRm()
+    {
+        return $this->rm;
+    }
+
+    public function setRm($rm)
+    {
+        $this->rm = $rm;
+    }
+
+    public function getRb()
+    {
+        return $this->rb;
+    }
+
+    public function setRb($rb)
+    {
+        $this->rb = $rb;
     }
 
     public function getFilePdf()

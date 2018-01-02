@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Calc\ZwickCalculations;
 use AppBundle\Entity\Zwick;
 use AppBundle\Entity\ZwickData;
-use AppBundle\Entity\ZwickOutput;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
@@ -40,8 +39,19 @@ class ZwickController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $file stores the uploaded CSV file
-            /** @var File\UploadedFile $file */
+            /**
+             * @var File\UploadedFile $file
+             * @var File\UploadedFile $report
+             */
             $file = $input->getFileTra();
+            $report = $input->getFilePdf();
+
+            //handle pdf file
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $report->move(
+                $this->getParameter('pdf_directory'),
+                $fileName
+            );
 
             $em = $this->getDoctrine()->getManager();
             // TODO remove all existing entities
