@@ -68,43 +68,43 @@ class Zwick
      */
     private $v0;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     private $ag;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     private $agt;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     private $at;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     private $e;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     private $r;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     private $fm;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     private $rm;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     private $rb;
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $t1;
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $korr;
 
