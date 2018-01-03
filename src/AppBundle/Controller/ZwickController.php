@@ -20,16 +20,6 @@ use Symfony\Component\HttpFoundation\File as File;
 class ZwickController extends Controller
 {
     /**
-     * Lists all Lab1_pomiar entities.
-     *
-     * @Route("/", name="zwick_input_list")
-     * @Method("GET")
-     */
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
-    }
-    /**
      * @Route("/new", name="zwick_new")
      */
     public function newAction(Request $request) {
@@ -84,11 +74,11 @@ class ZwickController extends Controller
             $filesystem->remove($file->getRealPath());
 
             $this->reportAction($input);
-//            return $this->redirect($this->generateUrl('index'));
-            return $this->render('zwick/report.html.twig', array(
-                'zwick' => $input,
-                'zwick_data' => $input->getData(),
-            ));
+            return $this->redirect($this->generateUrl('zwick_show', array('id' => $input->getId() ) ) );
+//            return $this->render('zwick/report.html.twig', array(
+//                'zwick' => $input,
+//                'zwick_data' => $input->getData(),
+//            ));
         }
 
         return $this->render('zwick/upload.html.twig', array(
@@ -97,10 +87,7 @@ class ZwickController extends Controller
     }
 
     /**
-     * Calculates and displays an entity.
-     *
-     * @Route("/generate/{id}", name="zwick_generate")
-     * @Method("GET")
+     * Calculates data and uploads to db.
      */
     public function reportAction(Zwick $input)
     {
@@ -124,7 +111,33 @@ class ZwickController extends Controller
             $em->persist($item);
         }
         $em->flush();
+    }
 
+    /**
+     * Finds and displays a Lab1_pomiar entity.
+     *
+     * @Route("/{id}/show", name="zwick_show")
+     * @Method("GET")
+     */
+    public function showAction(Zwick $zwick)
+    {
+        //TODO delete form
+//        $deleteForm = $this->createDeleteForm($zwick);
 
+        $em = $this->getDoctrine()->getManager();
+        $dataArray = $em->getRepository('AppBundle:ZwickData')->findBy(array('zwick' => $zwick->getId()));
+
+        $paginator  = $this->get('knp_paginator');
+        $data = $paginator->paginate(
+            $dataArray,
+            1 /*page number*/,
+            25 /*limit per page*/
+        );
+
+        return $this->render('zwick/report.html.twig', array(
+            'zwick_data' => $data,
+            'zwick' => $zwick,
+//            'delete_form' => $deleteForm->createView(),
+        ));
     }
 }
