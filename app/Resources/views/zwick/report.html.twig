@@ -19,7 +19,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <table>
-                                    <tbody >
+                                    <tbody>
                                     <tr>
                                         <th style="padding:5px">Id</th>
                                         <td style="padding:5px">Id =  {{ zwick.id }}</td>
@@ -76,44 +76,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Czas badania</th>
-                                            <th>Droga standardowa</th>
-                                            <th>Siła standardowa</th>
-                                            <th>S - pole przekroju poprzecznego</th>
-                                            <th>S<sub>exp</sub></th>
-                                            <th>&epsilon - odkształcenie</th>
-                                        </tr>
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th>[mm]</th>
-                                            <th>[N]</th>
-                                            <th>[mm <sup>2</sup>]</th>
-                                            <th>[N / mm<sup>2</sup>]</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for row in zwick_data %}
-                                            {% set counter = counter + 1 %}
-                                            <tr>
-                                                <td>{{ counter }}</td>
-                                                <td>{{ row.tavg }}</td>
-                                                <td>{{ row.distancestandard }}</td>
-                                                <td>{{ row.loadmeasurement }}</td>
-                                                <td>{{ row.s }}</td>
-                                                <td>{{ row.sexp }}</td>
-                                                <td>{{ row.eps }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                {{ include('zwick/_data.html.twig') }}
                             </div>
                         </div>
                     </div>
@@ -181,10 +144,10 @@
                     tooltip: true,
                     tooltipOpts: {
                         content: "P(%x.3) =  %y.2",
-                        shifts: {
-                            x: -60,
-                            y: 25
-                        }
+                        // shifts: {
+                        //     x: -60,
+                        //     y: 25
+                        // }
                     },
                     axisLabels: {
                         show: true

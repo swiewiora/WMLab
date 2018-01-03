@@ -1,0 +1,55 @@
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Czas badania</th>
+            <th>Droga standardowa</th>
+            <th>Siła standardowa</th>
+            <th>S - pole przekroju poprzecznego</th>
+            <th>S<sub>exp</sub></th>
+            <th>&epsilon; - odkształcenie</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>[mm]</th>
+            <th>[N]</th>
+            <th>[mm <sup>2</sup>]</th>
+            <th>[N / mm<sup>2</sup>]</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in zwick_data %}
+            {% set counter = counter + 1 %}
+            <tr>
+                <td>{{ counter }}</td>
+                <td>{{ row.tavg }}</td>
+                <td>{{ row.distancestandard }}</td>
+                <td>{{ row.loadmeasurement }}</td>
+                <td>{{ row.s }}</td>
+                <td>{{ row.sexp }}</td>
+                <td>{{ row.eps }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="navigation text-center">
+    {{ knp_pagination_render(zwick_data) }}
+</div>
+
+{#<script>#}
+    {#app.get('/SearchShow', function(req, res){#}
+        {#console.log(req.query);#}
+
+        {#var cgid =  req.query.cgid;#}
+        {#console.log("cgid: " + cgid);#}
+        {#category.getProductsAssignedToCategory(cgid, function(productHits){#}
+            {#res.send({#}
+                {#"products" : productHits#}
+            {#});#}
+        {#});#}
+    {#});#}
+{#</script>#}
