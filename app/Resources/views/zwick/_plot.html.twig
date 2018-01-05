@@ -1,0 +1,62 @@
+<!-- Flot Charts JavaScript -->
+<script src="{{ asset('flot/excanvas.min.js') }}"></script>
+<script src="{{ asset('flot/jquery.flot.js') }}"></script>
+<script src="{{ asset('flot/jquery.flot.pie.js') }}"></script>
+<script src="{{ asset('flot/jquery.flot.resize.js') }}"></script>
+<script src="{{ asset('flot/jquery.flot.time.js') }}"></script>
+<script src="{{ asset('flot-tooltip/jquery.flot.tooltip.min.js') }}"></script>
+<script src="{{ asset('flot-axislabels/jquery.flot.axislabels.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        var offset = 0;
+        plot();
+
+        function plot() {
+            var p = [];
+            {% for row in zwick_data %}
+            p.push([{{ row.eps }}, {{ row.sexp }}]);
+            {% endfor %}
+
+            var options = {
+                series: {
+                    lines: {
+                        show: true
+                    },
+                    points: {
+                        show: true
+                    }
+                },
+                grid: {
+                    hoverable: true // this is needed for tooltip to work
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    content: "P(%x.3) =  %y.2",
+                    // shifts: {
+                    //     x: -60,
+                    //     y: 25
+                    // }
+                },
+                axisLabels: {
+                    show: true
+                },
+                xaxes: [{
+                    axisLabel: 'l [mm]',
+                    // min: Math.min(p[0]),
+                    // max: Math.max(p[0])
+                }],
+                yaxes: [{
+                    position: 'left',
+                    axisLabel: 'P [kN]',
+                }]
+            };
+
+            var plotObj = $.plot($("#flot-line-chart"), [ {
+                    data: p,
+                    label: "P(l)"
+                }],
+                options);
+        }
+    });
+</script>

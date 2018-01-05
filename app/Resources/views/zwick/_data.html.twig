@@ -21,7 +21,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for row in zwick_data %}
+        {% for row in zwick_data_page %}
             {% set counter = counter + 1 %}
             <tr>
                 <td>{{ counter }}</td>
@@ -37,7 +37,7 @@
     </table>
 </div>
 <div class="navigation text-center">
-    {{ knp_pagination_render(zwick_data) }}
+    {{ knp_pagination_render(zwick_data_page) }}
 </div>
 
 {#<script>#}

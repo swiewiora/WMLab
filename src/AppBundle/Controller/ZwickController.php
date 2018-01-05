@@ -125,7 +125,8 @@ class ZwickController extends Controller
 //        $deleteForm = $this->createDeleteForm($zwick);
 
         $em = $this->getDoctrine()->getManager();
-//        $dataArray = $em->getRepository('AppBundle:ZwickData')->findBy(array('zwick' => $zwick->getId()));
+        $dataArray = $em->getRepository('AppBundle:ZwickData')->findBy(array('zwick' => $zwick->getId()));
+
         $queryBuilder = $em->getRepository('AppBundle:ZwickData')
             ->createQueryBuilder('zwick_data')
             ->where('zwick_data.zwick = :idinput')
@@ -141,7 +142,8 @@ class ZwickController extends Controller
         );
 
         return $this->render('zwick/report.html.twig', array(
-            'zwick_data' => $data,
+            'zwick_data_page' => $data,
+            'zwick_data' => $dataArray,
             'zwick' => $zwick,
 //            'delete_form' => $deleteForm->createView(),
         ));
