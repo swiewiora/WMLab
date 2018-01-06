@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File as File;
 
 /**
- * Lab1_pomiar controller.
+ * Zwick task controller.
  *
  * @Route("/zwick")
  */
