@@ -16,7 +16,17 @@
                 Materiały
             </div>
             <div class="panel-body">
-
+                <ul class="list-group">
+                    {% for material in materials %}
+                        {% set counter = counter + 1 %}
+                        <li class="list-group-item">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">{{ counter }}</span>
+                                <p class="form-control-static">{{ material.AlloyName }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
         <div class="well">
@@ -25,6 +35,7 @@
         </div>
     </div>
 </div>
+{% set counter = 0 %}
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -32,7 +43,19 @@
                 Zadania
             </div>
             <div class="panel-body">
-
+                <ul class="list-group">
+                    {% for task in tasks %}
+                    {% set counter = counter + 1 %}
+                    <li class="list-group-item">
+                        <div class="input-group">
+                            <a href="{{ path('task_show', { 'id': task.id }) }}">
+                                <span class="input-group-addon" id="basic-addon1">{{ counter }}</span>
+                                <p class="form-control-static">Zadanie</p>
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
         <div class="well">

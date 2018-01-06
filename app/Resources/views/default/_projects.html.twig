@@ -1,0 +1,27 @@
+{% set counter = 0 %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Projekty
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    {% for project in projects %}
+                        {% set counter = counter + 1 %}
+                        <li class="list-group-item">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">{{ counter }}</span>
+                                <p class="form-control-static">Projekt</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="well">
+            <p><a class="btn btn-outline btn-lg btn-success btn-block"
+                  href="{{ path('material_new', { 'project': project.id }) }}">Nowy materiał</a></p>
+        </div>
+    </div>
+</div>
