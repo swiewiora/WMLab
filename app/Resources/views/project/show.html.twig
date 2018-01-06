@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% set counter = 0 %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Projekt</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Materiały
+            </div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+        <div class="well">
+            <p><a class="btn btn-outline btn-lg btn-success btn-block"
+                  href="{{ path('material_new', { 'project': project.id }) }}">Nowy materiał</a></p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Zadania
+            </div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+        <div class="well">
+            <p><a class="btn btn-outline btn-lg btn-primary btn-block"
+                  href="{{ path('zwick_new', { 'project': project.id }) }}">Nowe zadanie</a></p>
+        </div>
+    </div>
+</div>

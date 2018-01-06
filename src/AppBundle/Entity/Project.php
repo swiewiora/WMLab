@@ -24,22 +24,27 @@ class Project
      */
     private $id;
     /**
-     * @OneToMany(targetEntity="AppBundle\Entity\Zwick", mappedBy="project", cascade={"remove"})
+     * @OneToMany(targetEntity="AppBundle\Entity\Material", mappedBy="project", cascade={"remove"})
      */
-    private $zwick;
+    private $materials;
     /**
      * @OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="project")
      */
     private $user;
 
-    public function getZwick()
+    public function getId()
     {
-        return $this->zwick;
+        return $this->id;
     }
 
-    public function setZwick($zwick)
+    public function getMaterials()
     {
-        $this->zwick = $zwick;
+        return $this->materials;
+    }
+
+    public function setMaterials($materials)
+    {
+        $this->materials = $materials;
     }
 
     public function getUser()

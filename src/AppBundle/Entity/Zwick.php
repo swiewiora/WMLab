@@ -33,10 +33,10 @@ class Zwick
      */
     private $data;
     /**
-     * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="zwick")
+     * @ManyToOne(targetEntity="AppBundle\Entity\Material", inversedBy="tasks")
      * @JoinColumn(name="id_project", referencedColumnName="id")
      */
-    private $project;
+    private $material;
     /**
      * @ORM\Column(type="string")
      *
@@ -223,14 +223,14 @@ class Zwick
         $this->data = $data;
     }
 
-    public function getProject()
+    public function getMaterial()
     {
-        return $this->project;
+        return $this->material;
     }
 
-    public function setProject($project)
+    public function setMaterial($material)
     {
-        $this->project = $project;
+        $this->material = $material;
     }
 
     public function getFileTra()

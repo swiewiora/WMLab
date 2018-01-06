@@ -34,12 +34,12 @@ class Material
      */
     private $chemicalComposition;
     /**
-     * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="zwick")
+     * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="materials")
      * @JoinColumn(name="id_project", referencedColumnName="id")
      */
     private $project;
     /**
-     * @OneToMany(targetEntity="AppBundle\Entity\Zwick", mappedBy="project", cascade={"remove"})
+     * @OneToMany(targetEntity="AppBundle\Entity\Zwick", mappedBy="material", cascade={"remove"})
      */
     private $tasks;
 

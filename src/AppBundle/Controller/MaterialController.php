@@ -23,9 +23,12 @@ class MaterialController extends Controller
     /**
      * @Route("/new", name="material_new")
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
         $material = new Material();
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository('AppBundle:Project')
+            ->findBy(array('id', $request->query->get('project') ) );
+        $material->setProject($project);
         $form = $this->createForm('AppBundle\Form\MaterialType', $material);
         $form->handleRequest($request);
 
@@ -33,7 +36,6 @@ class MaterialController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($material);
             $em->flush();
-
             return $this->redirect($this->generateUrl('project_show', array('id' => $material->getProject()->getId())));
         }
 

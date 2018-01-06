@@ -27,7 +27,7 @@ class ZwickController extends Controller
         $form = $this->createForm('AppBundle\Form\ZwickType', $input);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() ) {
             // $file stores the uploaded CSV file
             /**
              * @var File\UploadedFile $file
@@ -81,7 +81,7 @@ class ZwickController extends Controller
 //            ));
         }
 
-        return $this->render('zwick/upload.html.twig', array(
+        return $this->render('zwick/new.html.twig', array(
             'form' => $form->createView(),
         ));
     }

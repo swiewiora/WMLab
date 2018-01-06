@@ -2,22 +2,32 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use AppBundle\Entity\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Lab1_pomiar controller.
  *
- * @Route("/projects")
+ * @Route("/project")
  */
 class ProjectController extends Controller
 {
+    public function index() {
+        $em = $this->getDoctrine()->getManager();
+        $projects = $em->getRepository('AppBundle:Project')->findAll();
+        return $projects;
+    }
+
     /**
-     * @Route("/", name="projects")
+     * @Route("/new", name="project_new")
      */
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
+    public function newAction() {
+        $project = new Project();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($project);
+        $em->flush();
+        return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
     }
 }
