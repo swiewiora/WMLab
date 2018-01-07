@@ -12,9 +12,6 @@ abstract class BaseController extends Controller
     protected function getEntityManager()
     {
         $em = $this->getDoctrine()->getManager();
-
         return $em;
     }
-
-
 }

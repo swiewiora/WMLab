@@ -1,6 +1,7 @@
 {% set counter = 0 %}
 <div class="row">
     <div class="col-lg-12">
+        {% if projects %}
         <div class="panel panel-default">
             <div class="panel-heading">
                 Projekty
@@ -19,9 +20,11 @@
                 </ul>
             </div>
         </div>
+        {% endif %}
         <div class="well">
-            <p><a class="btn btn-outline btn-lg btn-success btn-block"
-                  href="{{ path('project_new', { 'project': project.id }) }}">Nowy project</a></p>
+            <h4>Operacje</h4>
+            <a class="btn btn-outline btn-lg btn-primary btn-block"
+               href="{{ path('project_new') }}">Stwórz nowy projekt</a>
         </div>
     </div>
 </div>
