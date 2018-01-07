@@ -155,7 +155,7 @@ class ZwickController extends Controller
      * @Route("/{id}/data", name="zwick_data")
      * @Method("GET")
      */
-    public function renderDataAction(Zwick $zwick)
+    public function renderDataAction(Request $request, Zwick $zwick)
     {
         //TODO delete form
 //        $deleteForm = $this->createDeleteForm($zwick);

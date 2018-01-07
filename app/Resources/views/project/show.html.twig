@@ -19,19 +19,18 @@
                 <ul class="list-group">
                     {% for material in materials %}
                         {% set counter = counter + 1 %}
+                        {#<a href="{{ path('material_show', material.id) }}">#}
                         <li class="list-group-item">
-                            <div class="input-group">
-                                <span class="input-group-addon" id="basic-addon1">{{ counter }}</span>
-                                <p class="form-control-static">{{ material.AlloyName }}</p>
-                            </div>
+                            {{ counter }}. {{ material.AlloyName }}
                         </li>
+                        {#</a>#}
                     {% endfor %}
                 </ul>
                 {% endif %}
             </div>
             <div class="panel-footer">
                 <a class="btn btn-outline btn-lg btn-success btn-block"
-                      href="{{ path('material_new', { 'project': project.id }) }}">Nowy materiał
+                      href="{{ path('material_new', { 'project': project.Id }) }}">Nowy materiał
                 </a>
             </div>
         </div>
@@ -47,16 +46,15 @@
             </div>
             <div class="panel-body">
                 <ul class="list-group">
-                    {% for task in tasks %}
+                    {% for taskGroup in tasks %}
+                        {% for task in taskGroup %}
                     {% set counter = counter + 1 %}
                     <li class="list-group-item">
-                        <div class="input-group">
-                            <a href="{{ path('task_show', { 'id': task.id }) }}">
-                                <span class="input-group-addon" id="basic-addon1">{{ counter }}</span>
-                                <p class="form-control-static">Zadanie</p>
-                            </a>
-                        </div>
+                        <a href="{{ path('zwick_show', { 'id': task.Id }) }}">
+                            {{ counter }}. Zadanie
+                        </a>
                     </li>
+                        {% endfor %}
                     {% endfor %}
                 </ul>
 

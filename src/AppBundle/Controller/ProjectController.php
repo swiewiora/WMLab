@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Material;
 use AppBundle\Entity\Project;
+use AppBundle\Entity\Zwick;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,11 +40,10 @@ class ProjectController extends Controller
     {
         //TODO delete form
 //        $deleteForm = $this->createDeleteForm($project);
-//        $em = $this->getDoctrine()->getManager();
-//        $lab1_pomiar_tabs = $em->getRepository('AppBundle:Project')->findBy(array('id' => $project->getId()));
         $materials = $project->getMaterials();
         $tasks = array();
         foreach ($materials as $material) {
+            /** @var $material Material */
             array_push($tasks, $material->getTasks());
         }
 

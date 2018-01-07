@@ -26,8 +26,8 @@ class MaterialController extends Controller
     public function newAction(Request $request) {
         $material = new Material();
         $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('AppBundle:Project')
-            ->findBy(array('id', $request->query->get('project') ) );
+        $projectId = $request->query->get('project');
+        $project = $em->find('AppBundle:Project', $projectId);
         $material->setProject($project);
         $form = $this->createForm('AppBundle\Form\MaterialType', $material);
         $form->handleRequest($request);
