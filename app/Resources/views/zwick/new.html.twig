@@ -11,13 +11,94 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Krok 1 - Wprowadź wymiary próbki
+                    Parametry próby
                 </div>
                 <div class="panel-body">
-
                     {{ form_start(form) }}
-                    {{ form_widget(form) }}
-
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">d<sub>0</sub></span>
+                        {{ form_widget(form.d0, {'attr': {'placeholder': 'Średnica próbki'} }) }}
+                        <span class="input-group-addon">mm</span>
+                        {{ form_errors(form.d0) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">h<sub>0</sub></span>
+                        {{ form_widget(form.h0, {'attr': {'placeholder': 'Wysokość próbki'} }) }}
+                        <span class="input-group-addon">mm</span>
+                        {{ form_errors(form.h0) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">t<sub>0</sub></span>
+                        {{ form_widget(form.t0, {'attr': {'placeholder': 'Temperatura próby'} }) }}
+                        <span class="input-group-addon">&deg;C</span>
+                        {{ form_errors(form.t0) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">v<sub>0</sub></span>
+                        {{ form_widget(form.v0, {'attr': {'placeholder': 'Prędkość próby'} }) }}
+                        <span class="input-group-addon">mm/min</span>
+                        {{ form_errors(form.v0) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">A<sub>g</sub></span>
+                        {{ form_widget(form.ag, {'attr': {'placeholder': 'Ag'} }) }}
+                        <span class="input-group-addon">%</span>
+                        {{ form_errors(form.ag) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">A<sub>gt</sub></span>
+                        {{ form_widget(form.agt, {'attr': {'placeholder': 'Agt'} }) }}
+                        <span class="input-group-addon">%</span>
+                        {{ form_errors(form.agt) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">A<sub>t</sub></span>
+                        {{ form_widget(form.at, {'attr': {'placeholder': 'At'} }) }}
+                        <span class="input-group-addon">%</span>
+                        {{ form_errors(form.at) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">E</span>
+                        {{ form_widget(form.e, {'attr': {'placeholder': 'Moduł Younga'} }) }}
+                        <span class="input-group-addon">GPa</span>
+                        {{ form_errors(form.e) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">R<sub>p0.2</sub></span>
+                        {{ form_widget(form.r, {'attr': {'placeholder': 'Granica plastyczności'} }) }}
+                        <span class="input-group-addon">MPa</span>
+                        {{ form_errors(form.r) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">F<sub>m</sub></span>
+                        {{ form_widget(form.fm, {'attr': {'placeholder': 'Granica wytrzymałości'} }) }}
+                        <span class="input-group-addon">kN</span>
+                        {{ form_errors(form.fm) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">R<sub>m</sub></span>
+                        {{ form_widget(form.rm, {'attr': {'placeholder': 'Granica wytrzymałości'} }) }}
+                        <span class="input-group-addon">MPa</span>
+                        {{ form_errors(form.rm) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">R<sub>b</sub></span>
+                        {{ form_widget(form.rb, {'attr': {'placeholder': 'Naprężenie przy zerwanu'} }) }}
+                        <span class="input-group-addon">MPa</span>
+                        {{ form_errors(form.rb) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">Dane wejściowe</span>
+                        {{ form_widget(form.fileTra) }}
+                        <span class="input-group-addon">TRA</span>
+                        {{ form_errors(form.fileTra) }}
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">Raport</span>
+                        {{ form_widget(form.filePdf) }}
+                        <span class="input-group-addon">PDF</span>
+                        {{ form_errors(form.filePdf) }}
+                    </div>
                     <p><input type="submit" class="btn btn-outline btn-primary" value="Przejdź dalej"/></p>
                     {{ form_end(form) }}
                     <p><a class="btn btn-outline btn-danger" href="{{ path('index') }}">Przerwij</a></p>
