@@ -10,12 +10,11 @@
                 <ul class="list-group">
                     {% for project in projects %}
                         {% set counter = counter + 1 %}
+                        <a href="{{ path('project_show', {'id': project.id}) }}">
                         <li class="list-group-item">
-                            <div class="input-group">
-                                <span class="input-group-addon" id="basic-addon1">{{ counter }}</span>
-                                <p class="form-control-static">Projekt</p>
-                            </div>
+                            {{ counter }}. Projekt
                         </li>
+                        </a>
                     {% endfor %}
                 </ul>
             </div>

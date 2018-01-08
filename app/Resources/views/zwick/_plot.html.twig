@@ -32,29 +32,23 @@
                 },
                 tooltip: true,
                 tooltipOpts: {
-                    content: "P(%x.3) =  %y.2",
-                    // shifts: {
-                    //     x: -60,
-                    //     y: 25
-                    // }
+                    content: "&sigma;(%x.3) =  %y.2",
                 },
                 axisLabels: {
                     show: true
                 },
                 xaxes: [{
-                    axisLabel: 'l [mm]',
-                    // min: Math.min(p[0]),
-                    // max: Math.max(p[0])
+                    axisLabel: '&epsilon;',
                 }],
                 yaxes: [{
                     position: 'left',
-                    axisLabel: 'P [kN]',
+                    axisLabel: 'S<sub>exp</sub> [N / mm<sup>2</sup>]',
                 }]
             };
 
             var plotObj = $.plot($("#flot-line-chart"), [ {
                     data: p,
-                    label: "P(l)"
+                    label: "&sigma;<sub>exp</sub>(&epsilon;)"
                 }],
                 options);
         }
