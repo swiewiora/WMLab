@@ -24,7 +24,13 @@ class ZwickController extends Controller
      */
     public function newAction(Request $request) {
         $input = new Zwick();
-        $form = $this->createForm('AppBundle\Form\ZwickType', $input);
+        // get materials and send them to form builder
+        $projectId = $request->query->getInt('project');
+        $em = $this->getDoctrine()->getManager();
+        $materials = $em->getRepository('AppBundle:Material')
+            ->findBy(array('project' => $projectId));
+        $form = $this->createForm('AppBundle\Form\ZwickType', $input, array(
+            'materials' => $materials ) );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() ) {
@@ -43,17 +49,18 @@ class ZwickController extends Controller
                 $fileName
             );
 
-            $em = $this->getDoctrine()->getManager();
+
             // TODO remove all existing entities
-            $existing_output = $em->getRepository('AppBundle:Zwick')
-                ->findAll();
-            foreach($existing_output as $output) {
-                $em->remove($output);
-            }
+//            $existing_output = $em->getRepository('AppBundle:Zwick')
+//                ->findAll();
+//            foreach($existing_output as $output) {
+//                $em->remove($output);
+//            }
+
             // persist input to get ID
             $em->persist($input);
             $em->flush();
-            // quickly load data from file
+            // fast load data from file
             $connection = $em->getConnection();
             $statement = $connection->prepare("LOAD DATA INFILE :filename into table zwick_data".
                 " fields terminated by ','".
@@ -64,14 +71,14 @@ class ZwickController extends Controller
             $statement->bindValue('filename', $file->getRealPath());
             $statement->bindValue('idinput', $input->getId());
             $statement->execute();
-            //get zwick_data from database
+            // get zwick_data from database
             $data = $this->getDoctrine()
                 ->getRepository(ZwickData::class)
                 ->findBy(array('zwick' => $input->getId()));
             $input->setData($data);
 
             $filesystem = new Filesystem();
-            $filesystem->remove($file->getRealPath());
+            $filesystem->remove($file->getRealPath() );
 
             $this->reportAction($input);
             return $this->redirect($this->generateUrl('zwick_show', array('id' => $input->getId() ) ) );
@@ -83,7 +90,7 @@ class ZwickController extends Controller
 
         return $this->render('zwick/new.html.twig', array(
             'form' => $form->createView(),
-        ));
+        ) );
     }
 
     /**

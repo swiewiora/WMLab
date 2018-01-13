@@ -34,7 +34,7 @@ class Zwick
     private $data;
     /**
      * @ManyToOne(targetEntity="AppBundle\Entity\Material", inversedBy="tasks")
-     * @JoinColumn(name="id_project", referencedColumnName="id")
+     * @JoinColumn(name="id_material", referencedColumnName="id")
      */
     private $material;
     /**
@@ -108,6 +108,7 @@ class Zwick
      */
     private $korr;
 
+    //region Getters and Setters
     public function getId()
     {
         return $this->id;
@@ -292,4 +293,5 @@ class Zwick
     {
         $this->korr = $korr;
     }
+    //endregion
 }

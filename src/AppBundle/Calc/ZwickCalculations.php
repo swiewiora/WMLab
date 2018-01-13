@@ -42,13 +42,13 @@ class ZwickCalculations
         $korr = $this->zwick->getKorr();
 
         $zwick_file_data = $this->zwick->getData();
-            /** @var ZwickData $data_row */
-            $data_row = $zwick_file_data[0];
-            $this->time[0] = $data_row->getTestTime();
-            $this->distance_standard[0] = $data_row->getDistanceStandard() + $korr;
-            $this->load_measurement[0] = $data_row->getLoadMeasurement();
+        /** @var ZwickData $data_row */
+        $data_row = $zwick_file_data[0];
+        $this->time[0] = $data_row->getTestTime();
+        $this->distance_standard[0] = $data_row->getDistanceStandard() + $korr;
+        $this->load_measurement[0] = $data_row->getLoadMeasurement();
 
-            $this->Eps[0] = log($h0 / ($h0 - $this->distance_standard[0]));
+        $this->Eps[0] = log($h0 / ($h0 - $this->distance_standard[0]));
 
         for($i = 0; $i < sizeof($zwick_file_data); $i++) {
             /**

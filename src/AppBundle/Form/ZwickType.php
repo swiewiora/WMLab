@@ -3,7 +3,10 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Zwick;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,6 +17,10 @@ class ZwickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('material', EntityType::class, array(
+                'class' => 'AppBundle:Material',
+                'choices' => $options['materials'],
+                'choice_label' => 'alloyName', ) )
             ->add('d0', NumberType::class)
             ->add('h0', NumberType::class)
             ->add('t0', NumberType::class)
@@ -35,6 +42,7 @@ class ZwickType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => Zwick::class,
+            'materials' => null,
         ));
     }
 
