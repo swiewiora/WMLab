@@ -49,14 +49,6 @@ class ZwickController extends Controller
                 $fileName
             );
 
-
-            // TODO remove all existing entities
-//            $existing_output = $em->getRepository('AppBundle:Zwick')
-//                ->findAll();
-//            foreach($existing_output as $output) {
-//                $em->remove($output);
-//            }
-
             // persist input to get ID
             $em->persist($input);
             $em->flush();
@@ -82,10 +74,6 @@ class ZwickController extends Controller
 
             $this->reportAction($input);
             return $this->redirect($this->generateUrl('zwick_show', array('id' => $input->getId() ) ) );
-//            return $this->render('zwick/report.html.twig', array(
-//                'zwick' => $input,
-//                'zwick_data' => $input->getData(),
-//            ));
         }
 
         return $this->render('zwick/new.html.twig', array(
