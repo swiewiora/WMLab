@@ -19,17 +19,15 @@
             <ul class="list-group">
               {% for material in materials %}
                 {% set counter = counter + 1 %}
-                {#<a href="{{ path('material_show', material.id) }}">#}
                 <li class="list-group-item">
                   {{ counter }}. {{ material.AlloyName }}
                   <span class="pull-right">
-                    <a class="btn btn-outline btn-info btn-xs"
-                       href="{{ path('material_show', { 'id': material.Id }) }}">
-                      Szczegóły
-                    </a>
+                    {#<a class="btn btn-outline btn-info btn-xs"#}
+                       {#href="{{ path('material_show', { 'id': material.Id }) }}">#}
+                      {#Szczegóły#}
+                    {#</a>#}
                   </span>
                 </li>
-                {#</a>#}
               {% endfor %}
             </ul>
           </div>
@@ -57,9 +55,7 @@
                   {% for task in taskGroup %}
                     {% set counter = counter + 1 %}
                     <li class="list-group-item">
-                      {#<a href="{{ path('zwick_show', { 'id': task.Id }) }}">#}
                       {{ counter }}. Zadanie
-                      {#</a>#}
                       <span class="pull-right">
                         <a class="btn btn-outline btn-info btn-xs"
                            href="{{ path('zwick_show', { 'id': task.Id }) }}">
