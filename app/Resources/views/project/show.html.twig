@@ -14,8 +14,8 @@
             <div class="panel-heading">
                 Materiały
             </div>
+            {% if materials|length %}
             <div class="panel-body">
-                {% if materials|length %}
                 <ul class="list-group">
                     {% for material in materials %}
                         {% set counter = counter + 1 %}
@@ -26,8 +26,8 @@
                         {#</a>#}
                     {% endfor %}
                 </ul>
-                {% endif %}
             </div>
+            {% endif %}
             <div class="panel-footer">
                 <a class="btn btn-outline btn-lg btn-success btn-block"
                       href="{{ path('material_new', { 'project': project.Id }) }}">Nowy materiał
@@ -44,6 +44,7 @@
             <div class="panel-heading">
                 Zadania
             </div>
+        {% if tasks|length %}
             <div class="panel-body">
                 <ul class="list-group">
                     {% for taskGroup in tasks %}
@@ -57,8 +58,8 @@
                         {% endfor %}
                     {% endfor %}
                 </ul>
-
             </div>
+        {% endif %}
             <div class="panel-footer">
                 <a class="btn btn-outline btn-lg btn-primary btn-block"
                    href="{{ path('zwick_new', { 'project': project.id }) }}">Nowe zadanie</a>
