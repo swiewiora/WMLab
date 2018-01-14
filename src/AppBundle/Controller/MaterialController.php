@@ -81,4 +81,31 @@ class MaterialController extends Controller
         ->getForm()
         ;
   }
+
+  /**
+   * Displays a form to edit an existing Lab1_pomiar entity.
+   *
+   * @Route("/{id}/edit", name="material_edit")
+   * @Method({"GET", "POST"})
+   */
+  public function editAction(Request $request, Material $material)
+  {
+    $deleteForm = $this->createDeleteForm($material);
+    $editForm = $this->createForm('AppBundle\Form\MaterialType', $material);
+    $editForm->handleRequest($request);
+    $projectId = $material->getProject()->getId();
+
+    if ($editForm->isSubmitted() && $editForm->isValid()) {
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($material);
+      $em->flush();
+      return $this->redirectToRoute('project_show', array('id' => $projectId));
+    }
+
+    return $this->render('material/edit.html.twig', array(
+        'form' => $editForm->createView(),
+        'delete_form' => $deleteForm->createView(),
+        'projectId' => $projectId,
+    ));
+  }
 }

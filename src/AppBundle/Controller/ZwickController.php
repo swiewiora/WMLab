@@ -42,12 +42,19 @@ class ZwickController extends Controller
             $file = $input->getFileTra();
             $report = $input->getFilePdf();
 
-            //handle pdf file
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            //handle pdf and csv file
+            $fileName = md5(uniqid()).'.'.$report->guessExtension();
             $report->move(
                 $this->getParameter('pdf_directory'),
                 $fileName
             );
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('csv_directory'),
+                $fileName
+            );
+            $input->setFilePdf($report);
+            $input->setFileTra($file);
 
             // persist input to get ID
             $em->persist($input);
@@ -68,9 +75,6 @@ class ZwickController extends Controller
                 ->getRepository(ZwickData::class)
                 ->findBy(array('zwick' => $input->getId()));
             $input->setData($data);
-
-            $filesystem = new Filesystem();
-            $filesystem->remove($file->getRealPath() );
 
             $this->reportAction($input);
             return $this->redirect($this->generateUrl('zwick_show', array('id' => $input->getId() ) ) );
@@ -109,10 +113,9 @@ class ZwickController extends Controller
     public function showAction(Request $request, Zwick $zwick)
     {
         $deleteForm = $this->createDeleteForm($zwick);
-
         $em = $this->getDoctrine()->getManager();
         $dataArray = $em->getRepository('AppBundle:ZwickData')->findBy(array('zwick' => $zwick->getId()));
-
+        $projectId = $zwick->getMaterial()->getProject()->getId();
         $queryBuilder = $em->getRepository('AppBundle:ZwickData')
             ->createQueryBuilder('zwick_data')
             ->where('zwick_data.zwick = :idinput')
@@ -132,6 +135,7 @@ class ZwickController extends Controller
             'zwick_data' => $dataArray,
             'zwick' => $zwick,
             'delete_form' => $deleteForm->createView(),
+            'projectId' => $projectId,
         ));
     }
 
@@ -168,5 +172,34 @@ class ZwickController extends Controller
         ->setMethod('DELETE')
         ->getForm()
         ;
+  }
+
+  /**
+   * Displays a form to edit an existing Lab1_pomiar entity.
+   *
+   * @Route("/{id}/edit", name="zwick_edit")
+   * @Method({"GET", "POST"})
+   */
+  public function editAction(Request $request, Zwick $zwick)
+  {
+    $deleteForm = $this->createDeleteForm($zwick);
+    $editForm = $this->createForm('AppBundle\Form\ZwickEditType', $zwick);
+    $editForm->handleRequest($request);
+    $projectId = $zwick->getMaterial()->getProject()->getId();
+
+    if ($editForm->isSubmitted() && $editForm->isValid()) {
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($zwick);
+      $em->flush();
+
+      $this->reportAction($zwick);
+      return $this->redirect($this->generateUrl('zwick_show', array('id' => $zwick->getId() ) ) );
+    }
+
+    return $this->render('zwick/edit.html.twig', array(
+        'form' => $editForm->createView(),
+        'delete_form' => $deleteForm->createView(),
+        'projectId' => $projectId,
+    ));
   }
 }

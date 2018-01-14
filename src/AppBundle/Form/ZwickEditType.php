@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ZwickType extends AbstractType
+class ZwickEditType extends ZwickType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -58,12 +58,6 @@ class ZwickType extends AbstractType
             ->add('fm', NumberType::class)
             ->add('rm', NumberType::class)
             ->add('rb', NumberType::class)
-            ->add('fileTra', FileType::class, array(
-                'data_class' => null
-            ))
-            ->add('filePdf', FileType::class, array(
-                'data_class' => null
-            ))
             ;
     }
 

@@ -20,12 +20,12 @@
               {% for material in materials %}
                 {% set counter = counter + 1 %}
                 <li class="list-group-item">
-                  {{ counter }}. {{ material.AlloyName }}
+                  {{ counter }}. {{ material.AlloyName }} - {{ material.chemicalComposition }}
                   <span class="pull-right">
-                    {#<a class="btn btn-outline btn-info btn-xs"#}
-                       {#href="{{ path('material_show', { 'id': material.Id }) }}">#}
-                      {#Szczegóły#}
-                    {#</a>#}
+                    <a class="btn btn-warning btn-xs"
+                       href="{{ path('material_edit', { 'id': material.Id }) }}">
+                          Edytuj
+                    </a>
                   </span>
                 </li>
               {% endfor %}
@@ -57,9 +57,13 @@
                     <li class="list-group-item">
                       {{ counter }}. Zadanie
                       <span class="pull-right">
-                        <a class="btn btn-outline btn-info btn-xs"
+                        <a class="btn btn-info btn-xs"
                            href="{{ path('zwick_show', { 'id': task.Id }) }}">
                           Szczegóły
+                        </a>
+                        <a class="btn btn-warning btn-xs"
+                           href="{{ path('zwick_edit', { 'id': task.Id }) }}">
+                          Edytuj
                         </a>
                       </span>
                     </li>
