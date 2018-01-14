@@ -52,6 +52,16 @@ class Zwick
      */
     private $filePdf;
     /**
+     * false: walec, true: wiosełka
+     * @ORM\Column(type="boolean")
+     */
+    private $shape;
+    /**
+     * false: compression, true: tension
+     * @ORM\Column(type="boolean")
+     */
+    private $type;
+    /**
      * @ORM\Column(type="float")
      */
     private $d0;
@@ -109,6 +119,25 @@ class Zwick
     private $korr;
 
     //region Getters and Setters
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+    public function getShape()
+    {
+        return $this->shape;
+    }
+
+    public function setShape($shape)
+    {
+        $this->shape = $shape;
+    }
     public function getId()
     {
         return $this->id;

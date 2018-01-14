@@ -2,70 +2,81 @@
 {% set counter = 0 %}
 
 {% block body %}
-<div class="row">
+  <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Projekt</h1>
+      <h1 class="page-header">Projekt</h1>
     </div>
-</div>
+  </div>
 
-<div class="row">
+  <div class="row">
     <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Materiały
-            </div>
-            {% if materials|length %}
-            <div class="panel-body">
-                <ul class="list-group">
-                    {% for material in materials %}
-                        {% set counter = counter + 1 %}
-                        {#<a href="{{ path('material_show', material.id) }}">#}
-                        <li class="list-group-item">
-                            {{ counter }}. {{ material.AlloyName }}
-                        </li>
-                        {#</a>#}
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            <div class="panel-footer">
-                <a class="btn btn-outline btn-lg btn-success btn-block"
-                      href="{{ path('material_new', { 'project': project.Id }) }}">Nowy materiał
-                </a>
-            </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Materiały
         </div>
+        {% if materials|length %}
+          <div class="panel-body">
+            <ul class="list-group">
+              {% for material in materials %}
+                {% set counter = counter + 1 %}
+                {#<a href="{{ path('material_show', material.id) }}">#}
+                <li class="list-group-item">
+                  {{ counter }}. {{ material.AlloyName }}
+                  <span class="pull-right">
+                    <a class="btn btn-outline btn-info btn-xs"
+                       href="{{ path('material_show', { 'id': material.Id }) }}">
+                      Szczegóły
+                    </a>
+                  </span>
+                </li>
+                {#</a>#}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        <div class="panel-footer">
+          <a class="btn btn-outline btn-lg btn-success btn-block"
+             href="{{ path('material_new', { 'project': project.Id }) }}">Nowy materiał
+          </a>
+        </div>
+      </div>
     </div>
-</div>
-    {% if materials|length %}
-{% set counter = 0 %}
-<div class="row">
-    <div class="col-lg-12">
+  </div>
+  {% if materials|length %}
+    {% set counter = 0 %}
+    <div class="row">
+      <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                Zadania
-            </div>
-        {% if tasks|length %}
+          <div class="panel-heading">
+            Zadania
+          </div>
+          {% if tasks|length %}
             <div class="panel-body">
-                <ul class="list-group">
-                    {% for taskGroup in tasks %}
-                        {% for task in taskGroup %}
+              <ul class="list-group">
+                {% for taskGroup in tasks %}
+                  {% for task in taskGroup %}
                     {% set counter = counter + 1 %}
                     <li class="list-group-item">
-                        <a href="{{ path('zwick_show', { 'id': task.Id }) }}">
-                            {{ counter }}. Zadanie
-                        </a>
+                      {#<a href="{{ path('zwick_show', { 'id': task.Id }) }}">#}
+                      {{ counter }}. Zadanie
+                      {#</a>#}
+                      <span class="pull-right">
+                        <a class="btn btn-outline btn-info btn-xs"
+                           href="{{ path('zwick_show', { 'id': task.Id }) }}">
+                          Szczegóły
+                        </a></span>
                     </li>
-                        {% endfor %}
-                    {% endfor %}
-                </ul>
+                  {% endfor %}
+                {% endfor %}
+              </ul>
             </div>
-        {% endif %}
-            <div class="panel-footer">
-                <a class="btn btn-outline btn-lg btn-primary btn-block"
-                   href="{{ path('zwick_new', { 'project': project.id }) }}">Nowe zadanie</a>
-            </div>
+          {% endif %}
+          <div class="panel-footer">
+            <a class="btn btn-outline btn-lg btn-primary btn-block"
+               href="{{ path('zwick_new', { 'project': project.id }) }}">Nowe zadanie</a>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-    {% endif %}
+  {% endif %}
 {% endblock %}

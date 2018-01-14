@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Zwick;
+use Doctrine\DBAL\Types\BooleanType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -17,10 +18,34 @@ class ZwickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('machine', ChoiceType::class, array(
+                'mapped' => false,
+                'choices'  => array(
+                    'Zwick' => 0,
+                ),
+                'attr' => array(
+                    'disabled' => null,
+                ),
+            ))
             ->add('material', EntityType::class, array(
                 'class' => 'AppBundle:Material',
                 'choices' => $options['materials'],
                 'choice_label' => 'alloyName', ) )
+            ->add('shape', ChoiceType::class, array(
+                'choices'  => array(
+                    'Walec' => true,
+                    'Wiosełka' => false,
+                ),
+                'attr' => array(
+                    'disabled' => null,
+                ),
+            ))
+            ->add('type', ChoiceType::class, array(
+                'choices'  => array(
+                    'Rozciąganie' => true,
+                    'Ściskanie' => false,
+                ),
+            ))
             ->add('d0', NumberType::class)
             ->add('h0', NumberType::class)
             ->add('t0', NumberType::class)
@@ -33,8 +58,8 @@ class ZwickType extends AbstractType
             ->add('fm', NumberType::class)
             ->add('rm', NumberType::class)
             ->add('rb', NumberType::class)
-            ->add('fileTra', FileType::class, array('label' => "Input Data (TRA file)"))
-            ->add('filePdf', FileType::class, array('label' => "Report (PDF file)"))
+            ->add('fileTra', FileType::class)
+            ->add('filePdf', FileType::class)
             ;
     }
 

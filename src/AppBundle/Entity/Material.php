@@ -43,6 +43,7 @@ class Material
      */
     private $tasks;
 
+    //region getters and setters
     public function getId()
     {
         return $this->id;
@@ -87,4 +88,5 @@ class Material
     {
         $this->tasks = $tasks;
     }
+    //endregion
 }

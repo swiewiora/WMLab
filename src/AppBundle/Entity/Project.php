@@ -32,6 +32,7 @@ class Project
      */
     private $user;
 
+    //region getters and setters
     public function getId()
     {
         return $this->id;
@@ -56,4 +57,5 @@ class Project
     {
         $this->user = $user;
     }
+    //endregion
 }
