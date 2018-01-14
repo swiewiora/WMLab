@@ -90,17 +90,9 @@ class ZwickController extends Controller
         //TODO multi user, multi projects
 //        $existing_output = $em->getRepository('AppBundle:Project')
 //            ->findOneBy(array('user' => $this->getUser()))->getZwick();
-//        if($existing_output) {
-//            $em->remove($existing_output);
-//            $em->flush();
-//        }
 
         $zwick_calculations = new ZwickCalculations($input);
         $output_data = $zwick_calculations->calculateData();
-
-        //TODO persist Zwick entity after changes
-//        $output = $zwick_calculations->getZwick();
-//        $em->persist($output);
 
         foreach($output_data as $item) {
             $em->persist($item);
@@ -116,8 +108,7 @@ class ZwickController extends Controller
      */
     public function showAction(Request $request, Zwick $zwick)
     {
-        //TODO delete form
-//        $deleteForm = $this->createDeleteForm($zwick);
+        $deleteForm = $this->createDeleteForm($zwick);
 
         $em = $this->getDoctrine()->getManager();
         $dataArray = $em->getRepository('AppBundle:ZwickData')->findBy(array('zwick' => $zwick->getId()));
@@ -140,38 +131,42 @@ class ZwickController extends Controller
             'zwick_data_page' => $data,
             'zwick_data' => $dataArray,
             'zwick' => $zwick,
-//            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
-    /**
-     * Finds and displays a Lab1_pomiar entity.
-     *
-     * @Route("/{id}/data", name="zwick_data")
-     * @Method("GET")
-     */
-    public function renderDataAction(Request $request, Zwick $zwick)
-    {
-        //TODO delete form
-//        $deleteForm = $this->createDeleteForm($zwick);
+  /**
+   * Deletes a Zwick entity.
+   *
+   * @Route("/{id}", name="zwick_delete")
+   * @Method("DELETE")
+   */
+  public function deleteAction(Request $request, Zwick $zwick)
+  {
+    $projectId = $zwick->getMaterial()->getProject()->getId();
+    $form = $this->createDeleteForm($zwick);
+    $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
-//        $dataArray = $em->getRepository('AppBundle:ZwickData')->findBy(array('zwick' => $zwick->getId()));
-        $queryBuilder = $em->getRepository('AppBundle:ZwickData')
-            ->createQueryBuilder('qb')->where(array('zwick' => $zwick->getId()));
-        $query = $queryBuilder->getQuery();
-
-        $paginator  = $this->get('knp_paginator');
-        $data = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1) /*page number*/,
-            $request->query->getInt('limit', 25) /*limit per page*/
-        );
-
-        return $this->render('zwick/report.html.twig', array(
-            'zwick_data' => $data,
-            'zwick' => $zwick,
-//            'delete_form' => $deleteForm->createView(),
-        ));
+    if ($form->isSubmitted() && $form->isValid()) {
+      $em = $this->getDoctrine()->getManager();
+      $em->remove($zwick);
+      $em->flush();
     }
+    return $this->redirectToRoute('project_show', array('id' => $projectId));
+  }
+
+  /**
+   * Creates a form to delete a Zwick entity.
+   *
+   * @param Zwick $zwick The Zwick entity
+   * @return \Symfony\Component\Form\FormInterface
+   */
+  private function createDeleteForm(Zwick $zwick)
+  {
+    return $this->createFormBuilder()
+        ->setAction($this->generateUrl('zwick_delete', array('id' => $zwick->getId())))
+        ->setMethod('DELETE')
+        ->getForm()
+        ;
+  }
 }

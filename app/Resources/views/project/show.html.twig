@@ -60,7 +60,8 @@
                         <a class="btn btn-outline btn-info btn-xs"
                            href="{{ path('zwick_show', { 'id': task.Id }) }}">
                           Szczegóły
-                        </a></span>
+                        </a>
+                      </span>
                     </li>
                   {% endfor %}
                 {% endfor %}
@@ -75,4 +76,11 @@
       </div>
     </div>
   {% endif %}
+  <div class="row">
+  <div class="col-lg-12">
+    {{ form_start(delete_form) }}
+    <input class="btn btn-outline btn-lg btn-danger btn-block" type="submit" value="Usuń Projekt">
+    {{ form_end(delete_form) }}
+  </div>
+  </div>
 {% endblock %}

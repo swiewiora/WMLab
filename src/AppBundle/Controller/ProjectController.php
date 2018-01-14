@@ -7,6 +7,7 @@ use AppBundle\Entity\Project;
 use AppBundle\Entity\Zwick;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -38,8 +39,7 @@ class ProjectController extends Controller
      */
     public function showAction(Project $project)
     {
-        //TODO delete form
-//        $deleteForm = $this->createDeleteForm($project);
+        $deleteForm = $this->createDeleteForm($project);
         $materials = $project->getMaterials();
         $tasks = array();
         foreach ($materials as $material) {
@@ -48,10 +48,44 @@ class ProjectController extends Controller
         }
 
         return $this->render('project/show.html.twig', array(
-//            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView(),
             'project' => $project,
             'tasks' => $tasks,
             'materials' => $materials,
         ) );
     }
+
+  /**
+   * Deletes a Project entity.
+   *
+   * @Route("/{id}", name="project_delete")
+   * @Method("DELETE")
+   */
+  public function deleteAction(Request $request, Project $project)
+  {
+    $form = $this->createDeleteForm($project);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+      $em = $this->getDoctrine()->getManager();
+      $em->remove($project);
+      $em->flush();
+    }
+    return $this->redirectToRoute('index');
+  }
+
+  /**
+   * Creates a form to delete a Lab1_pomiar entity.
+   *
+   * @param Project $project The Project entity
+   * @return \Symfony\Component\Form\FormInterface
+   */
+  private function createDeleteForm(Project $project)
+  {
+    return $this->createFormBuilder()
+        ->setAction($this->generateUrl('project_delete', array('id' => $project->getId())))
+        ->setMethod('DELETE')
+        ->getForm()
+        ;
+  }
 }
