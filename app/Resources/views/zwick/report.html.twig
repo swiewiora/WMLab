@@ -96,9 +96,9 @@
                     <div class="well">
                         <h4>Operacje</h4>
                         <p><a class="btn btn-outline btn-lg btn-default btn-block"
-                              href="{{ path('project_show', { 'id': project.id })) }}">Powrót do Projektu</a></p>
+                              href="{{ path('project_show', { 'id': projectId }) }}">Powrót do Projektu</a></p>
                         <p><a class="btn btn-outline btn-lg btn-success btn-block"
-                              href="{{ path('zwick_edit', { 'id': task.id }) }}">Edytuj</a></p>
+                              href="{{ path('zwick_edit', { 'id': zwick.id }) }}">Edytuj</a></p>
                         {{ form_start(delete_form) }}
                         <input class="btn btn-outline btn-lg btn-danger btn-block" type="submit" value="Usuń Zadanie">
                         {{ form_end(delete_form) }}

@@ -58,12 +58,8 @@ class ZwickType extends AbstractType
             ->add('fm', NumberType::class)
             ->add('rm', NumberType::class)
             ->add('rb', NumberType::class)
-            ->add('fileTra', FileType::class, array(
-                'data_class' => null
-            ))
-            ->add('filePdf', FileType::class, array(
-                'data_class' => null
-            ))
+            ->add('fileTra')
+            ->add('filePdf')
             ;
     }
 
