@@ -20,26 +20,10 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var Zespol
-     * @ManyToOne(targetEntity="AppBundle\Entity\Zespol", inversedBy="user")
-     * @JoinColumn(name="id_zespol", referencedColumnName="id")
-     */
-    protected $zespol;
-
-    /**
      * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="user")
      * @JoinColumn(name="id_project", referencedColumnName="id")
      */
     protected $project;
-
-    public function getZespol()
-    {
-        return $this->zespol;
-    }
-    public function setZespol($zespol)
-    {
-        $this->zespol = $zespol;
-    }
 
     public function getId()
     {
@@ -56,5 +40,4 @@ class User extends BaseUser
     {
         return $this->id;
     }
-
 }

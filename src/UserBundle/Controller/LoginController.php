@@ -2,6 +2,8 @@
 
 namespace UserBundle\Controller;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -53,11 +55,17 @@ class LoginController extends Controller
      */
     public function getToken(User $user)
     {
+      try {
         return $this->container->get('lexik_jwt_authentication.encoder')
-            ->encode([
-                'username' => $user->getUsername(),
-                'exp' => $this->getTokenExpiryDateTime(),
-            ]);
+            ->encode(
+                [
+                    'username' => $user->getUsername(),
+                    'exp' => $this->getTokenExpiryDateTime(),
+                ]
+            );
+      } catch (JWTEncodeFailureException $e) {
+        throw new Exception ($e);
+      }
     }
 
     /**
@@ -69,8 +77,12 @@ class LoginController extends Controller
     {
         $tokenTtl = $this->container->getParameter('lexik_jwt_authentication.token_ttl');
         $now = new \DateTime();
+      try {
         $now->add(new \DateInterval('PT'.$tokenTtl.'S'));
+      } catch (\Exception $e) {
+        throw new Exception ($e);
+      }
 
-        return $now->format('U');
+      return $now->format('U');
     }
 }

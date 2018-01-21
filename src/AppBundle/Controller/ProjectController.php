@@ -16,44 +16,52 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProjectController extends Controller
 {
-    public function index() {
-        $em = $this->getDoctrine()->getManager();
-        $projects = $em->getRepository('AppBundle:Project')->findAll();
-        return $projects;
+  public function index()
+  {
+
+    $em = $this->getDoctrine()->getManager();
+    $projects = $em->getRepository('AppBundle:Project')->findAll();
+
+    return $projects;
+  }
+
+  /**
+   * @Route("/new", name="project_new")
+   */
+  public function newAction()
+  {
+    $project = new Project();
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($project);
+    $em->flush();
+
+    return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
+  }
+
+  /**
+   * @Route("/{id}", name="project_show")
+   * @Method("GET")
+   */
+  public function showAction(Project $project)
+  {
+    $deleteForm = $this->createDeleteForm($project);
+    $materials = $project->getMaterials();
+    $tasks = array();
+    foreach ($materials as $material) {
+      /** @var $material Material */
+      array_push($tasks, $material->getTasks());
     }
 
-    /**
-     * @Route("/new", name="project_new")
-     */
-    public function newAction() {
-        $project = new Project();
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($project);
-        $em->flush();
-        return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
-    }
-
-    /**
-     * @Route("/{id}", name="project_show")
-     * @Method("GET")
-     */
-    public function showAction(Project $project)
-    {
-        $deleteForm = $this->createDeleteForm($project);
-        $materials = $project->getMaterials();
-        $tasks = array();
-        foreach ($materials as $material) {
-            /** @var $material Material */
-            array_push($tasks, $material->getTasks());
-        }
-
-        return $this->render('project/show.html.twig', array(
+    return $this->render(
+        'project/show.html.twig',
+        array(
             'delete_form' => $deleteForm->createView(),
             'project' => $project,
             'tasks' => $tasks,
             'materials' => $materials,
-        ) );
-    }
+        )
+    );
+  }
 
   /**
    * Deletes a Project entity.
@@ -71,6 +79,7 @@ class ProjectController extends Controller
       $em->remove($project);
       $em->flush();
     }
+
     return $this->redirectToRoute('index');
   }
 
@@ -85,7 +94,6 @@ class ProjectController extends Controller
     return $this->createFormBuilder()
         ->setAction($this->generateUrl('project_delete', array('id' => $project->getId())))
         ->setMethod('DELETE')
-        ->getForm()
-        ;
+        ->getForm();
   }
 }
