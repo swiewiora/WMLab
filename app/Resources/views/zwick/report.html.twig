@@ -2,113 +2,126 @@
 {% set counter = 0 %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Statyczna próba rozciągania</h1>
-        </div>
-        <!-- /.col-lg-12 -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Statyczna próba rozciągania</h1>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Wyniki obliczeń
-                </div>
-                <div class="panel-body">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <th style="padding:5px">Id</th>
-                                        <td style="padding:5px">Id =  {{ zwick.id }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Średnica próbki: </th>
-                                        <td style="padding:5px">d<sub>0</sub> = {{ zwick.d0 }} mm</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Długość próbki: </th>
-                                        <td style="padding:5px">h<sub>0</sub> = {{ zwick.h0 }} mm</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Temperatura próby: </th>
-                                        <td style="padding:5px">t<sub>0</sub> = {{ zwick.t0 }} &degC</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Prędkość próby: </th>
-                                        <td style="padding:5px">v<sub>0</sub> = {{ zwick.v0 }} mm/min</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Ag: </th>
-                                        <td style="padding:5px">A<sub>g</sub> = {{ zwick.ag }} %</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Agt: </th>
-                                        <td style="padding:5px">A<sub>gt</sub> = {{ zwick.agt }} %</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Moduł Younga: </th>
-                                        <td style="padding:5px">E = {{ zwick.e }} GPa</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Granica plastyczności: </th>
-                                        <td style="padding:5px">R<sub>p0.2</sub> = {{ zwick.r }} MPa</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Granica wytrzymałości: </th>
-                                        <td style="padding:5px">F<sub>m</sub> = {{ zwick.fm }} kN</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Granica wytrzymałości: </th>
-                                        <td style="padding:5px">R<sub>m</sub> = {{ zwick.rm }} MPa</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="padding:5px">Naprężenie przy zerwanu: </th>
-                                        <td style="padding:5px">R<sub>B</sub> = {{ zwick.rb }} MPa</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                {{ include('zwick/_data.html.twig') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- /.col-lg-12 -->
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Wyniki obliczeń
         </div>
-        <div class="col-lg-12">
+        <div class="panel-body">
+          <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    Wykres zależności &sigma; - &epsilon; dla zmierzonych wartości
-                </div>
-                <div class="panel-body">
-                    <div class="flot-chart">
-                        <div class="flot-chart-content" id="flot-line-chart"></div>
-                    </div>
+              <div class="panel-body">
+                <table>
+                  <tbody>
+                  <tr>
+                    <th style="padding:5px">Id</th>
+                    <td style="padding:5px">Id = {{ zwick.id }}</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Średnica próbki:</th>
+                    <td style="padding:5px">d<sub>0</sub> = {{ zwick.d0 }} mm</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Długość próbki:</th>
+                    <td style="padding:5px">h<sub>0</sub> = {{ zwick.h0 }} mm</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Temperatura próby:</th>
+                    <td style="padding:5px">t<sub>0</sub> = {{ zwick.t0 }} &degC</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Prędkość próby:</th>
+                    <td style="padding:5px">v<sub>0</sub> = {{ zwick.v0 }} mm/min</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Ag:</th>
+                    <td style="padding:5px">A<sub>g</sub> = {{ zwick.ag }} %</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Agt:</th>
+                    <td style="padding:5px">A<sub>gt</sub> = {{ zwick.agt }} %</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Moduł Younga:</th>
+                    <td style="padding:5px">E = {{ zwick.e }} GPa</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Granica plastyczności:</th>
+                    <td style="padding:5px">R<sub>p0.2</sub> = {{ zwick.r }} MPa</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Granica wytrzymałości:</th>
+                    <td style="padding:5px">F<sub>m</sub> = {{ zwick.fm }} kN</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Granica wytrzymałości:</th>
+                    <td style="padding:5px">R<sub>m</sub> = {{ zwick.rm }} MPa</td>
+                  </tr>
+                  <tr>
+                    <th style="padding:5px">Naprężenie przy zerwanu:</th>
+                    <td style="padding:5px">R<sub>B</sub> = {{ zwick.rb }} MPa</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                {{ include('zwick/_data.html.twig') }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Wykres zależności &sigma; - &epsilon; dla zmierzonych wartości
+        </div>
+        <div class="panel-body">
+          <div class="flot-chart">
+            <div class="flot-chart-content" id="flot-line-chart"></div>
+          </div>
 
-                    <div class="well">
-                        <h4>Operacje</h4>
-                        <p><a class="btn btn-outline btn-lg btn-default btn-block"
-                              href="{{ path('project_show', { 'id': projectId }) }}">Powrót do Projektu</a></p>
-                        <p><a class="btn btn-outline btn-lg btn-success btn-block"
-                              href="{{ path('zwick_edit', { 'id': zwick.id }) }}">Edytuj</a></p>
-                        {{ form_start(delete_form) }}
-                        <input class="btn btn-outline btn-lg btn-danger btn-block" type="submit" value="Usuń Zadanie">
-                        {{ form_end(delete_form) }}
-                    </div>
-                </div>
-            </div>
+          <div class="well">
+            <h4>Operacje</h4>
+            <p><a class="btn btn-outline btn-lg btn-default btn-block"
+                  href="{{ path('project_show', { 'id': projectId }) }}">Powrót do Projektu</a></p>
+            <p><a class="btn btn-outline btn-lg btn-success btn-block"
+                  href="{{ path('zwick_edit', { 'id': zwick.id }) }}">Edytuj</a></p>
+            {{ form_start(delete_form) }}
+            <input class="btn btn-outline btn-lg btn-danger btn-block" type="submit" value="Usuń Zadanie">
+            {{ form_end(delete_form) }}
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 {% endblock %}
 
 {% block javascripts %}
-    {{ include('zwick/_plot.html.twig') }}
+  {{ include('zwick/_plot.html.twig') }}
+
+  <!-- DataTables JavaScript -->
+  <script src="{{ asset('datatables/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('datatables-plugins/dataTables.bootstrap.min.js') }}"></script>
+  <script src="{{ asset('datatables-responsive/dataTables.responsive.js') }}"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#dataTables-example').DataTable({
+        responsive: true
+      });
+    });
+  </script>
 {% endblock %}

@@ -129,26 +129,26 @@ class ZwickController extends Controller
     $em = $this->getDoctrine()->getManager();
     $dataArray = $em->getRepository('AppBundle:ZwickData')->findBy(array('zwick' => $zwick->getId()));
     $projectId = $zwick->getMaterial()->getProject()->getId();
-    $queryBuilder = $em->getRepository('AppBundle:ZwickData')
-        ->createQueryBuilder('zwick_data')
-        ->where('zwick_data.zwick = :idinput')
-        ->setParameter(
-            'idinput',
-            $zwick->getId()
-        );
-    $query = $queryBuilder->getQuery();
-
-    $paginator = $this->get('knp_paginator');
-    $data = $paginator->paginate(
-        $query,
-        $request->query->getInt('page', 1) /*page number*/,
-        $request->query->getInt('limit', 25) /*limit per page*/
-    );
+//    $queryBuilder = $em->getRepository('AppBundle:ZwickData')
+//        ->createQueryBuilder('zwick_data')
+//        ->where('zwick_data.zwick = :idinput')
+//        ->setParameter(
+//            'idinput',
+//            $zwick->getId()
+//        );
+//    $query = $queryBuilder->getQuery();
+//
+//    $paginator = $this->get('knp_paginator');
+//    $data = $paginator->paginate(
+//        $query,
+//        $request->query->getInt('page', 1) /*page number*/,
+//        $request->query->getInt('limit', 25) /*limit per page*/
+//    );
 
     return $this->render(
         'zwick/report.html.twig',
         array(
-            'zwick_data_page' => $data,
+//            'zwick_data_page' => $data,
             'zwick_data' => $dataArray,
             'zwick' => $zwick,
             'delete_form' => $deleteForm->createView(),
