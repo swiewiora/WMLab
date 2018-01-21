@@ -27,8 +27,9 @@ class Project
      * @OneToMany(targetEntity="AppBundle\Entity\Material", mappedBy="project", cascade={"remove"})
      */
     private $materials;
+    //TODO invert
     /**
-     * @OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="project")
+     * @OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="projects")
      */
     private $user;
 

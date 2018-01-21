@@ -13,8 +13,15 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+      $em = $this->getDoctrine()->getManager();
+      $auth_checker = $this->get('security.authorization_checker');
+      $projects = null;
+      if ($auth_checker->isGranted('ROLE_ADMIN') )
         $projects = $em->getRepository('AppBundle:Project')->findAll();
+      else {
+        if ($this->getUser() )
+          $projects = $this->getUser()->getProjects();
+      }
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
             'projects' => $projects,

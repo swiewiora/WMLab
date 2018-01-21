@@ -37,12 +37,12 @@ class Builder implements ContainerAwareInterface
     );
     $menu['Labs']->setChildrenAttribute('class', 'nav nav-second-level');
     $em = $this->container->get('doctrine')->getManager();
-    $projects = $em->getRepository('AppBundle:Project')->findAll();
+    $projects = $em->getRepository('UserBundle:User')->findAll(); //TODO user rights (register service)
     foreach ($projects as $project) {
       /**
        * @var Project $project
        */
-      $projectKey = 'Project' . $project->getId();
+      $projectKey = 'Project'.$project->getId();
       $menu['Labs']->addChild(
           $projectKey,
           array(
@@ -58,10 +58,10 @@ class Builder implements ContainerAwareInterface
         /**
          * @var Material $material
          */
-        $materialKey = 'Material' . $material->getId();
+        $materialKey = 'Material'.$material->getId();
         $menu['Labs'][$projectKey]->addChild(
             $materialKey,
-            array(
+            array (
                 'route' => 'material_edit',
                 'routeParameters' => ['id' => $material->getId()],
                 'label' => '<i class="fa fa-edit fa-fw"></i> ' . $material->getAlloyName(),
@@ -73,7 +73,7 @@ class Builder implements ContainerAwareInterface
           /**
            * @var Zwick $task
            */
-          $taskKey = 'Material' . $task->getId();
+          $taskKey = 'Material'.$task->getId();
           $menu['Labs'][$projectKey]->addChild(
               $taskKey,
               array(

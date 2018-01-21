@@ -18,17 +18,27 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
+    //TODO switch to OnetToMany
     /**
      * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="user")
      * @JoinColumn(name="id_project", referencedColumnName="id")
      */
-    protected $project;
+    protected $projects;
 
     public function getId()
     {
         return $this->id;
     }
+
+  public function getProjects()
+  {
+    return $this->projects;
+  }
+
+  public function setProjects($projects)
+  {
+    $this->projects = $projects;
+  }
 
     public function __construct()
     {
