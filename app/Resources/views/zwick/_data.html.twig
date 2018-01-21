@@ -11,20 +11,11 @@
   <tr>
     <th>#</th>
     <th>Czas badania</th>
-    <th>Droga standardowa</th>
-    <th>Siła standardowa</th>
-    <th>S</th>
-    <th>S<sub>exp</sub></th>
+    <th>Droga standardowa <br />[mm]</th>
+    <th>Siła standardowa <br />[N]</th>
+    <th>S <br />[mm <sup>2</sup>]</th>
+    <th>S<sub>exp</sub> <br />[N / mm<sup>2</sup>]</th>
     <th>&epsilon;</th>
-  </tr>
-  <tr>
-    <th></th>
-    <th></th>
-    <th>[mm]</th>
-    <th>[N]</th>
-    <th>[mm <sup>2</sup>]</th>
-    <th>[N / mm<sup>2</sup>]</th>
-    <th></th>
   </tr>
   </thead>
   <tbody>
@@ -32,12 +23,12 @@
     {% set counter = counter + 1 %}
     <tr>
       <td>{{ counter }}</td>
-      <td>{{ row.testTime }}</td>
-      <td>{{ row.distancestandard }}</td>
-      <td>{{ row.loadmeasurement }}</td>
-      <td>{{ row.s }}</td>
-      <td>{{ row.sexp }}</td>
-      <td>{{ row.eps }}</td>
+      <td>{{ (row.testTime)|number_format(3, '.', ',') }}</td>
+      <td>{{ (row.distancestandard)|number_format(5, '.', ',') }}</td>
+      <td>{{ (row.loadmeasurement)|number_format(2, '.', ',') }}</td>
+      <td>{{ (row.s)|number_format(3, '.', ',') }}</td>
+      <td>{{ (row.sexp)|number_format(3, '.', ',') }}</td>
+      <td>{{ (row.eps)|number_format(5, '.', ',') }}</td>
     </tr>
   {% endfor %}
   </tbody>

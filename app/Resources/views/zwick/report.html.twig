@@ -20,10 +20,10 @@
               <div class="panel-body">
                 <table>
                   <tbody>
-                  <tr>
-                    <th style="padding:5px">Id</th>
-                    <td style="padding:5px">Id = {{ zwick.id }}</td>
-                  </tr>
+                  {#<tr>#}
+                    {#<th style="padding:5px">Id</th>#}
+                    {#<td style="padding:5px">Id = {{ zwick.id }}</td>#}
+                  {#</tr>#}
                   <tr>
                     <th style="padding:5px">Średnica próbki:</th>
                     <td style="padding:5px">d<sub>0</sub> = {{ zwick.d0 }} mm</td>
@@ -110,8 +110,6 @@
 {% endblock %}
 
 {% block javascripts %}
-  {{ include('zwick/_plot.html.twig') }}
-
   <!-- DataTables JavaScript -->
   <script src="{{ asset('datatables/js/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('datatables-plugins/dataTables.bootstrap.min.js') }}"></script>
@@ -124,4 +122,6 @@
       });
     });
   </script>
+
+  {{ include('zwick/_plot.html.twig') }}
 {% endblock %}
