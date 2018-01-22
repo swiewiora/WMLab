@@ -51,7 +51,7 @@ class Zespol
      */
     private $lab2Wynik;
 
-    /**
+    /*
      * @var User
      * @OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="zespol")
      */

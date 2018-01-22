@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToMany;
 
 /**
@@ -27,9 +28,9 @@ class Project
      * @OneToMany(targetEntity="AppBundle\Entity\Material", mappedBy="project", cascade={"remove"})
      */
     private $materials;
-    //TODO invert
     /**
-     * @OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="projects")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="projects")
+     * @JoinColumn(name="id_user", referencedColumnName="id")
      */
     private $user;
 

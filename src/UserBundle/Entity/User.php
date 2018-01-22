@@ -4,6 +4,7 @@ use AppBundle\Entity\Zespol;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -18,10 +19,8 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    //TODO switch to OnetToMany
     /**
-     * @ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="user")
-     * @JoinColumn(name="id_project", referencedColumnName="id")
+     * @OneToMany(targetEntity="AppBundle\Entity\Project", mappedBy="user", cascade={"remove"})
      */
     protected $projects;
 
