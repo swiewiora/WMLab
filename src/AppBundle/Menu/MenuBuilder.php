@@ -8,6 +8,7 @@
 
 namespace AppBundle\Menu;
 use AppBundle\Entity\Material;
+use AppBundle\Entity\Zwick;
 use Doctrine\ORM\EntityManager;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;

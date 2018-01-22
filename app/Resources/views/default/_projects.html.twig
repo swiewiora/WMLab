@@ -1,7 +1,7 @@
 {% set counter = 0 %}
 <div class="row">
     <div class="col-lg-12">
-        {% if projects %}
+        {% if projects|length %}
         <div class="panel panel-default">
             <div class="panel-heading">
                 Projekty
@@ -20,10 +20,12 @@
             </div>
         </div>
         {% endif %}
+        {% if app.user %}
         <div class="well">
             <h4>Operacje</h4>
             <a class="btn btn-outline btn-lg btn-primary btn-block"
                href="{{ path('project_new') }}">Stwórz nowy projekt</a>
         </div>
+        {% endif %}
     </div>
 </div>
