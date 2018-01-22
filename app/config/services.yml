@@ -10,6 +10,16 @@ parameters:
         allow_safe_labels: true
 
 services:
+    app.menu_builder:
+        class: AppBundle\Menu\MenuBuilder
+        arguments:
+          - "@knp_menu.factory"
+          - "@doctrine.orm.entity_manager"
+          - "@security.token_storage"
+          - "@security.authorization_checker"
+        tags:
+          - { name: knp_menu.menu_builder, method: mainMenu, alias: main } # The alias is what is used to retrieve the menu
+
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

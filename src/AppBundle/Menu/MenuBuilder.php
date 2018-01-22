@@ -1,25 +1,41 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Seba
+ * Date: 2018-01-22
+ * Time: 15:24
+ */
 
 namespace AppBundle\Menu;
-
-use AppBundle\Entity\Material;
-use AppBundle\Entity\Project;
-use AppBundle\Entity\Zwick;
+use Doctrine\ORM\EntityManager;
 use Knp\Menu\FactoryInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use UserBundle\Entity\User;
 
-class Builder implements ContainerAwareInterface
+class MenuBuilder
 {
-  use ContainerAwareTrait;
+  private $factory, $em, $tokenStorage, $checker;
 
-  public function mainMenu(FactoryInterface $factory, array $options)
+  /**
+   * Add any other dependency you need
+   * @param FactoryInterface $factory
+   * @param EntityManager $em
+   * @param TokenStorage $tokenStorage
+   * @param AuthorizationChecker $checker
+   */
+  public function __construct(FactoryInterface $factory, EntityManager $em, TokenStorage $tokenStorage,
+      AuthorizationChecker $checker)
   {
-    $menu = $factory->createItem(
+    $this->factory = $factory;
+    $this->em = $em;
+    $this->tokenStorage = $tokenStorage;
+    $this->checker = $checker;
+  }
+
+  public function mainMenu(array $options)
+  {
+    $menu = $this->factory->createItem(
         'root',
         array(
             'childrenAttributes' => array(
@@ -28,6 +44,16 @@ class Builder implements ContainerAwareInterface
             ),
         )
     );
+    if ($this->checker->isGranted('ROLE_ADMIN') ) {
+      $menu->addChild(
+          'Dashboard',
+          array(
+              'route' => 'dashboard',
+              'label' => '<i class="fa fa-dashboard fa-fw"></i> Kokpit',
+              'extras' => array('safe_label' => true),
+          )
+      );
+    }
     $menu->addChild(
         'Labs',
         array (
@@ -37,16 +63,16 @@ class Builder implements ContainerAwareInterface
         )
     );
     $menu['Labs']->setChildrenAttribute('class', 'nav nav-second-level');
-    $em = $this->container->get('doctrine')->getManager();
+    $em = $this->em;
     /**
      * @var User $user
      */
-    $user = $options['user'];
-    if ($user) {
-      $projects = $em->getRepository('UserBundle:User')->findBy($user->getId() );
+    $user = $this->tokenStorage->getToken()->getUser();
+    $projects = null;
+    if ($user != "anon.") {
+      $projects = $em->getRepository('UserBundle:User')->findBy($user->getId() )->getProjects();
     }
-     //TODO user rights (register service)
-    foreach ($projects as $project) {
+    foreach ( (array)$projects as $project) {
       /**
        * @var Project $project
        */
@@ -95,17 +121,6 @@ class Builder implements ContainerAwareInterface
       }
     }
 
-    $checker = $this->container->get('security.authorization_checker');
-    if ($checker->isGranted('ROLE_ADMIN')) {
-
-      $menu->addChild(
-          'Dashboard',
-          array(
-              'route' => 'dashboard',
-              'label' => '<i class="fa fa-dashboard fa-fw"></i> Kokpit',
-              'extras' => array('safe_label' => true),
-          )
-      );
 
       /*$menu->addChild(
           'Settings',
@@ -115,26 +130,8 @@ class Builder implements ContainerAwareInterface
               'extras' => array('safe_label' => true),
           )
       );*/
-    }
+
 
     return $menu;
   }
 }
-
-
-/*// access services from the container!
-$em = $this->container->get('doctrine')->getManager();
-// findMostRecent and Blog are just imaginary examples
-$blog = $em->getRepository('AppBundle:Blog')->findMostRecent();
-
-$menu->addChild('Latest Blog Post', array(
-    'route' => 'blog_show',
-    'routeParameters' => array('id' => $blog->getId())
-));
-
-// create another menu item
-$menu->addChild('About Me', array('route' => 'about'));
-// you can also add sub level's to your menu's as follows
-$menu['About Me']->addChild('Edit profile', array('route' => 'edit_profile'));
-
-// ... add more children*/

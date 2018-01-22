@@ -1,53 +1,53 @@
 <div id="wrapper">
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ path('index') }}">WM Lab</a>
-        </div>
-        <!-- /.navbar-header -->
+  <!-- Navigation -->
+  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ path('index') }}">WM Lab</a>
+    </div>
+    <!-- /.navbar-header -->
 
-        <ul class="nav navbar-top-links navbar-right">
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        {{ app.user.username }}
-                    {% endif %}
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li><a href="{{ path('fos_user_profile_show') }}">
-                                <i class="fa fa-user fa-fw"></i> Profil użytkownika</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}">
-                            <i class="fa fa-sign-out fa-fw"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                        </a></li>
-                    {% else %}
-                        <li><a href="{{ path('fos_user_security_login') }}">
-                            {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
-                        </a></li>
-                    {% endif %}
-                </ul>
-                <!-- /.dropdown-user -->
+    <ul class="nav navbar-top-links navbar-right">
+      <!-- /.dropdown -->
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ app.user.username }}
+          {% endif %}
+          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <li><a href="{{ path('fos_user_profile_show') }}">
+                <i class="fa fa-user fa-fw"></i> Profil użytkownika</a>
             </li>
-            <!-- /.dropdown -->
+            <li class="divider"></li>
+            <li><a href="{{ path('fos_user_security_logout') }}">
+                <i class="fa fa-sign-out fa-fw"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+              </a></li>
+          {% else %}
+            <li><a href="{{ path('fos_user_security_login') }}">
+                {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+              </a></li>
+          {% endif %}
         </ul>
-        <!-- /.navbar-top-links -->
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-        <!-- /.navbar-static-side -->
-    </nav>
+        <!-- /.dropdown-user -->
+      </li>
+      <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+    <div class="navbar-default sidebar" role="navigation">
+      <div class="sidebar-nav navbar-collapse">
+        {{ knp_menu_render('main') }}
+      </div>
+      <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+  </nav>
 </div>
 <!-- /#wrapper -->

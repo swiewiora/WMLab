@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html>
-    {% block head %}
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block head %}
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{% block title %}WMLab{% endblock %}</title>
+    <title>{% block title %}WMLab{% endblock %}</title>
 
-            <!-- Bootstrap Core CSS -->
-            <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-            <!-- MetisMenu CSS -->
-            <link href="{{ asset('metisMenu/metisMenu.min.css') }}" rel="stylesheet">
-            <!-- Custom CSS -->
-            <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
-            <!-- Custom Fonts -->
-            <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-        {% block stylesheets %}{% endblock %}
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="{{ asset('metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    {% block stylesheets %}{% endblock %}
 
-        {#< link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
-    </head>
-    {% endblock %}
+    {#< link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
+  </head>
+{% endblock %}
 
-    <body>
-    {% for type, messages in app.session.flashBag.all %}
-        {% for message in messages %}
+<body>
+{% for type, messages in app.session.flashBag.all %}
+  {% for message in messages %}
     <div class="alert alert-success alert-dismissable">
-        <button type="{{ type }} button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ message|trans({}, 'FOSUserBundle') }}
+      <button type="{{ type }} button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      {{ message|trans({}, 'FOSUserBundle') }}
     </div>
-        {% endfor %}
-    {% endfor %}
+  {% endfor %}
+{% endfor %}
 
-        {#{% block fos_user_content %}{{ include('@User/layout.html.twig') }}{% endblock %}#}
-        {{ include('navigation.html.twig') }}
+{#{% block fos_user_content %}{{ include('@User/layout.html.twig') }}{% endblock %}#}
+{{ include('navigation.html.twig') }}
 
-        <div id="page-wrapper">
-        {% block body %}{% endblock %}
+<div id="page-wrapper">
+  {% block body %}{% endblock %}
+</div>
+<!-- /#page-wrapper -->
 
-        </div>
-        <!-- /#page-wrapper -->
-
-        {% block basejavascripts %}
-            <!-- jQuery -->
-            <script src="{{ asset('jquery/jquery.min.js') }}"></script>
-            <!-- Bootstrap Core JavaScript -->
-            <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-            <!-- Metis Menu Plugin JavaScript -->
-            <script src="{{ asset('metisMenu/metisMenu.min.js') }}"></script>
-            <!-- Custom Theme JavaScript -->
-            <script src="{{ asset('js/sb-admin-2.js') }}"></script>
-        {% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+{% block basejavascripts %}
+  <!-- jQuery -->
+  <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+  <!-- Metis Menu Plugin JavaScript -->
+  <script src="{{ asset('metisMenu/metisMenu.min.js') }}"></script>
+  <!-- Custom Theme JavaScript -->
+  <script src="{{ asset('js/sb-admin-2.js') }}"></script>
+{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
 </html>
