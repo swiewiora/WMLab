@@ -18,6 +18,7 @@ class ZwickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('taskName')
             ->add('machine', ChoiceType::class, array(
                 'mapped' => false,
                 'choices'  => array(
