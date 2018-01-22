@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\Menu;
+use AppBundle\Entity\Material;
 use Doctrine\ORM\EntityManager;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -70,9 +71,9 @@ class MenuBuilder
     $user = $this->tokenStorage->getToken()->getUser();
     $projects = null;
     if ($user != "anon.") {
-      $projects = $em->getRepository('UserBundle:User')->findBy($user->getId() )->getProjects();
+      $projects = $user->getProjects();
     }
-    foreach ( (array)$projects as $project) {
+    foreach ($projects as $project) {
       /**
        * @var Project $project
        */
