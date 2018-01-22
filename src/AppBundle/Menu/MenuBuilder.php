@@ -60,7 +60,7 @@ class MenuBuilder
         'Labs',
         array (
             'uri' => '#',
-            'label' => ' <i class="fa fa-sitemap fa-fw"></i> Laboratorium<span class="fa arrow"></span>',
+            'label' => ' <i class="fa fa-flask fa-fw"></i> Laboratorium<span class="fa arrow"></span>',
             'extras' => array('safe_label' => true),
         )
     );
@@ -74,6 +74,8 @@ class MenuBuilder
     if ($user != "anon.") {
       $projects = $user->getProjects();
     }
+
+    if ($projects == false) return $menu;
     foreach ($projects as $project) {
       /**
        * @var Project $project
@@ -84,7 +86,7 @@ class MenuBuilder
           array(
               'route' => 'project_show',
               'routeParameters' => ['id' => $project->getId()],
-              'label' => 'Projekt <span class="fa arrow"></span>',
+              'label' => ' <i class="fa fa-sitemap fa-fw"></i> Projekt <span class="fa arrow"></span>',
               'extras' => array('safe_label' => true),
           )
       );
