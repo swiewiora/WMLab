@@ -51,8 +51,7 @@
           {% if tasks|length %}
             <div class="panel-body">
               <ul class="list-group">
-                {% for taskGroup in tasks %}
-                  {% for task in taskGroup %}
+                  {% for task in tasks %}
                     {% set counter = counter + 1 %}
                     <li class="list-group-item">
                       {{ counter }}. Zadanie
@@ -68,7 +67,6 @@
                       </span>
                     </li>
                   {% endfor %}
-                {% endfor %}
               </ul>
             </div>
           {% endif %}

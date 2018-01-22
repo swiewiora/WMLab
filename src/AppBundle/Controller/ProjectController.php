@@ -43,7 +43,7 @@ class ProjectController extends Controller
     $tasks = array();
     foreach ($materials as $material) {
       /** @var $material Material */
-      array_push($tasks, $material->getTasks());
+      $tasks = array_merge($tasks, $material->getTasks()->toArray() );
     }
 
     return $this->render(
