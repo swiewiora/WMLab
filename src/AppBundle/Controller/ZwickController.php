@@ -105,10 +105,6 @@ class ZwickController extends Controller
   public function reportAction(Zwick $input)
   {
     $em = $this->getDoctrine()->getManager();
-    //TODO multi user, multi projects
-//        $existing_output = $em->getRepository('AppBundle:Project')
-//            ->findOneBy(array('user' => $this->getUser()))->getZwick();
-
     $zwick_calculations = new ZwickCalculations($input);
     $output_data = $zwick_calculations->calculateData();
 
