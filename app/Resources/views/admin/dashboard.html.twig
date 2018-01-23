@@ -36,10 +36,10 @@
                   <td>
                     {% if user.enabled %}Tak
                       <a class="btn btn-xs btn-danger"
-                         href="#">Zablokuj</a>
+                         href="{{ path('user_disable', {'id': user.id}) }}">Zablokuj</a>
                     {% else %}Nie
                       <a class="btn btn-xs btn-success"
-                         href="#">Aktywuj</a>
+                         href="{{ path('user_enable', {'id': user.id}) }}">Aktywuj</a>
                     {% endif %}
                   </td>
                   <td>{{ user.lastLogin|date('H:m d.m.Y') }}</td>
