@@ -30,7 +30,7 @@ class ZwickController extends Controller
     $projectId = $request->query->getInt('project');
     $em = $this->getDoctrine()->getManager();
     $materials = $em->getRepository('AppBundle:Material')
-        ->findBy(array('project' => $projectId));
+        ->findBy(array('project' => $projectId) );
     $form = $this->createForm(
         'AppBundle\Form\ZwickType',
         $input,

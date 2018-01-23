@@ -3,5 +3,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    <p>Konto zostało założone. Czekaj na potwierdzenie konta przez administratora.</p>
+    <p><a href="{{ path('fos_user_security_login') }}">Strona główna</a></p>
 {% endblock fos_user_content %}

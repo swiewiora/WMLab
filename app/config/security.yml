@@ -12,7 +12,7 @@ security:
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         fos_userbundle:
-                id: fos_user.user_provider.username
+            id: fos_user.user_provider.username
         in_memory:
             memory: ~
 
@@ -41,7 +41,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/dashboard/, role: ROLE_ADMIN }
         - { path: ^/lab1_pomiar/, role: ROLE_USER }
         - { path: ^/lab1_wynik/, role: ROLE_USER }
         - { path: ^/lab2_pomiar/, role: ROLE_USER }

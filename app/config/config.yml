@@ -79,7 +79,7 @@ fos_user:
         form:
             type: UserBundle\Form\RegistrationType
         confirmation:
-            enabled: false
+            enabled: true
     service:
         mailer: fos_user.mailer.noop
     profile:

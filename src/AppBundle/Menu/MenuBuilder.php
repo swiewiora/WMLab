@@ -44,8 +44,7 @@ class MenuBuilder
                 'class' => 'nav',
                 'id' => 'side-menu',
             ),
-        )
-    );
+    ) );
     if ($this->checker->isGranted('ROLE_ADMIN') ) {
       $menu->addChild(
           'Dashboard',
@@ -65,13 +64,14 @@ class MenuBuilder
         )
     );
     $menu['Labs']->setChildrenAttribute('class', 'nav nav-second-level');
-    $em = $this->em;
     /**
      * @var User $user
      */
     $user = $this->tokenStorage->getToken()->getUser();
     $projects = null;
-    if ($user != "anon.") {
+    if ($this->checker->isGranted('ROLE_ADMIN') ) {
+      $projects = $this->em->getRepository('AppBundle:Project')->findAll();
+    } elseif ($user != "anon.") {
       $projects = $user->getProjects();
     }
 
@@ -117,15 +117,14 @@ class MenuBuilder
               array(
                   'route' => 'zwick_show',
                   'routeParameters' => ['id' => $task->getId()],
-                  'label' => '<i class="fa fa-bar-chart-o fa-fw"></i> Zadanie',
+                  'label' => '<i class="fa fa-bar-chart-o fa-fw"></i> ' .
+                      substr($task->getTaskName(), 0, 20),
                   'extras' => array('safe_label' => true),
               )
           );
         }
       }
     }
-
-
       /*$menu->addChild(
           'Settings',
           array(
@@ -134,8 +133,6 @@ class MenuBuilder
               'extras' => array('safe_label' => true),
           )
       );*/
-
-
     return $menu;
   }
 }

@@ -18,14 +18,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * Lab1_pomiar_tab controller.
  *
- * @Route("/lab1_pomiar_tab")
+ * @Route("/")
  * @Security("has_role('ROLE_ADMIN')")
  */
 class DashboardController extends Controller
 {
     /**
-     *
-     *
      * @Route("/dashboard", name="dashboard")
      * @Method("GET")
      */

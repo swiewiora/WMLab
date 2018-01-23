@@ -3,8 +3,10 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
+  <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+  {% if targetUrl %}
+    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+  {% else %}
+    <p><a href="{{ path('fos_user_security_login') }}">Strona główna</a></p>
+  {% endif %}
 {% endblock fos_user_content %}
