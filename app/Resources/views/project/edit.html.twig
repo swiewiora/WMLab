@@ -4,7 +4,7 @@
 {% block body %}
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Edycja materiału</h1>
+      <h1 class="page-header">Edycja projektu</h1>
     </div>
   </div>
   <div class="row">
@@ -12,16 +12,15 @@
       <div class="panel panel-default">
         <div class="panel-body">
           {{ form_start(form) }}
-          {{ form_widget(form) }}
-          <div class="well">
-          <p><input type="submit" class="btn btn-outline btn-success btn-lg btn-block"
+          {{ form_row(form.name, {'label': 'Nazwa projektu'}) }}
+          <p><input type="submit" class="btn btn-outline btn-success btn-block btn-lg"
                     value="Zapisz"/></p>
           {{ form_end(form) }}
           <p><a class="btn btn-outline btn-warning btn-lg btn-block"
                 href="{{ path('project_show', { 'id': projectId }) }}">Przerwij</a></p>
           {{ form_start(delete_form) }}
           <input class="btn btn-outline btn-lg btn-danger btn-block" type="submit"
-                 value="Usuń materiał i wszystkie zadania z nim związane">
+                 value="Usuń projekt z cała zawartością">
           {{ form_end(delete_form) }}
           </div>
         </div>

@@ -24,6 +24,7 @@ class MaterialController extends Controller
 
     /**
      * @Route("/new", name="material_new")
+     * @Method({"POST"})
      */
     public function newAction(Request $request) {
         $material = new Material();
@@ -35,7 +36,6 @@ class MaterialController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($material);
             $em->flush();
             return $this->redirect($this->generateUrl('project_show',
@@ -84,7 +84,7 @@ class MaterialController extends Controller
   }
 
   /**
-   * Displays a form to edit an existing Lab1_pomiar entity.
+   * Displays a form to edit an existing entity.
    *
    * @Route("/{id}/edit", name="material_edit")
    * @Method({"GET", "POST"})

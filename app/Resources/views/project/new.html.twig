@@ -4,7 +4,7 @@
 {% block body %}
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Dodawanie nowego materiału</h1>
+      <h1 class="page-header">Nowy projekt</h1>
     </div>
   </div>
   <div class="row">
@@ -12,9 +12,8 @@
       <div class="panel panel-default">
         <div class="panel-body">
           {{ form_start(form) }}
-          {{ form_row(form.alloyName, {'label': 'Nazwa stopu'}) }}
-          {{ form_row(form.chemicalComposition, {'label': 'Skład chemiczny'}) }}
-          <p><input type="submit" class="btn btn-outline btn-primary" value="Dodaj materiał"/></p>
+          {{ form_row(form.name, {'label': 'Nazwa projektu'}) }}
+          <p><input type="submit" class="btn btn-outline btn-primary" value="Stwórz projekt"/></p>
           {{ form_end(form) }}
           <p><a class="btn btn-outline btn-warning" href="{{ path('index') }}">Przerwij</a></p>
         </div>

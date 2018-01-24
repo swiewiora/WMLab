@@ -12,7 +12,7 @@
                         {% set counter = counter + 1 %}
                         <a href="{{ path('project_show', {'id': project.id}) }}">
                         <li class="list-group-item">
-                            {{ counter }}. Projekt
+                            {{ counter }}. Projekt: {{ project.name }}
                         </li>
                         </a>
                     {% endfor %}

@@ -8,6 +8,7 @@
 
 namespace AppBundle\Menu;
 use AppBundle\Entity\Material;
+use AppBundle\Entity\Project;
 use AppBundle\Entity\Zwick;
 use Doctrine\ORM\EntityManager;
 use Knp\Menu\FactoryInterface;
@@ -77,16 +78,14 @@ class MenuBuilder
 
     if ($projects == false) return $menu;
     foreach ($projects as $project) {
-      /**
-       * @var Project $project
-       */
+      /** @var Project $project */
       $projectKey = 'Project'.$project->getId();
       $menu['Labs']->addChild(
           $projectKey,
           array(
               'route' => 'project_show',
               'routeParameters' => ['id' => $project->getId()],
-              'label' => ' <i class="fa fa-sitemap fa-fw"></i> Projekt <span class="fa arrow"></span>',
+              'label' => ' <i class="fa fa-sitemap fa-fw"></i> '.$project->getName().'<span class="fa arrow"></span>',
               'extras' => array('safe_label' => true),
           )
       );
