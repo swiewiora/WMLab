@@ -44,14 +44,12 @@ class Zwick
   private $taskName;
   /**
    * @ORM\Column(type="string")
-   *
    * @Assert\NotBlank(message="Please, upload the CSV data.")
    * @Assert\File(mimeTypes={ "text/plain" })
    */
   private $fileTra;
   /**
    * @ORM\Column(type="string")
-   *
    * @Assert\NotBlank(message="Please, upload the PDF data.")
    * @Assert\File(mimeTypes={ "application/pdf" })
    */

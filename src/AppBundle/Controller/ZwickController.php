@@ -9,7 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File as File;
 
@@ -44,10 +46,7 @@ class ZwickController extends Controller
       //set default shape
       $input->setShape(true);
       // $file stores the uploaded CSV file
-      /**
-       * @var File\UploadedFile $file
-       * @var File\UploadedFile $report
-       */
+      /** @var File\UploadedFile $file @var File\UploadedFile $report */
       $file = $input->getFileTra();
       $report = $input->getFilePdf();
       //handle pdf and csv file
@@ -56,13 +55,13 @@ class ZwickController extends Controller
           $this->getParameter('pdf_directory'),
           $fileName
       );
-      $input->setFilePdf($this->getParameter('pdf_directory').'/'.$fileName);
+      $input->setFilePdf($fileName);
       $fileName = md5(uniqid()).'.'.$file->guessExtension();
       $file->move(
           $this->getParameter('csv_directory'),
           $fileName
       );
-      $input->setFileTra($this->getParameter('csv_directory').'/'.$fileName);
+      $input->setFileTra($fileName);
 
       // persist input to get ID
       $em->persist($input);
@@ -77,7 +76,7 @@ class ZwickController extends Controller
           " (test_time, distance_standard, load_measurement)".
           " set id_input = :idinput"
       );
-      $statement->bindValue('filename', $input->getFileTra());
+      $statement->bindValue('filename', $this->getParameter('csv_directory').'/'.$input->getFileTra());
       $statement->bindValue('idinput', $input->getId());
       $statement->execute();
       // get zwick_data from database
@@ -204,5 +203,42 @@ class ZwickController extends Controller
             'projectId' => $projectId,
         )
     );
+  }
+
+  /**
+   * @Route("/pdf", name="zwick_pdf")
+   * @Method({"GET"})
+   */
+  public function pdfAction(Request $request)
+  {
+//    $kernel = $this->get('kernel');
+    $pdfFilename = $request->get('name');
+    //$path = $kernel->locateResource($pdfFilename); //$this->getParameter('pdf_directory') .
+    $response = new BinaryFileResponse($this->getParameter('pdf_directory').'/'.$pdfFilename);
+   $response->headers->set('Content-Type', 'application/pdf');
+   $response->setContentDisposition(
+       ResponseHeaderBag::DISPOSITION_INLINE, //use ResponseHeaderBag::DISPOSITION_ATTACHMENT to save as an attachement
+       $pdfFilename
+   );
+
+   return $response;
+}
+
+  /**
+   * @Route("/tra", name="zwick_tra")
+   * @Method({"GET"})
+   */
+  public function traAction(Request $request)
+  {
+//    $kernel = $this->get('kernel');
+    $pdfFilename = $request->get('name');
+    $response = new BinaryFileResponse($this->getParameter('csv_directory').'/'.$pdfFilename);
+    $response->headers->set('Content-Type', 'text/plain');
+    $response->setContentDisposition(
+        ResponseHeaderBag::DISPOSITION_INLINE, //use ResponseHeaderBag::DISPOSITION_ATTACHMENT to save as an attachement
+        $pdfFilename
+    );
+
+    return $response;
   }
 }

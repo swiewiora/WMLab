@@ -15,15 +15,15 @@
           Wyniki obliczeń
         </div>
         <div class="panel-body">
-          <div class="col-lg-12">
+          <div class="col-lg-6">
             <div class="panel panel-default">
               <div class="panel-body">
                 <table>
                   <tbody>
-                  {#<tr>#}
-                    {#<th style="padding:5px">Id</th>#}
-                    {#<td style="padding:5px">Id = {{ zwick.id }}</td>#}
-                  {#</tr>#}
+                  {% if is_granted("ROLE_ADMIN") %}<tr>
+                    <th style="padding:5px">Id</th>
+                    <td style="padding:5px">Id = {{ zwick.id }}</td>
+                  </tr>{% endif %}
                   <tr>
                     <th style="padding:5px">Średnica próbki:</th>
                     <td style="padding:5px">d<sub>0</sub> = {{ zwick.d0 }} mm</td>
@@ -70,6 +70,16 @@
                   </tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <p><a class="btn btn-default btn-block"
+                      href="{{ path('zwick_pdf', {'name': zwick.filePdf}) }}" target="pdf">Raport (PDF)</a></p>
+                <p><a class="btn btn-default btn-block"
+                      href="{{ path('zwick_tra', {'name': zwick.fileTra}) }}" target="txt">Wyniki pomiarów (TRA)</a></p>
               </div>
             </div>
           </div>
