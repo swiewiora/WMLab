@@ -150,6 +150,9 @@ class ZwickController extends Controller
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
+      $fs = new Filesystem();
+      $fs->remove($this->getParameter('csv_directory') .'/'. $zwick->getFileTra() );
+      $fs->remove($this->getParameter('pdf_directory') .'/'. $zwick->getFilePdf() );
       $em = $this->getDoctrine()->getManager();
       $em->remove($zwick);
       $em->flush();
