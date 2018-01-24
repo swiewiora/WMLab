@@ -12,7 +12,8 @@
       <div class="panel panel-default">
         <div class="panel-body">
           {{ form_start(form) }}
-          {{ form_widget(form) }}
+          {{ form_row(form.alloyName, {'label': 'Nazwa stopu'}) }}
+          {{ form_row(form.chemicalComposition, {'label': 'Skład chemiczny'}) }}
           <div class="well">
           <p><input type="submit" class="btn btn-outline btn-success btn-lg btn-block"
                     value="Zapisz"/></p>

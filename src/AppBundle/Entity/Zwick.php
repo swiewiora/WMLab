@@ -112,14 +112,14 @@ class Zwick
    * @ORM\Column(type="float")
    */
   private $rb;
-  /**
-   * @ORM\Column(type="float", nullable=true)
-   */
-  private $t1;
-  /**
-   * @ORM\Column(type="float", nullable=true)
-   */
-  private $korr;
+//  /**
+//   * @ORM\Column(type="float", nullable=true)
+//   */
+//  private $t1;
+//  /**
+//   * @ORM\Column(type="float", nullable=true)
+//   */
+//  private $korr;
 
   //region Getters and Setters
   public function getTaskName()
