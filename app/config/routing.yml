@@ -9,9 +9,9 @@ admin:
 _user_bundle:
   resource: "@UserBundle/Resources/config/routing.yml"
 
-user_rest:
-  resource: "@UserBundle/Controller/"
-  type:     annotation
-  prefix:   /rest
-  defaults:
-      _format: json
+#user_rest:
+#  resource: "@UserBundle/Controller/"
+#  type:     annotation
+#  prefix:   /rest
+#  defaults:
+#      _format: json
