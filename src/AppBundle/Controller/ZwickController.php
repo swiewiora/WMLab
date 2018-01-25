@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Calc\ZwickCalculations;
 use AppBundle\Entity\Zwick;
 use AppBundle\Entity\ZwickData;
+use League\Csv\Reader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -66,24 +67,39 @@ class ZwickController extends Controller
       // persist input to get ID
       $em->persist($input);
       $em->flush();
-      // fast load data from file
-      $connection = $em->getConnection();
-      $statement = $connection->prepare(
-          "LOAD DATA INFILE :filename into table zwick_data".
-          " fields terminated by ','".
-          " lines terminated by '\r\n'".
-          " ignore 1 lines".
-          " (test_time, distance_standard, load_measurement)".
-          " set id_input = :idinput"
-      );
-      $statement->bindValue('filename', $this->getParameter('csv_directory').'/'.$input->getFileTra());
-      $statement->bindValue('idinput', $input->getId());
-      $statement->execute();
+      // load data from file
+//      $connection = $em->getConnection();
+//      $statement = $connection->prepare(
+//          "LOAD DATA INFILE :filename into table zwick_data".
+//          " fields terminated by ','".
+//          " lines terminated by '\r\n'".
+//          " ignore 1 lines".
+//          " (test_time, distance_standard, load_measurement)".
+//          " set id_input = :idinput"
+//      );
+//      $statement->bindValue('filename', $this->getParameter('csv_directory').'/'.$input->getFileTra());
+//      $statement->bindValue('idinput', $input->getId());
+//      $statement->execute();
+
+//      $em->getConnection()->getConfiguration()->setSQLLogger(null);
+      $reader = Reader::createFromPath($this->getParameter('csv_directory').'/'.$input->getFileTra() );
+      $reader->setEnclosure(" ");
+      $results = $reader->fetchAssoc();
+      foreach ($results as $row) {
+        $data_row = (new ZwickData())
+            ->setZwick($input)
+            ->setTestTime($row['Czas badania'])
+            ->setDistanceStandard($row['Droga standard'])
+            ->setLoadMeasurement($row['Siła standardo']);
+        $em->persist($data_row);
+      }
+      $em->flush();
+
       // get zwick_data from database
-      $data = $this->getDoctrine()
-          ->getRepository(ZwickData::class)
-          ->findBy(array('zwick' => $input->getId()));
-      $input->setData($data);
+//      $data = $this->getDoctrine()
+//          ->getRepository(ZwickData::class)
+//          ->findBy(array('zwick' => $input->getId()));
+//      $input->setData($data);
 
       $this->reportAction($input);
 

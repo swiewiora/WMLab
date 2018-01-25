@@ -32,18 +32,18 @@ class DashboardController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
     $users = $em->getRepository('UserBundle:User')->findAll();
-    $zespoly = $em->getRepository('AppBundle:Zespol')->findAll();
-
-    foreach ($zespoly as $zespol) {
-      $deleteForm = $this->createDeleteZespolForm($zespol);
-    }
+//    $zespoly = $em->getRepository('AppBundle:Zespol')->findAll();
+//
+//    foreach ($zespoly as $zespol) {
+//      $deleteForm = $this->createDeleteZespolForm($zespol);
+//    }
 
     return $this->render(
         'admin/dashboard.html.twig',
         array(
             'users' => $users,
-            'zespoly' => $zespoly,
-            'delete_form' => $deleteForm->createView(),
+//            'zespoly' => $zespoly,
+//            'delete_form' => $deleteForm->createView(),
         )
     );
   }

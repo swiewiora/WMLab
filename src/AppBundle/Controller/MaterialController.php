@@ -16,15 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class MaterialController extends Controller
 {
-    public function index () {
-        $em = $this->getDoctrine()->getManager();
-        $materials = $em->getRepository('AppBundle:Material')->findAll();
-        return $materials;
-    }
-
     /**
      * @Route("/new", name="material_new")
-     * @Method({"POST"})
+     * @Method({"GET", "POST"})
      */
     public function newAction(Request $request) {
         $material = new Material();

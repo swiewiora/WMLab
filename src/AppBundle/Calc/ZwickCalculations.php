@@ -31,7 +31,6 @@ class ZwickCalculations
 
     public function calculateData()
     {
-//        //TODO lol
 //        $this->zwick->setT1(0);
 //        $this->zwick->setKorr(0);
 

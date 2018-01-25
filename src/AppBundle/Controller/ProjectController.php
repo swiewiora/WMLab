@@ -41,7 +41,7 @@ class ProjectController extends Controller
     }
 
     return $this->render(
-        'project/show.html.twig',
+        'project/new.html.twig',
         array(
             'project' => $project,
             'form' => $form->createView(),
