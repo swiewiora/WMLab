@@ -15,6 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File as File;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Zwick task controller.
@@ -82,24 +85,25 @@ class ZwickController extends Controller
 //      $statement->execute();
 
 //      $em->getConnection()->getConfiguration()->setSQLLogger(null);
-      $reader = Reader::createFromPath($this->getParameter('csv_directory').'/'.$input->getFileTra() );
-      $reader->setEnclosure(" ");
-      $results = $reader->fetchAssoc();
-      foreach ($results as $row) {
-        $data_row = (new ZwickData())
-            ->setZwick($input)
-            ->setTestTime($row['Czas badania'])
-            ->setDistanceStandard($row['Droga standard'])
-            ->setLoadMeasurement($row['Siła standardo']);
+      $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+      $data = $serializer->decode(file_get_contents($this->getParameter('csv_directory').'/'.$input->getFileTra()), 'csv');
+
+      foreach ($data as $row) {
+        $data_row = new ZwickData();
+        $data_row->setZwick($input);
+        $data_row->setTestTime(reset($row) );
+        $data_row->setDistanceStandard(next($row) );
+        $data_row->setLoadMeasurement(next($row) );
+
         $em->persist($data_row);
       }
       $em->flush();
 
       // get zwick_data from database
-//      $data = $this->getDoctrine()
-//          ->getRepository(ZwickData::class)
-//          ->findBy(array('zwick' => $input->getId()));
-//      $input->setData($data);
+      $data = $this->getDoctrine()
+          ->getRepository(ZwickData::class)
+          ->findBy(array('zwick' => $input->getId()));
+      $input->setData($data);
 
       $this->reportAction($input);
 

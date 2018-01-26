@@ -40,7 +40,7 @@ class ZwickData
 //   */
 //  private $distance_standard_korr;
   /**
-   * @ORM\Column(type="float")
+   * @ORM\Column(type="float", nullable=true)
    */
   private $S;
 //  /**
@@ -52,7 +52,7 @@ class ZwickData
 //   */
 //  private $t_avg;
   /**
-   * @ORM\Column(type="float")
+   * @ORM\Column(type="float", nullable=true)
    */
   private $Eps;
 //  /**
@@ -68,7 +68,7 @@ class ZwickData
 //   */
 //  private $flow_stress;
   /**
-   * @ORM\Column(type="float")
+   * @ORM\Column(type="float", nullable=true)
    */
   private $Sexp;
 //  /**
