@@ -71,39 +71,27 @@ class ZwickController extends Controller
       $em->persist($input);
       $em->flush();
       // load data from file
-//      $connection = $em->getConnection();
-//      $statement = $connection->prepare(
-//          "LOAD DATA INFILE :filename into table zwick_data".
-//          " fields terminated by ','".
-//          " lines terminated by '\r\n'".
-//          " ignore 1 lines".
-//          " (test_time, distance_standard, load_measurement)".
-//          " set id_input = :idinput"
-//      );
-//      $statement->bindValue('filename', $this->getParameter('csv_directory').'/'.$input->getFileTra());
-//      $statement->bindValue('idinput', $input->getId());
-//      $statement->execute();
-
 //      $em->getConnection()->getConfiguration()->setSQLLogger(null);
       $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
-      $data = $serializer->decode(file_get_contents($this->getParameter('csv_directory').'/'.$input->getFileTra()), 'csv');
-
+      $data = $serializer->decode(file_get_contents(
+          $this->getParameter('csv_directory').'/'.$input->getFileTra()), 'csv');
+      $inputData = [];
       foreach ($data as $row) {
-        $data_row = new ZwickData();
-        $data_row->setZwick($input);
-        $data_row->setTestTime(reset($row) );
-        $data_row->setDistanceStandard(next($row) );
-        $data_row->setLoadMeasurement(next($row) );
-
-        $em->persist($data_row);
+        $dataRow = new ZwickData();
+        $dataRow->setZwick($input);
+        $dataRow->setTestTime(reset($row) );
+        $dataRow->setDistanceStandard(next($row) );
+        $dataRow->setLoadMeasurement(next($row) );
+        array_push($inputData, $dataRow);
+        $em->persist($dataRow);
       }
-      $em->flush();
+//      $em->flush();
 
       // get zwick_data from database
-      $data = $this->getDoctrine()
-          ->getRepository(ZwickData::class)
-          ->findBy(array('zwick' => $input->getId()));
-      $input->setData($data);
+//      $data = $this->getDoctrine()
+//          ->getRepository(ZwickData::class)
+//          ->findBy(array('zwick' => $input->getId()));
+      $input->setData($inputData);
 
       $this->reportAction($input);
 
@@ -234,14 +222,12 @@ class ZwickController extends Controller
    */
   public function pdfAction(Request $request)
   {
-//    $kernel = $this->get('kernel');
     $pdfFilename = $request->get('name');
-    //$path = $kernel->locateResource($pdfFilename); //$this->getParameter('pdf_directory') .
     $response = new BinaryFileResponse($this->getParameter('pdf_directory').'/'.$pdfFilename);
    $response->headers->set('Content-Type', 'application/pdf');
    $response->setContentDisposition(
-       ResponseHeaderBag::DISPOSITION_INLINE, //use ResponseHeaderBag::DISPOSITION_ATTACHMENT to save as an attachement
-       $pdfFilename
+       ResponseHeaderBag::DISPOSITION_INLINE,
+       "report.pdf"
    );
 
    return $response;
@@ -253,13 +239,12 @@ class ZwickController extends Controller
    */
   public function traAction(Request $request)
   {
-//    $kernel = $this->get('kernel');
     $pdfFilename = $request->get('name');
     $response = new BinaryFileResponse($this->getParameter('csv_directory').'/'.$pdfFilename);
     $response->headers->set('Content-Type', 'text/plain');
     $response->setContentDisposition(
-        ResponseHeaderBag::DISPOSITION_INLINE, //use ResponseHeaderBag::DISPOSITION_ATTACHMENT to save as an attachement
-        $pdfFilename
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        "measurements.tra"
     );
 
     return $response;
