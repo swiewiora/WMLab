@@ -86,7 +86,7 @@ class ZwickController extends Controller
       }
 
       $input->setData($inputData);
-      $this->reportAction($input);
+      $this->generateReport($input);
 
       return $this->redirect($this->generateUrl('zwick_show', array('id' => $input->getId())));
     }
@@ -102,7 +102,7 @@ class ZwickController extends Controller
   /**
    * Calculates data and uploads to db.
    */
-  public function reportAction(Zwick $input)
+  private function generateReport(Zwick $input)
   {
     $em = $this->getDoctrine()->getManager();
     $zwick_calculations = new ZwickCalculations($input);
@@ -194,7 +194,7 @@ class ZwickController extends Controller
       $em->persist($zwick);
       $em->flush();
 
-      $this->reportAction($zwick);
+      $this->generateReport($zwick);
 
       return $this->redirect($this->generateUrl('zwick_show', array('id' => $zwick->getId())));
     }
