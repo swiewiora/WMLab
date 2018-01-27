@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Calc\ZwickCalculations;
 use AppBundle\Entity\Zwick;
 use AppBundle\Entity\ZwickData;
-use League\Csv\Reader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -50,7 +49,8 @@ class ZwickController extends Controller
       //set default shape
       $input->setShape(true);
       // $file stores the uploaded CSV file
-      /** @var File\UploadedFile $file @var File\UploadedFile $report */
+      /** @var File\UploadedFile $file
+       * @var File\UploadedFile $report */
       $file = $input->getFileTra();
       $report = $input->getFilePdf();
       //handle pdf and csv file
@@ -71,7 +71,6 @@ class ZwickController extends Controller
       $em->persist($input);
       $em->flush();
       // load data from file
-//      $em->getConnection()->getConfiguration()->setSQLLogger(null);
       $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
       $data = $serializer->decode(file_get_contents(
           $this->getParameter('csv_directory').'/'.$input->getFileTra()), 'csv');
@@ -85,14 +84,8 @@ class ZwickController extends Controller
         array_push($inputData, $dataRow);
         $em->persist($dataRow);
       }
-//      $em->flush();
 
-      // get zwick_data from database
-//      $data = $this->getDoctrine()
-//          ->getRepository(ZwickData::class)
-//          ->findBy(array('zwick' => $input->getId()));
       $input->setData($inputData);
-
       $this->reportAction($input);
 
       return $this->redirect($this->generateUrl('zwick_show', array('id' => $input->getId())));

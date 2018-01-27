@@ -44,18 +44,18 @@ class Zwick
   private $taskName;
   /**
    * @ORM\Column(type="string")
-   * @Assert\NotBlank(message="Please, upload the CSV data.")
+   * @Assert\NotBlank(message="Proszę wybrać plik z rozszerzeniem TRA")
    * @Assert\File(mimeTypes={ "text/plain" })
    */
   private $fileTra;
   /**
    * @ORM\Column(type="string")
-   * @Assert\NotBlank(message="Please, upload the PDF data.")
+   * @Assert\NotBlank(message="Proszę wybrać plik PDF")
    * @Assert\File(mimeTypes={ "application/pdf" })
    */
   private $filePdf;
   /**
-   * false: walec, true: wiosełka
+   * false: cylinder, true: paddle
    * @ORM\Column(type="boolean")
    */
   private $shape;
@@ -112,14 +112,6 @@ class Zwick
    * @ORM\Column(type="float")
    */
   private $rb;
-//  /**
-//   * @ORM\Column(type="float", nullable=true)
-//   */
-//  private $t1;
-//  /**
-//   * @ORM\Column(type="float", nullable=true)
-//   */
-//  private $korr;
 
   //region Getters and Setters
   public function getTaskName()

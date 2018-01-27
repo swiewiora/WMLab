@@ -35,73 +35,20 @@ class ZwickData
    * @ORM\Column(type="float")
    */
   private $load_measurement;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $distance_standard_korr;
   /**
    * @ORM\Column(type="float", nullable=true)
    */
   private $S;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $v;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $t_avg;
   /**
    * @ORM\Column(type="float", nullable=true)
    */
   private $Eps;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $U;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $Ns;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $flow_stress;
   /**
    * @ORM\Column(type="float", nullable=true)
    */
   private $Sexp;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $Sapr;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $load_prediction;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $d;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $p;
-//  /**
-//   * @ORM\Column(type="float")
-//   */
-//  private $d2;
 
 //region getters and setters
-//  public function getDistanceStandardKorr()
-//  {
-//    return $this->distance_standard_korr;
-//  }
-
-//  public function setDistanceStandardKorr($distance_standard_korr)
-//  {
-//    $this->distance_standard_korr = $distance_standard_korr;
-//  }
 
   public function getS()
   {
@@ -113,26 +60,6 @@ class ZwickData
     $this->S = $S;
   }
 
-//  public function getV()
-//  {
-//    return $this->v;
-//  }
-//
-//  public function setV($v)
-//  {
-//    $this->v = $v;
-//  }
-
-//  public function getTAvg()
-//  {
-//    return $this->t_avg;
-//  }
-//
-//  public function setTAvg($t_avg)
-//  {
-//    $this->t_avg = $t_avg;
-//  }
-
   public function getEps()
   {
     return $this->Eps;
@@ -143,36 +70,6 @@ class ZwickData
     $this->Eps = $Eps;
   }
 
-//  public function getU()
-//  {
-//    return $this->U;
-//  }
-//
-//  public function setU($U)
-//  {
-//    $this->U = $U;
-//  }
-
-//  public function getNs()
-//  {
-//    return $this->Ns;
-//  }
-//
-//  public function setNs($Ns)
-//  {
-//    $this->Ns = $Ns;
-//  }
-//
-//  public function getFlowStress()
-//  {
-//    return $this->flow_stress;
-//  }
-//
-//  public function setFlowStress($flow_stress)
-//  {
-//    $this->flow_stress = $flow_stress;
-//  }
-
   public function getSexp()
   {
     return $this->Sexp;
@@ -182,56 +79,6 @@ class ZwickData
   {
     $this->Sexp = $Sexp;
   }
-
-//  public function getSapr()
-//  {
-//    return $this->Sapr;
-//  }
-//
-//  public function setSapr($Sapr)
-//  {
-//    $this->Sapr = $Sapr;
-//  }
-//
-//  public function getLoadPrediction()
-//  {
-//    return $this->load_prediction;
-//  }
-//
-//  public function setLoadPrediction($load_prediction)
-//  {
-//    $this->load_prediction = $load_prediction;
-//  }
-//
-//  public function getD()
-//  {
-//    return $this->d;
-//  }
-//
-//  public function setD($d)
-//  {
-//    $this->d = $d;
-//  }
-//
-//  public function getP()
-//  {
-//    return $this->p;
-//  }
-//
-//  public function setP($p)
-//  {
-//    $this->p = $p;
-//  }
-//
-//  public function getD2()
-//  {
-//    return $this->d2;
-//  }
-//
-//  public function setD2($d2)
-//  {
-//    $this->d2 = $d2;
-//  }
 
   public function getTestTime()
   {
