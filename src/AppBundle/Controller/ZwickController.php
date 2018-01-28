@@ -217,8 +217,8 @@ class ZwickController extends Controller
   {
     $pdfFilename = $request->get('name');
     $response = new BinaryFileResponse($this->getParameter('pdf_directory').'/'.$pdfFilename);
-   $response->headers->set('Content-Type', 'application/pdf');
-   $response->setContentDisposition(
+    $response->headers->set('Content-Type', 'application/pdf');
+    $response->setContentDisposition(
        ResponseHeaderBag::DISPOSITION_INLINE,
        "report.pdf"
    );
