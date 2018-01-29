@@ -7,8 +7,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: pl
-    csv_directory: '%kernel.project_dir%/web/uploads/csv'
-    pdf_directory: '%kernel.project_dir%/web/uploads/pdf'
+    csv_directory: '%kernel.project_dir%/uploads/csv'
+    pdf_directory: '%kernel.project_dir%/uploads/pdf'
 
 framework:
     #esi:             ~
