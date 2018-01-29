@@ -19,6 +19,7 @@
           <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel-body">
               {{ form_start(form) }}
+              {{ form_row(form.taskName, {'label': 'Nazwa zadania'}) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">Maszyna wytrzymałościowa</span>
                 {{ form_widget(form.machine) }}

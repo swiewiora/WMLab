@@ -19,7 +19,7 @@ class ZwickEditType extends ZwickType
     {
       parent::buildForm($builder, $options);
       $builder
-          ->remove('fileTRA')
+          ->remove('fileTra')
           ->remove('filePdf')
       ;
     }

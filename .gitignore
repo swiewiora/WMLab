@@ -20,3 +20,6 @@ src/UserBundle/Document/
 /test1.php
 /wm.sql
 /app/data.db3
+log/
+uploads/
+web/info.php

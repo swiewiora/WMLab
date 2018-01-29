@@ -46,7 +46,7 @@ class ZwickController extends Controller
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-      //set default shape
+      //set default shape (same in editAction)
       $input->setShape(true);
       // $file stores the uploaded CSV file
       /** @var File\UploadedFile $file
@@ -59,13 +59,13 @@ class ZwickController extends Controller
           $this->getParameter('pdf_directory'),
           $fileName
       );
-      $input->setFilePdf($fileName);
+      $input->setFilePdf($this->getParameter('pdf_directory').'/'.$fileName);
       $fileName = md5(uniqid()).'.'.$file->guessExtension();
       $file->move(
           $this->getParameter('csv_directory'),
           $fileName
       );
-      $input->setFileTra($fileName);
+      $input->setFileTra($this->getParameter('csv_directory').'/'.$fileName);
 
       // persist input to get ID
       $em->persist($input);
@@ -73,7 +73,7 @@ class ZwickController extends Controller
       // load data from file
       $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
       $data = $serializer->decode(file_get_contents(
-          $this->getParameter('csv_directory').'/'.$input->getFileTra()), 'csv');
+          $input->getFileTra()), 'csv');
       $inputData = [];
       foreach ($data as $row) {
         $dataRow = new ZwickData();
@@ -189,14 +189,18 @@ class ZwickController extends Controller
     $editForm->handleRequest($request);
     $projectId = $zwick->getMaterial()->getProject()->getId();
 
-    if ($editForm->isSubmitted() && $editForm->isValid()) {
-      $em = $this->getDoctrine()->getManager();
-      $em->persist($zwick);
-      $em->flush();
+    if ($editForm->isSubmitted() ) {
+      if ($editForm->isValid() ) {
+        //set default shape
+        $zwick->setShape(true);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($zwick);
+        $em->flush();
 
-      $this->generateReport($zwick);
+        $this->generateReport($zwick);
 
-      return $this->redirect($this->generateUrl('zwick_show', array('id' => $zwick->getId())));
+        return $this->redirect($this->generateUrl('zwick_show', array('id' => $zwick->getId())));
+      }
     }
 
     return $this->render(
@@ -215,8 +219,8 @@ class ZwickController extends Controller
    */
   public function pdfAction(Request $request)
   {
-    $pdfFilename = $request->get('name');
-    $response = new BinaryFileResponse($this->getParameter('pdf_directory').'/'.$pdfFilename);
+    $fileName = $request->get('name');
+    $response = new BinaryFileResponse($fileName);
     $response->headers->set('Content-Type', 'application/pdf');
     $response->setContentDisposition(
        ResponseHeaderBag::DISPOSITION_INLINE,
@@ -232,8 +236,8 @@ class ZwickController extends Controller
    */
   public function traAction(Request $request)
   {
-    $pdfFilename = $request->get('name');
-    $response = new BinaryFileResponse($this->getParameter('csv_directory').'/'.$pdfFilename);
+    $fileName = $request->get('name');
+    $response = new BinaryFileResponse($fileName);
     $response->headers->set('Content-Type', 'text/plain');
     $response->setContentDisposition(
         ResponseHeaderBag::DISPOSITION_ATTACHMENT,
