@@ -65,9 +65,7 @@ class MenuBuilder
         )
     );
     $menu['Labs']->setChildrenAttribute('class', 'nav nav-second-level');
-    /**
-     * @var User $user
-     */
+    /** @var User $user */
     $user = $this->tokenStorage->getToken()->getUser();
     $projects = null;
     if ($this->checker->isGranted('ROLE_ADMIN') ) {
@@ -92,9 +90,7 @@ class MenuBuilder
       $menu['Labs'][$projectKey]->setChildrenAttribute('class', 'nav nav-third-level');
       $materials = $project->getMaterials();
       foreach ($materials as $material) {
-        /**
-         * @var Material $material
-         */
+        /** @var Material $material */
         $materialKey = 'Material'.$material->getId();
         $menu['Labs'][$projectKey]->addChild(
             $materialKey,
@@ -107,10 +103,8 @@ class MenuBuilder
         );
         $tasks = $material->getTasks();
         foreach ($tasks as $task) {
-          /**
-           * @var Zwick $task
-           */
-          $taskKey = 'Material'.$task->getId();
+          /** @var Zwick $task */
+          $taskKey = 'Task'.$task->getId();
           $menu['Labs'][$projectKey]->addChild(
               $taskKey,
               array(
