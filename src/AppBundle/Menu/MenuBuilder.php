@@ -124,14 +124,6 @@ class MenuBuilder
         }
       }
     }
-      /*$menu->addChild(
-          'Settings',
-          array(
-              'uri' => '#',
-              'label' => '<i class="fa fa-wrench fa-fw"></i> Ustawienia',
-              'extras' => array('safe_label' => true),
-          )
-      );*/
     return $menu;
   }
 }

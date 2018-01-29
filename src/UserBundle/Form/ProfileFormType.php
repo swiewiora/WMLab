@@ -19,12 +19,6 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 class ProfileFormType extends AbstractType
 {
-//    public function buildForm(FormBuilderInterface $builder, array $options)
-//    {
-//        $builder
-//            ->add('zespol')
-//        ;
-//    }
 
     public function getParent()
     {
