@@ -81,15 +81,15 @@ class Zwick
    */
   private $v0;
   /**
-   * @ORM\Column(type="float")
+   * @ORM\Column(type="float", nullable=true)
    */
   private $ag;
   /**
-   * @ORM\Column(type="float")
+   * @ORM\Column(type="float", nullable=true)
    */
   private $agt;
   /**
-   * @ORM\Column(type="float")
+   * @ORM\Column(type="float", nullable=true)
    */
   private $at;
   /**
@@ -97,7 +97,7 @@ class Zwick
    */
   private $e;
   /**
-   * @ORM\Column(type="float")
+   * @ORM\Column(type="float", nullable=true)
    */
   private $r;
   /**
@@ -105,11 +105,11 @@ class Zwick
    */
   private $fm;
   /**
-   * @ORM\Column(type="float")
+   * @ORM\Column(type="float", nullable=true)
    */
   private $rm;
   /**
-   * @ORM\Column(type="float")
+   * @ORM\Column(type="float", nullable=true)
    */
   private $rb;
 
