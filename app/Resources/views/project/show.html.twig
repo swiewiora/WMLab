@@ -20,7 +20,8 @@
               {% for material in materials %}
                 {% set counter = counter + 1 %}
                 <li class="list-group-item">
-                  {{ counter }}. {{ material.AlloyName }} - {{ material.chemicalComposition }}
+                  {{ counter }}. {{ material.AlloyName }}
+                {% if material.chemicalComposition %}- {{ material.chemicalComposition }}{% endif %}
                   <span class="pull-right">
                     <a class="btn btn-warning btn-xs"
                        href="{{ path('material_edit', { 'id': material.Id }) }}">

@@ -1,5 +1,17 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{#{% form_theme form _self %}#}
+
+{#{% block form_errors -%}#}
+  {#{% if errors|length > 0 -%}#}
+    {#{% if form is not rootform %}<p class="help-block">{% else %}<div class="alert alert-danger">{% endif %}#}
+    {#<ul class="list-unstyled">#}
+        {#{%- for error in errors -%}#}
+          {#<li><span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}</li>#}
+        {#{%- endfor -%}#}
+    {#</ul>#}
+    {#{% if form is not rootform %}</p>{% else %}</div>{% endif %}#}
+  {#{%- endif %}#}
+{#{%- endblock form_errors %}#}
 
 {% block body %}
   <div class="row">
@@ -23,23 +35,23 @@
               <div class="form-group input-group">
                 <span class="input-group-addon">Maszyna wytrzymałościowa</span>
                 {{ form_widget(form.machine) }}
-                {{ form_errors(form.machine) }}
               </div>
+              {{ form_errors(form.machine) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">Materiał</span>
                 {{ form_widget(form.material) }}
-                {{ form_errors(form.material) }}
               </div>
+              {{ form_errors(form.material) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">Kształt próbki</span>
                 {{ form_widget(form.shape) }}
-                {{ form_errors(form.shape) }}
               </div>
+              {{ form_errors(form.shape) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">Rodzaj próby</span>
                 {{ form_widget(form.type) }}
-                {{ form_errors(form.type) }}
               </div>
+              {{ form_errors(form.type) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">d<sub>0</sub></span>
                 {{ form_widget(form.d0, {'attr': {'placeholder': 'Średnica próbki'} }) }}
@@ -50,20 +62,20 @@
                 <span class="input-group-addon">h<sub>0</sub></span>
                 {{ form_widget(form.h0, {'attr': {'placeholder': 'Wysokość próbki'} }) }}
                 <span class="input-group-addon">mm</span>
-                {{ form_errors(form.h0) }}
               </div>
+              {{ form_errors(form.h0) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">t<sub>0</sub></span>
                 {{ form_widget(form.t0, {'attr': {'placeholder': 'Temperatura próby'} }) }}
                 <span class="input-group-addon">&deg;C</span>
-                {{ form_errors(form.t0) }}
               </div>
+              {{ form_errors(form.t0) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">v<sub>0</sub></span>
                 {{ form_widget(form.v0, {'attr': {'placeholder': 'Prędkość próby'} }) }}
                 <span class="input-group-addon">mm/min</span>
-                {{ form_errors(form.v0) }}
               </div>
+              {{ form_errors(form.v0) }}
             </div>
           </div>
         </div>
@@ -79,60 +91,60 @@
                 <span class="input-group-addon">A<sub>g</sub></span>
                 {{ form_widget(form.ag, {'attr': {'placeholder': 'Wydłużenie nieproporcjonalne procentowe'} }) }}
                 <span class="input-group-addon">%</span>
-                {{ form_errors(form.ag) }}
               </div>
+              {{ form_errors(form.ag) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">A<sub>gt</sub></span>
                 {{ form_widget(form.agt, {'attr': {'placeholder': 'Wydłużenie całkowite procentowe'} }) }}
                 <span class="input-group-addon">%</span>
-                {{ form_errors(form.agt) }}
               </div>
+              {{ form_errors(form.agt) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">A<sub>t</sub></span>
                 {{ form_widget(form.at, {'attr': {'placeholder': 'Wydłużenie całkowite procentowe '} }) }}
                 <span class="input-group-addon">%</span>
-                {{ form_errors(form.at) }}
               </div>
+              {{ form_errors(form.at) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">E</span>
                 {{ form_widget(form.e, {'attr': {'placeholder': 'Moduł Younga'} }) }}
                 <span class="input-group-addon">GPa</span>
-                {{ form_errors(form.e) }}
               </div>
+              {{ form_errors(form.e) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">R<sub>p0.2</sub></span>
                 {{ form_widget(form.r, {'attr': {'placeholder': 'Granica plastyczności'} }) }}
                 <span class="input-group-addon">MPa</span>
-                {{ form_errors(form.r) }}
               </div>
+              {{ form_errors(form.r) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">F<sub>m</sub></span>
                 {{ form_widget(form.fm, {'attr': {'placeholder': 'maksymalna siła '} }) }}
                 <span class="input-group-addon">kN</span>
-                {{ form_errors(form.fm) }}
               </div>
+              {{ form_errors(form.fm) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">R<sub>m</sub></span>
                 {{ form_widget(form.rm, {'attr': {'placeholder': 'Wytrzymałość na rozciąganie'} }) }}
                 <span class="input-group-addon">MPa</span>
-                {{ form_errors(form.rm) }}
               </div>
+              {{ form_errors(form.rm) }}
               <div class="form-group input-group">
                 <span class="input-group-addon">R<sub>b</sub></span>
                 {{ form_widget(form.rb, {'attr': {'placeholder': 'Naprężenie przy zerwanu'} }) }}
                 <span class="input-group-addon">MPa</span>
-                {{ form_errors(form.rb) }}
               </div>
+              {{ form_errors(form.rb) }}
               <div class="form-group">
                 <label>Dane wejściowe (TRA)</label>
                 {{ form_widget(form.fileTra) }}
-                {{ form_errors(form.fileTra) }}
               </div>
+              {{ form_errors(form.fileTra) }}
               <div class="form-group">
                 <label>Raport (PDF)</label>
                 {{ form_widget(form.filePdf) }}
-                {{ form_errors(form.filePdf) }}
               </div>
+              {{ form_errors(form.filePdf) }}
             </div>
           </div>
         </div>
