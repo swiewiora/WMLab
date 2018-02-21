@@ -35,7 +35,6 @@ class ZwickCalculations
     $zwick_file_data = $this->zwick->getData();
     /** @var ZwickData $data_row */
     $data_row = $zwick_file_data[0];
-//    $this->time[0] = $data_row->getTestTime();
     $this->distance_standard[0] = $data_row->getDistanceStandard();
     $this->load_measurement[0] = $data_row->getLoadMeasurement();
 
@@ -48,12 +47,10 @@ class ZwickCalculations
       $data_row = $zwick_file_data[$i];
       if ($i < (sizeof($zwick_file_data) - 1)) {
         $next_data_row = $zwick_file_data[$i + 1];
-//        $this->time[$i + 1] = $next_data_row->getTestTime();
         $this->distance_standard[$i + 1] = $next_data_row->getDistanceStandard();
         $this->load_measurement[$i + 1] = $next_data_row->getLoadMeasurement();
       }
       if ($i == (sizeof($zwick_file_data) - 1)) {
-//        $this->time[$i + 1] = 0;
         $this->distance_standard[$i + 1] = 0;
         $this->load_measurement[$i + 1] = 0;
       }
