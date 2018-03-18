@@ -13,18 +13,15 @@ See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
 ```
 PHP version >= 5.6.24,
 Composer version >= 1.4.1,
 Web server (Apache),
 MySQL database server (optional)
 PDO-SQLite PHP extension enabled;
+```
 and the usual Symfony application requirements for version 3.4:
 https://symfony.com/doc/current/reference/requirements.html
-
-```
 
 ### Installing
 
