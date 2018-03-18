@@ -25,10 +25,6 @@ https://symfony.com/doc/current/reference/requirements.html
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
 1. Get project to your machine
 2. Install dependencies via Composer:
 ```
